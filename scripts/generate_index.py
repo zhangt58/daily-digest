@@ -11,7 +11,7 @@ files = sorted(
 
 items = []
 for f in files:
-    m = re.search(r"hn_top10_(\d{4}-\d{2}-\d{2})\.html", f)
+    m = re.search(r"(\d{4}-\d{2}-\d{2})\.html", f)
     if m:
         date_str = m.group(1)
         date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d")
