@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 12px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API • April 27, 2026</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+        <div class="card-header">
+            <div class="rank">#1</div>
+            <div class="title-section">
+                <h2><a href="https://www.nytimes.com/2026/04/25/magazine/bob-odenkirk-interview.html" target="_blank">Bob Odenkirk would like to remind you that life is a meaningless farce</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 62</span>
+                    <span class="comments">💬 38</span>
+                    <span class="by">👤 wslh</span>
+                </div>
+                <div class="summary"><p>An in-depth interview with Bob Odenkirk discussing his career, creative process, and reflections on life, comedy, and the meaning (or meaninglessness) of it all. Full article requires NYT subscription.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.nytimes.com/2026/04/25/magazine/bob-odenkirk-interview.html" target="_blank">https://www.nytimes.com/2026/04/25/magazine/bob-odenkirk-interview.html</a></div>
+    </div>
+
+<div class="card" style="--accent: #4ecdc4;">
+        <div class="card-header">
+            <div class="rank">#2</div>
+            <div class="title-section">
+                <h2><a href="https://flipdisc.io" target="_blank">Flipdiscs</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 297</span>
+                    <span class="comments">💬 53</span>
+                    <span class="by">👤 skogstokig</span>
+                </div>
+                <div class="summary"><p>A detailed guide on building a large interactive flipdisc display — 9 Alfazeta panels in a 3x3 grid with 84x42 total discs. Covers the hardware build (power, frame, cabling), software stack using Node.js and MediaPipe for gesture-controlled visualizations, and the design philosophy of creating meaningful content within pixel constraints.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://flipdisc.io" target="_blank">https://flipdisc.io</a></div>
+    </div>
+
+<div class="card" style="--accent: #45b7d1;">
+        <div class="card-header">
+            <div class="rank">#3</div>
+            <div class="title-section">
+                <h2><a href="https://ca98am79.medium.com/i-bought-friendster-for-30k-heres-what-i-m-doing-with-it-d5e8ddb3991d" target="_blank">I bought Friendster for $30k – Here's what I'm doing with it</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 838</span>
+                    <span class="comments">💬 430</span>
+                    <span class="by">👤 ca98am79</span>
+                </div>
+                <div class="summary"><p>Mike Carson purchased the iconic friendster.com domain for ~$30k and is rebuilding it as a positive social network. The iOS app requires users to physically tap phones together to connect as 'friends', features 'fading connections' for friends who haven't met in a year, and aims to recapture the original's enjoyable experience without data selling or algorithmic manipulation.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://ca98am79.medium.com/i-bought-friendster-for-30k-heres-what-i-m-doing-with-it-d5e8ddb3991d" target="_blank">https://ca98am79.medium.com/i-bought-friendster-for-30k-heres-what-i-m-doing-with-it-d5e8ddb3991d</a></div>
+    </div>
+
+<div class="card" style="--accent: #96ceb4;">
+        <div class="card-header">
+            <div class="rank">#4</div>
+            <div class="title-section">
+                <h2><a href="https://www.koshyjohn.com/blog/ai-should-elevate-your-thinking-not-replace-it/" target="_blank">AI should elevate your thinking, not replace it</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 523</span>
+                    <span class="comments">💬 380</span>
+                    <span class="by">👤 koshyjohn</span>
+                </div>
+                <div class="summary"><p>Argues software engineering is splitting into two groups: those who use AI to offload drudgery and focus on higher thinking, and those who use it to avoid thinking altogether. Warns that early-career engineers who let AI remove all struggle are trading long-term capability for short-term appearance, since skills like debugging instinct only develop through friction and failure.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.koshyjohn.com/blog/ai-should-elevate-your-thinking-not-replace-it/" target="_blank">https://www.koshyjohn.com/blog/ai-should-elevate-your-thinking-not-replace-it/</a></div>
+    </div>
+
+<div class="card" style="--accent: #ffeaa7;">
+        <div class="card-header">
+            <div class="rank">#5</div>
+            <div class="title-section">
+                <h2><a href="https://interblah.net/self-updating-screenshots" target="_blank">Self-updating screenshots</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 319</span>
+                    <span class="comments">💬 47</span>
+                    <span class="by">👤 bjhess</span>
+                </div>
+                <div class="summary"><p>An automated screenshot system for Jelly's help center that captures screenshots directly from the running app using headless Chrome. Special HTML comments in Markdown files instruct a Rake task to navigate, locate elements by CSS selector, and capture screenshots — keeping documentation perfectly in sync with UI changes with minimal friction.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://interblah.net/self-updating-screenshots" target="_blank">https://interblah.net/self-updating-screenshots</a></div>
+    </div>
+
+<div class="card" style="--accent: #dda15e;">
+        <div class="card-header">
+            <div class="rank">#6</div>
+            <div class="title-section">
+                <h2><a href="https://arkaung.github.io/interactive-turboquant/" target="_blank">TurboQuant: A first-principles walkthrough</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 167</span>
+                    <span class="comments">💬 37</span>
+                    <span class="by">👤 kweezar</span>
+                </div>
+                <div class="summary"><p>An interactive guide explaining how to compress AI vectors to 2-4 bits per number using random rotation that spreads vector magnitude uniformly across all coordinates, enabling a universal Lloyd-Max codebook. Walks through the math step by step — from vector quantization basics to why naive approaches fail on outlier-heavy embeddings — showing how rotation plus a shared codebook achieves near-Shannon-optimal distortion without per-block metadata overhead.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://arkaung.github.io/interactive-turboquant/" target="_blank">https://arkaung.github.io/interactive-turboquant/</a></div>
+    </div>
+
+<div class="card" style="--accent: #98d8c8;">
+        <div class="card-header">
+            <div class="rank">#7</div>
+            <div class="title-section">
+                <h2><a href="https://developer.chrome.com/docs/ai/prompt-api" target="_blank">The Prompt API</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 143</span>
+                    <span class="comments">💬 79</span>
+                    <span class="by">👤 gslin</span>
+                </div>
+                <div class="summary"><p>A Chrome built-in AI feature that lets web developers send natural language requests to the on-device Gemini Nano model directly from the browser, with support for text, image, and audio inputs. Available via origin trial in Chrome 138+, it provides request-based and streaming output methods, session management with context windows, and JSON schema constraints for structured responses.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://developer.chrome.com/docs/ai/prompt-api" target="_blank">https://developer.chrome.com/docs/ai/prompt-api</a></div>
+    </div>
+
+<div class="card" style="--accent: #f7dc6f;">
+        <div class="card-header">
+            <div class="rank">#8</div>
+            <div class="title-section">
+                <h2><a href="https://robbowen.digital/wrote-about/abandoned-side-projects/" target="_blank">It's OK to abandon your side-project (2024)</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 89</span>
+                    <span class="comments">💬 40</span>
+                    <span class="by">👤 hisamafahri</span>
+                </div>
+                <div class="summary"><p>Developers should stop feeling guilty about abandoning side projects, reframing them as valuable learning experiences. Shares a story of building a Latvian grammar quiz app that was abandoned the same day it was deployed because the coding process itself had already taught the author what they needed to know. Encourages treating side projects as experimental prototypes and measuring success by experience gained.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://robbowen.digital/wrote-about/abandoned-side-projects/" target="_blank">https://robbowen.digital/wrote-about/abandoned-side-projects/</a></div>
+    </div>
+
+<div class="card" style="--accent: #bb8fce;">
+        <div class="card-header">
+            <div class="rank">#9</div>
+            <div class="title-section">
+                <h2><a href="https://github.com/WeebLabs/DSPi" target="_blank">Fully Featured Audio DSP Firmware for the Raspberry Pi Pico</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 7</span>
+                    <span class="comments">💬 2</span>
+                    <span class="by">👤 BoingBoomTschak</span>
+                </div>
+                
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://github.com/WeebLabs/DSPi" target="_blank">https://github.com/WeebLabs/DSPi</a></div>
+    </div>
+
+<div class="card" style="--accent: #85c1e9;">
+        <div class="card-header">
+            <div class="rank">#10</div>
+            <div class="title-section">
+                <h2><a href="https://jordanlord.co.uk/blog/3-constraints/" target="_blank">Three constraints before I build anything</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 225</span>
+                    <span class="comments">💬 39</span>
+                    <span class="by">👤 nervous_north</span>
+                </div>
+                <div class="summary"><p>Three constraints applied before building any project: ideas must fit on a one-page document to limit complexity, core technology must be separable from the product to compound long-term leverage, and each product must have one defining constraint that shapes its identity. Rules forged from 10 years of building experience after creating products that failed due to complexity or lack of direction.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://jordanlord.co.uk/blog/3-constraints/" target="_blank">https://jordanlord.co.uk/blog/3-constraints/</a></div>
+    </div>
+
+        <footer>
+            <p>Fetched via Hacker News API • April 27, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
