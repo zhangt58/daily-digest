@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Generate index.html from hn/ folder HTML reports."""
 
-import os, re, datetime
+import os, re, datetime, shutil
 
 repo_wdir = "../../"
 hn_dir = os.path.join(repo_wdir, "hn")
-out_index_path = os.path.join(repo_wdir, "index.html")
+dist_dir = os.path.join(repo_wdir, "dist")
+dist_hn_dir = os.path.join(dist_dir, "hn")
+out_index_path = os.path.join(dist_dir, "index.html")
+os.makedirs(dist_hn_dir, exist_ok=True)
+
 files = sorted(
     [f for f in os.listdir(hn_dir) if f.endswith(".html")],
     reverse=True
@@ -109,4 +113,10 @@ html = f'''<!DOCTYPE html>
 with open(out_index_path, "w") as f:
     f.write(html)
 
-print(f"Generated index.html with {len(files)} entries")
+# Copy hn HTML files into the dist/hn directory so the artifact contains all site files
+for f in files:
+    src = os.path.join(hn_dir, f)
+    dst = os.path.join(dist_hn_dir, f)
+    shutil.copy2(src, dst)
+
+print(f"Generated {out_index_path} with {len(files)} entries and copied hn files to {dist_hn_dir}")
