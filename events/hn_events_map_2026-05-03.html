@@ -260,7 +260,7 @@
         /* ====== MAP CONTAINER ====== */
         #map-container {
             display: flex;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 140px);
         }
 
         #map {
@@ -396,6 +396,10 @@
 
         /* ====== LEGEND ====== */
 
+        .legend-control {
+            padding-bottom: 4px;
+        }
+
         .legend {
             background: var(--bg-legend);
             backdrop-filter: blur(10px);
@@ -407,8 +411,14 @@
             color: var(--text-primary);
             transition: all 0.35s ease;
             box-shadow: var(--shadow-md);
-            margin: 12px;
+            margin: 10px;
             z-index: 1000;
+        }
+
+        @media (min-width: 641px) {
+            .legend {
+                margin: 16px;
+            }
         }
 
         .legend-title {
@@ -784,8 +794,8 @@
     });
 
 
-    // Legend
-    const legend = L.control({ position: 'bottomleft' });
+    // Legend - positioned bottom-left with enough padding
+    const legend = L.control({ position: 'bottomleft', className: 'legend-control' });
     legend.onAdd = function() {
         const div = L.DomUtil.create('div', 'legend');
         div.innerHTML = `
