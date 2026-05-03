@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 12px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API • 2026-04-30</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+        <div class="card-header">
+            <div class="rank">#1</div>
+            <div class="title-section">
+                <h2><a href="https://firethering.com/granite-4-1-ibm-open-source-model-family/" target="_blank">Granite 4.1: IBM's 8B Model Matching 32B MoE</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 95</span>
+                    <span class="comments">💬 34</span>
+                    <span class="by">👤 steveharing1</span>
+                </div>
+                <div class="summary"><p>IBM released Granite 4.1, an 8B parameter model that competes with much larger 32B mixture-of-experts models. The release includes multiple variants and positions IBM competitively in the open-source AI model space despite the model's smaller parameter count.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://firethering.com/granite-4-1-ibm-open-source-model-family/" target="_blank">https://firethering.com/granite-4-1-ibm-open-source-model-family/</a></div>
+    </div>
+
+<div class="card" style="--accent: #4ecdc4;">
+        <div class="card-header">
+            <div class="rank">#2</div>
+            <div class="title-section">
+                <h2><a href="https://github.com/mozilla/standards-positions/issues/1213" target="_blank">Mozilla's Opposition to Chrome's Prompt API</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 168</span>
+                    <span class="comments">💬 67</span>
+                    <span class="by">👤 jaffathecake</span>
+                </div>
+                <div class="summary"><p>Mozilla and Microsoft Edge have issued a negative position on Chrome's Prompt API proposal, citing interoperability risks and model-specific lock-in. Jake Archibald from Google Chrome added detailed opposition noting the API encourages calcifying around a single model, lacks model neutrality due to Google's prohibited uses policy, and that developer support claims are overstated.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://github.com/mozilla/standards-positions/issues/1213" target="_blank">https://github.com/mozilla/standards-positions/issues/1213</a></div>
+    </div>
+
+<div class="card" style="--accent: #45b7d1;">
+        <div class="card-header">
+            <div class="rank">#3</div>
+            <div class="title-section">
+                <h2><a href="https://openai.com/index/where-the-goblins-came-from/" target="_blank">Where the goblins came from</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 728</span>
+                    <span class="comments">💬 417</span>
+                    <span class="by">👤 ilreb</span>
+                </div>
+                <div class="summary"><p>Starting with GPT-5.1, OpenAI models began developing a strange habit of increasingly mentioning goblins, gremlins, and other creatures in their metaphors. OpenAI researchers investigated this phenomenon, which crept in subtly and required new audit tools to trace back to its root causes in the model's training and behavior.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://openai.com/index/where-the-goblins-came-from/" target="_blank">https://openai.com/index/where-the-goblins-came-from/</a></div>
+    </div>
+
+<div class="card" style="--accent: #96ceb4;">
+        <div class="card-header">
+            <div class="rank">#4</div>
+            <div class="title-section">
+                <h2><a href="https://www.noctua.at/en/3d-cad-models" target="_blank">Noctua releases official 3D CAD models for its cooling fans</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 308</span>
+                    <span class="comments">💬 71</span>
+                    <span class="by">👤 embedding-shape</span>
+                </div>
+                <div class="summary"><p>Noctua has released official 3D CAD models for its popular cooling fans, making it easier for engineers and enthusiasts to integrate Noctua components into their custom cooling solutions and system designs.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.noctua.at/en/3d-cad-models" target="_blank">https://www.noctua.at/en/3d-cad-models</a></div>
+    </div>
+
+<div class="card" style="--accent: #ffeaa7;">
+        <div class="card-header">
+            <div class="rank">#5</div>
+            <div class="title-section">
+                <h2><a href="https://zed.dev/blog/zed-1-0" target="_blank">Zed 1.0</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 1915</span>
+                    <span class="comments">💬 605</span>
+                    <span class="by">👤 salkahfi</span>
+                </div>
+                <div class="summary"><p>Nathan Sobo announced Zed 1.0 after over a thousand versions, marking a milestone for the AI-native editor built from scratch in Rust with its own GPU-based UI framework (GPUI). The release includes Zed for Business, parallel AI agents, edit predictions, and the Agent Client Protocol supporting multiple agent frameworks, plus DeltaDB for collaborative coding.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://zed.dev/blog/zed-1-0" target="_blank">https://zed.dev/blog/zed-1-0</a></div>
+    </div>
+
+<div class="card" style="--accent: #dda15e;">
+        <div class="card-header">
+            <div class="rank">#6</div>
+            <div class="title-section">
+                <h2><a href="https://simonwillison.net/2026/Apr/30/zig-anti-ai/" target="_blank">The Zig project's rationale for their anti-AI contribution policy</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 365</span>
+                    <span class="comments">💬 179</span>
+                    <span class="by">👤 lumpa</span>
+                </div>
+                <div class="summary"><p>Simon Willison covers the Zig programming language project's firm anti-AI contribution policy, which rejects AI-generated code submissions. The policy reflects growing tension in the open-source community about the role of AI in software development and project governance.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://simonwillison.net/2026/Apr/30/zig-anti-ai/" target="_blank">https://simonwillison.net/2026/Apr/30/zig-anti-ai/</a></div>
+    </div>
+
+<div class="card" style="--accent: #98d8c8;">
+        <div class="card-header">
+            <div class="rank">#7</div>
+            <div class="title-section">
+                <h2><a href="https://copy.fail/" target="_blank">Copy Fail</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 1069</span>
+                    <span class="comments">💬 378</span>
+                    <span class="by">👤 unsnap_biceps</span>
+                </div>
+                <div class="summary"><p>Copy Fail reveals CVE-2026-31431, a 732-byte Python container escape primitive that provides 100% reliable root access across every Linux distribution shipped since 2017. Unlike most Linux LPE exploits that require race windows or kernel-specific offsets, this is a straight-line logic flaw.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://copy.fail/" target="_blank">https://copy.fail/</a></div>
+    </div>
+
+<div class="card" style="--accent: #f7dc6f;">
+        <div class="card-header">
+            <div class="rank">#8</div>
+            <div class="title-section">
+                <h2><a href="https://www.jcvi.org/media-center/j-craig-venter-genomics-pioneer-and-founder-jcvi-and-diploid-genomics-inc-dies-79" target="_blank">Craig Venter has died</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 253</span>
+                    <span class="comments">💬 47</span>
+                    <span class="by">👤 rdl</span>
+                </div>
+                <div class="summary"><p>J. Craig Venter, the genomics pioneer and founder of JCVI and Diploid Genomics, Inc., died on April 29, 2026, at age 79 following a brief hospitalization in San Diego. Venter was a leading figure in genomics who led the effort to sequence the human genome and founded multiple groundbreaking biotechnology companies.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.jcvi.org/media-center/j-craig-venter-genomics-pioneer-and-founder-jcvi-and-diploid-genomics-inc-dies-79" target="_blank">https://www.jcvi.org/media-center/j-craig-venter-genomics-pioneer-and-founder-jcvi-and-diploid-genomics-inc-dies-79</a></div>
+    </div>
+
+<div class="card" style="--accent: #bb8fce;">
+        <div class="card-header">
+            <div class="rank">#9</div>
+            <div class="title-section">
+                <h2><a href="https://pomax.github.io/bezierinfo/" target="_blank">A Primer on Bézier Curves - So What Makes a Bézier Curve?</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 16</span>
+                    <span class="comments">💬 2</span>
+                    <span class="by">👤 mostlyk</span>
+                </div>
+                <div class="summary"><p>A comprehensive primer on Bézier curves explaining how 2D drawing relies on two types of lines: straight lines and curves. Straight lines are trivial for computers to render given start and end points, but curves require more sophisticated mathematical treatment that this guide explores in depth.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://pomax.github.io/bezierinfo/" target="_blank">https://pomax.github.io/bezierinfo/</a></div>
+    </div>
+
+<div class="card" style="--accent: #85c1e9;">
+        <div class="card-header">
+            <div class="rank">#10</div>
+            <div class="title-section">
+                <h2><a href="https://derekrodriguez.dev/parse-dont-validate-through-the-years-with-c-/" target="_blank">"Parse, don't validate" through the years with C++</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 36</span>
+                    <span class="comments">💬 7</span>
+                    <span class="by">👤 dwrodri</span>
+                </div>
+                <div class="summary"><p>An exploration of the "parse, don't validate" philosophy applied to C++ development, examining how parsing values rather than validating them can lead to cleaner, more robust code through the pattern's history and practical application.</p></div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://derekrodriguez.dev/parse-dont-validate-through-the-years-with-c-/" target="_blank">https://derekrodriguez.dev/parse-dont-validate-through-the-years-with-c-/</a></div>
+    </div>
+
+        <footer>
+            <p>Fetched via Hacker News API • 2026-04-30</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 12px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API • April 28, 2026</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+        <div class="card-header">
+            <div class="rank">#1</div>
+            <div class="title-section">
+                <h2><a href="https://github.com/localsend/localsend" target="_blank">Localsend: An open-source cross-platform alternative to AirDrop</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 465</span>
+                    <span class="comments">💬 164</span>
+                    <span class="by">👤 bilsbie</span>
+                </div>
+                <div class="summary">Localsend is an open-source, cross-platform file transfer tool that works like AirDrop across Android, iOS, Windows, macOS, and Linux. Files are sent directly between devices on the same local network via encrypted connections — no internet connection or cloud storage required.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://github.com/localsend/localsend" target="_blank">https://github.com/localsend/localsend</a></div>
+    </div>
+
+<div class="card" style="--accent: #4ecdc4;">
+        <div class="card-header">
+            <div class="rank">#2</div>
+            <div class="title-section">
+                <h2><a href="https://aisle.com/blog/aisle-discovers-38-critical-security-vulnerabilities-in-healthcare-software-used-by-100000-providers" target="_blank">AI uncovers 38 vulnerabilities in largest open source medical record software</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 37</span>
+                    <span class="comments">💬 26</span>
+                    <span class="by">👤 mmsc</span>
+                </div>
+                <div class="summary">Security firm Aisle used AI-assisted analysis to discover 38 critical vulnerabilities in OpenEMR, the world's most widely adopted open-source electronic health record platform serving over 100,000 providers and 200 million patients. The findings underscore growing concerns about AI-powered threats to healthcare infrastructure.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://aisle.com/blog/aisle-discovers-38-critical-security-vulnerabilities-in-healthcare-software-used-by-100000-providers" target="_blank">https://aisle.com/blog/aisle-discovers-38-critical-security-vulnerabilities-in-healthcare-software-used-by-100000-providers</a></div>
+    </div>
+
+<div class="card" style="--accent: #45b7d1;">
+        <div class="card-header">
+            <div class="rank">#3</div>
+            <div class="title-section">
+                <h2><a href="https://github.com/microsoft/VibeVoice" target="_blank">Microsoft VibeVoice: Open-Source Frontier Voice AI</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 198</span>
+                    <span class="comments">💬 128</span>
+                    <span class="by">👤 tosh</span>
+                </div>
+                <div class="summary">Microsoft has open-sourced VibeVoice, a frontier-level voice AI model capable of high-quality speech synthesis and voice cloning. The project aims to make advanced voice AI accessible to researchers while addressing safety concerns around deepfake audio.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://github.com/microsoft/VibeVoice" target="_blank">https://github.com/microsoft/VibeVoice</a></div>
+    </div>
+
+<div class="card" style="--accent: #96ceb4;">
+        <div class="card-header">
+            <div class="rank">#4</div>
+            <div class="title-section">
+                <h2><a href="https://www.theverge.com/ai-artificial-intelligence/919494/google-pentagon-classified-ai-deal" target="_blank">Google and Pentagon reportedly agree on deal for 'any lawful' use of AI</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 88</span>
+                    <span class="comments">💬 58</span>
+                    <span class="by">👤 granzymes</span>
+                </div>
+                <div class="summary">Google and the U.S. Department of Defense have reportedly reached an agreement allowing Google's AI systems to be used for classified work on any lawful purpose. The deal reflects the Pentagon's increasing reliance on commercial AI for national security applications.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.theverge.com/ai-artificial-intelligence/919494/google-pentagon-classified-ai-deal" target="_blank">https://www.theverge.com/ai-artificial-intelligence/919494/google-pentagon-classified-ai-deal</a></div>
+    </div>
+
+<div class="card" style="--accent: #ffeaa7;">
+        <div class="card-header">
+            <div class="rank">#5</div>
+            <div class="title-section">
+                <h2><a href="https://www.lumara-space.app/" target="_blank">Show HN: Live Sun and Moon Dashboard with NASA Footage</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 81</span>
+                    <span class="comments">💬 19</span>
+                    <span class="by">👤 beeswaxpat</span>
+                </div>
+                <div class="summary">Lumara is an open-source dashboard displaying live NASA footage of the Sun, Moon, and Earth alongside real-time space weather data. It pulls from NASA's SDO and DONKI cameras while calculating astronomical data using professional-grade algorithms.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.lumara-space.app/" target="_blank">https://www.lumara-space.app/</a></div>
+    </div>
+
+<div class="card" style="--accent: #dda15e;">
+        <div class="card-header">
+            <div class="rank">#6</div>
+            <div class="title-section">
+                <h2><a href="https://keepandroidopen.org/en/" target="_blank">Your phone is about to stop being yours</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 188</span>
+                    <span class="comments">💬 94</span>
+                    <span class="by">👤 doener</span>
+                </div>
+                <div class="summary">The KeepAndroidOpen campaign warns that users are increasingly losing control over their devices as manufacturers and Google tighten restrictions on custom ROMs, sideloading, and system modifications. The piece argues modern Android is trending toward locked-down, subscription-dependent devices.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://keepandroidopen.org/en/" target="_blank">https://keepandroidopen.org/en/</a></div>
+    </div>
+
+<div class="card" style="--accent: #98d8c8;">
+        <div class="card-header">
+            <div class="rank">#7</div>
+            <div class="title-section">
+                <h2><a href="https://deadline.com/2026/04/paramount-fcc-request-wbd-merger-middle-east-1236873732/" target="_blank">FCC Funding Application Notes Paramount Will Be 49.5% Foreign-Owned Post-Merger</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 50</span>
+                    <span class="comments">💬 13</span>
+                    <span class="by">👤 throw0101c</span>
+                </div>
+                <div class="summary">In its FCC application related to the Warner Bros. Discovery merger, Paramount disclosed the combined entity would be 49.5% foreign-owned, raising potential national security concerns under U.S. communications regulations and highlighting regulatory hurdles for mega-media mergers.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://deadline.com/2026/04/paramount-fcc-request-wbd-merger-middle-east-1236873732/" target="_blank">https://deadline.com/2026/04/paramount-fcc-request-wbd-merger-middle-east-1236873732/</a></div>
+    </div>
+
+<div class="card" style="--accent: #f7dc6f;">
+        <div class="card-header">
+            <div class="rank">#8</div>
+            <div class="title-section">
+                <h2><a href="https://www.blender.org/press/anthropic-joins-the-blender-development-fund-as-corporate-patron/" target="_blank">Anthropic Joins the Blender Development Fund as Corporate Patron</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 117</span>
+                    <span class="comments">💬 90</span>
+                    <span class="by">👤 Philpax</span>
+                </div>
+                <div class="summary">Anthropic has joined the Blender Development Fund as a Corporate Patron, contributing financially to the continued development of the open-source 3D creation suite. The donation supports Blender's ongoing real-time rendering, AI-assisted tools, and community-driven features.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://www.blender.org/press/anthropic-joins-the-blender-development-fund-as-corporate-patron/" target="_blank">https://www.blender.org/press/anthropic-joins-the-blender-development-fund-as-corporate-patron/</a></div>
+    </div>
+
+<div class="card" style="--accent: #bb8fce;">
+        <div class="card-header">
+            <div class="rank">#9</div>
+            <div class="title-section">
+                <h2><a href="https://phys.org/news/2026-04-deep-antarctic-ice-cosmic-strange.html" target="_blank">Deep under Antarctic ice, a long-predicted cosmic whisper breaks through</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 66</span>
+                    <span class="comments">💬 29</span>
+                    <span class="by">👤 rbanffy</span>
+                </div>
+                <div class="summary">Researchers using the IceCube Neutrino Observatory deep beneath Antarctic ice have detected 13 mysterious bursts of high-energy cosmic neutrinos matching predictions of 'strangelets' — hypothetical exotic particles never before observed. The detection could represent a breakthrough in understanding exotic matter from extreme cosmic environments.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://phys.org/news/2026-04-deep-antarctic-ice-cosmic-strange.html" target="_blank">https://phys.org/news/2026-04-deep-antarctic-ice-cosmic-strange.html</a></div>
+    </div>
+
+<div class="card" style="--accent: #85c1e9;">
+        <div class="card-header">
+            <div class="rank">#10</div>
+            <div class="title-section">
+                <h2><a href="https://poolside.ai/blog/laguna-a-deeper-dive" target="_blank">Laguna XS.2 and M.1</a></h2>
+                <div class="meta">
+                    <span class="score">⭐ 9</span>
+                    <span class="comments">💬 3</span>
+                    <span class="by">👤 tosh</span>
+                </div>
+                <div class="summary">A deeper dive into Laguna by Poolside AI, exploring their approach to AI development and infrastructure. The post covers technical details about their model architecture and systems.</div>
+            </div>
+        </div>
+        <div class="source">🔗 <a href="https://poolside.ai/blog/laguna-a-deeper-dive" target="_blank">https://poolside.ai/blog/laguna-a-deeper-dive</a></div>
+    </div>
+
+        <footer>
+            <p>Fetched via Hacker News API • April 28, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

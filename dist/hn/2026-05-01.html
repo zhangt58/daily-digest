@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts — 2026-05-01</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 12px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Friday, May 01, 2026</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://websmith.studio/blog/your-website-is-not-for-you/" target="_blank">Your Website Is Not for You</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 22</span>
+                <span class="comments">💬 12</span>
+                <span class="by">👤 pumbaa</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A developer reflects on watching decision-makers override designer research in favor of personal taste. Websites aren't art for founders to admire — they're tools built for users you've never met, and every design choice either helps or hinders them from accomplishing their goal.</div>
+    <div class="source">🔗 <a href="https://websmith.studio/blog/your-website-is-not-for-you/" target="_blank">websmith.studio</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="https://news.ycombinator.com/item?id=47972888" target="_blank">Show HN: Perfect Bluetooth MIDI for Windows</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 41</span>
+                <span class="comments">💬 6</span>
+                <span class="by">👤 mayerwin</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A free open-source utility that bridges Bluetooth LE MIDI keyboards into the Windows MIDI Services stack, solving the problem where Windows pairs with BLE-MIDI but no DAW can see the device. Built with .NET 10 and Avalonia — single ~21 MB exe, no installer, no telemetry, no account.</div>
+    <div class="source">🔗 <a href="https://news.ycombinator.com/item?id=47972888" target="_blank">HN Discussion</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://github.com/darrylmorley/whatcable" target="_blank">Show HN: WhatCable, a tiny menu bar app for inspecting USB-C cables</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 148</span>
+                <span class="comments">💬 47</span>
+                <span class="by">👤 sleepingNomad</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A macOS menu bar app that tells you, in plain English, what each USB-C cable plugged into your Mac can actually do. Open source with 196 stars — just plug in a cable and see its capabilities at a glance instead of wondering if your mystery USB-C cable supports charging, display, or data.</div>
+    <div class="source">🔗 <a href="https://github.com/darrylmorley/whatcable" target="_blank">github.com/darrylmorley/whatcable</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://thereader.mitpress.mit.edu/the-whistleblower-who-uncovered-the-nsas-big-brother-machine/" target="_blank">How Mark Klein told the EFF about Room 641A [book excerpt]</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 622</span>
+                <span class="comments">💬 208</span>
+                <span class="by">👤 the-mitr</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">Book excerpt about Mark Klein, the AT&T engineer who discovered and exposed Room 641A — the NSA surveillance facility inside an AT&T building in San Francisco. The whistleblower's account of how he uncovered the government's mass surveillance program and alerted the Electronic Frontier Foundation.</div>
+    <div class="source">🔗 <a href="https://thereader.mitpress.mit.edu/the-whistleblower-who-uncovered-the-nsas-big-brother-machine/" target="_blank">thereader.mitpress.mit.edu</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://docs.x.ai/developers/models/grok-4.3" target="_blank">Grok 4.3</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 136</span>
+                <span class="comments">💬 168</span>
+                <span class="by">👤 simianwords</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">xAI announces Grok 4.3 with structured outputs and a "thinking" mode where the model reasons before responding. Pricing at $1.25/M input tokens and $2.50/M output tokens. Supports response formatting in specific organized structures for more reliable API integrations.</div>
+    <div class="source">🔗 <a href="https://docs.x.ai/developers/models/grok-4.3" target="_blank">docs.x.ai</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://www.tcd.ie/news_events/articles/2026/caedmons-hymn-discovery/" target="_blank">New copy of earliest poem in English, written 1,3k years ago, discovered in Rome</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 88</span>
+                <span class="comments">💬 54</span>
+                <span class="by">👤 giuliomagnifico</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A newly discovered manuscript of Caedmon's Hymn was found in the National Central Library of Rome, dating from between 800-830 AD — making it the third oldest surviving text of what is considered the earliest known poem in English, written roughly 1,300 years ago.</div>
+    <div class="source">🔗 <a href="https://www.tcd.ie/news_events/articles/2026/caedmons-hymn-discovery/" target="_blank">tcd.ie</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://www.openwall.com/lists/oss-security/2026/04/30/10" target="_blank">For Linux kernel vulnerabilities, there is no heads-up to distributions</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 521</span>
+                <span class="comments">💬 418</span>
+                <span class="by">👤 ori_b</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A thread on oss-security discussing how Linux kernel vulnerabilities are patched without advance notice to distributions. Long-term kernels (6.12, 6.6, 6.1, 5.15, 5.10) often don't receive backported fixes in a timely manner, leaving many systems exposed.</div>
+    <div class="source">🔗 <a href="https://www.openwall.com/lists/oss-security/2026/04/30/10" target="_blank">openwall.com</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://matduggan.com/if-i-could-make-my-own-github/" target="_blank">If I could make my own GitHub</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 23</span>
+                <span class="comments">💬 53</span>
+                <span class="by">👤 matricaria</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A thought piece on redesigning GitHub after reading about Ghostty leaving the platform. Proposes pre-commit feedback loops, non-boolean PR approvals, stacked PRs as first-class citizens, smaller modular hosting units, and signed/hash-verified CI actions that work offline.</div>
+    <div class="source">🔗 <a href="https://matduggan.com/if-i-could-make-my-own-github/" target="_blank">matduggan.com</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://openwarp.zerx.dev" target="_blank">OpenWarp</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 109</span>
+                <span class="comments">💬 93</span>
+                <span class="by">👤 zero-lab</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A community fork of Warp terminal that lets you plug in any AI provider of your choice. Supports 6 API protocols natively (OpenAI, Anthropic, DeepSeek, Qwen, Ollama, Groq) with custom model routing, dynamic system prompts via minijinja templates, and 100% local credential storage.</div>
+    <div class="source">🔗 <a href="https://openwarp.zerx.dev" target="_blank">openwarp.zerx.dev</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://semgrep.dev/blog/2026/malicious-dependency-in-pytorch-lightning-used-for-ai-training/" target="_blank">Shai-Hulud Themed Malware Found in the PyTorch Lightning AI Training Library</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 406</span>
+                <span class="comments">💬 147</span>
+                <span class="by">👤 j12y</span>
+            </div>
+        </div>
+    </div>
+    <div class="summary">A supply chain attack compromised the 'lightning' PyPI package — a widely-used deep learning framework — affecting versions 2.6.2 and 2.6.3 published on April 30, 2026. Teams building image classifiers, fine-tuning LLMs, or running diffusion models were potentially affected by the malicious dependency.</div>
+    <div class="source">🔗 <a href="https://semgrep.dev/blog/2026/malicious-dependency-in-pytorch-lightning-used-for-ai-training/" target="_blank">semgrep.dev</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API • 2026-05-01</p>
+        </footer>
+    </div>
+</body>
+</html>

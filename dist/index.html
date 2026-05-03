@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Digest</title>
+    <style>* { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .section-title {
+            font-size: 1.1rem; font-weight: 700; color: #f7c948;
+            padding: 16px 0 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 12px;
+        }
+        .list { list-style: none; }
+        .list li {
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .list a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 24px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .rank {
+            font-size: 1.4rem; font-weight: 900;
+            color: #f7c948; min-width: 36px;
+        }
+        .info { flex: 1; }
+        .info h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+        .info p { font-size: 0.85rem; color: #888; }
+        .arrow { color: #555; font-size: 1.2rem; }</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Daily Digest</h1>
+            <p>Hacker News reports &amp; Michigan events</p>
+        </header>
+        <div class="section-title">🗺 Michigan Events</div>
+        <ul class="list">
+            <li>
+                <a href="events/hn_events_map_2026-05-03.html">
+                    <span class="rank">🗺</span>
+                    <div class="info">
+                        <h2>Events Map — May 03, 2026</h2>
+                        <p>Mid Michigan &amp; Lake Michigan events</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+        </ul>
+        <div class="section-title">📄 HN Top 10</div>
+        <ul class="list">
+            <li>
+                <a href="hn/2026-05-03.html">
+                    <span class="rank">#3</span>
+                    <div class="info">
+                        <h2>May 03, 2026</h2>
+                        <p>hn_top10_2026-05-03.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-05-02.html">
+                    <span class="rank">#2</span>
+                    <div class="info">
+                        <h2>May 02, 2026</h2>
+                        <p>hn_top10_2026-05-02.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-05-01.html">
+                    <span class="rank">#1</span>
+                    <div class="info">
+                        <h2>May 01, 2026</h2>
+                        <p>hn_top10_2026-05-01.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-04-30.html">
+                    <span class="rank">#30</span>
+                    <div class="info">
+                        <h2>April 30, 2026</h2>
+                        <p>hn_top10_2026-04-30.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-04-29.html">
+                    <span class="rank">#29</span>
+                    <div class="info">
+                        <h2>April 29, 2026</h2>
+                        <p>hn_top10_2026-04-29.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-04-28.html">
+                    <span class="rank">#28</span>
+                    <div class="info">
+                        <h2>April 28, 2026</h2>
+                        <p>hn_top10_2026-04-28.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="hn/2026-04-27.html">
+                    <span class="rank">#27</span>
+                    <div class="info">
+                        <h2>April 27, 2026</h2>
+                        <p>hn_top10_2026-04-27.html</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
