@@ -24,12 +24,6 @@ DIST_INDEX_PATH = os.path.join(DIST_DIR, "index.html")
 DIST_HN_DIR = os.path.join(DIST_DIR, "hn")
 DIST_EVENTS_DIR = os.path.join(DIST_DIR, "events")
 
-# Sync to Jekyll site for web publishing at zhangt58.github.io/digest/
-JEKYLL_DIGEST_DIR = "/home/tong/workspace/zhangt58.github.io/digest"
-JEKYLL_HN_DIR = os.path.join(JEKYLL_DIGEST_DIR, "hn")
-JEKYLL_EVENTS_DIR = os.path.join(JEKYLL_DIGEST_DIR, "events")
-JEKYLL_INDEX_PATH = os.path.join(JEKYLL_DIGEST_DIR, "index.html")
-
 
 def parse_date_from_filename(filename):
     """Extract YYYY-MM-DD from filename like 2026-05-03.html"""
@@ -239,27 +233,6 @@ def sync_dist():
             shutil.copy2(src, dst)
 
 
-def sync_jekyll():
-    """Sync hn/ and events/ to Jekyll site for web publishing"""
-    os.makedirs(JEKYLL_HN_DIR, exist_ok=True)
-    os.makedirs(JEKYLL_EVENTS_DIR, exist_ok=True)
-
-    for f in os.listdir(HN_DIR):
-        src = os.path.join(HN_DIR, f)
-        dst = os.path.join(JEKYLL_HN_DIR, f)
-        if os.path.isfile(src):
-            shutil.copy2(src, dst)
-
-    for f in os.listdir(EVENTS_DIR):
-        src = os.path.join(EVENTS_DIR, f)
-        dst = os.path.join(JEKYLL_EVENTS_DIR, f)
-        if os.path.isfile(src):
-            shutil.copy2(src, dst)
-
-    shutil.copy2(INDEX_PATH, JEKYLL_INDEX_PATH)
-    print(f"Synced to: {JEKYLL_INDEX_PATH}")
-
-
 def main():
     hn_posts = scan_hn_posts()
     events = scan_events()
@@ -276,9 +249,6 @@ def main():
 
     shutil.copy2(INDEX_PATH, DIST_INDEX_PATH)
     print(f"Written: {DIST_INDEX_PATH}")
-
-    sync_jekyll()
-
     print("Done.")
 
 
