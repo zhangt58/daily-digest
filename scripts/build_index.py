@@ -117,7 +117,7 @@ def generate_index(hn_posts, events):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Digest</title>
+    <title>Pocket</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
@@ -186,7 +186,7 @@ def generate_index(hn_posts, events):
 <body>
     <div class="container">
         <header>
-            <h1>🔥 Daily Digest</h1>
+            <h1>🔥 Pocket</h1>
             <p>Hacker News daily + Michigan events weekly</p>
         </header>
 
