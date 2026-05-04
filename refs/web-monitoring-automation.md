@@ -146,9 +146,9 @@ GrowthZone powers many Chamber of Commerce event calendars (look for "GrowthZone
   - Fees: `.gz-event-fees .gz-event-fees`
   - Website: `.gz-event-website a[itemprop="url"]`
 
-**Filtering:** Search form posts to `/events/search` via GET. Params: `c=<category_id>` (from `select.gz-search-category`), `Lookahead=<days>` (`7`=This Week, `30`=This Month, `60`=This Month & Next, `360`=This Year). No weekend-only filter. Only 10 cards per page — `per_page` param often ignored. Client-side weekend filter by checking date text for "Saturday"/"Sunday" is reliable.
+- **GrowthZone pagination** — Only 10 cards per page, no reliable `per_page` param. Extract first page + use client-side date filtering for weekend events.
 
-See `references/growthzone-chambermaster.md` for full extraction script and DOM tree.
+See `references/events-watcher-all-sites.md` for full GrowthZone extraction script (South Haven section).
 
 ### Grand Rapids CVB (e.g. experiencegr.com)
 
@@ -162,9 +162,9 @@ Key patterns:
 - **Time:** NOT in list view — must navigate to detail page
 - **~148 events** total on one page with no pagination
 - **Detail page:** `/event/<slug>/<id>/`
-- **Filters:** Date pickers, category dropdown (20+ options), venue dropdown, text search — but client-side JS, not URL params
+- **GrowthZone pagination** — Only 10 cards per page, no reliable `per_page` param. Extract first page + use client-side date filtering for weekend events.
 
-See `references/grand-rapids-experiencegr.md` for full extraction script and DOM tree.
+See `references/events-watcher-all-sites.md` for full GrowthZone extraction script (South Haven section).
 
 ## Geocoding & Map Visualization
 
@@ -289,6 +289,8 @@ When embedding a large JSON array into an existing HTML file:
   ```
 - **Validate after write** — parse the embedded JSON back out and verify event count
 
+See `references/events-watcher-all-sites.md` for consolidated extraction patterns for all 7 Michigan sites (Detroit, South Haven, Traverse City, Grand Haven, Mt. Pleasant, Battle Creek, Grand Rapids).
+
 ## Deploying to GitHub Pages (pocket pattern)
 
 The `pocket` repo (`/home/tong/workspace/pocket/`) uses a build workflow: `.github/workflows/scripts/generate_index.py` creates `dist/` with:
@@ -307,7 +309,7 @@ When adding a new section type (e.g. `events/`), update `generate_index.py` to:
 3. Copy files to `dist_events_dir` via `shutil.copy2()`
 4. Add a new `<ul class="list">` section in the index HTML template
 
-**Note:** The HN cron job and `hackernews-api` skill both reference `/home/tong/workspace/pocket/` as the output path. The events cron job delivers to Discord only — map/JSON files are committed manually from chat sessions.
+**Note:** The HN cron job and `hackernews-api` skill both reference `/home/tong/workspace/pocket/` as the output path. The events cron job (`6826679aaa01`) now also commits to the repo automatically — it copies updated map/JSON to `pocket/events/`, runs `git add/commit/push`, then delivers to Discord.
 
 ## Common Pitfalls
 
@@ -317,6 +319,7 @@ When adding a new section type (e.g. `events/`), update `generate_index.py` to:
 - **Over-extraction** — Extract what's needed, not everything (avoid hitting rate limits)
 - **Natural language schedules** — The cron system ONLY accepts standard cron format
 - **Nominatim 403 wall** — After ~20 requests, ALL further geocoding fails for the session. Use known coords or city-center fallback immediately.
+- **Missing terminal toolset** — If your cron job needs to commit to git or run shell commands, include `"terminal"` in `enabled_toolsets`. Without it, `git add/commit/push` will fail silently.
 - **SimpleView map-marker artifact** — `.address` textContent includes "Map Marker" accessibility text. Strip with `.replace(/\s*Map Marker\s*/g, '')`.
 - **GrowthZone pagination** — Only 10 cards per page, no reliable `per_page` param. Extract first page + use client-side date filtering for weekend events.
 - **VisitWizard JS rendering** — Server returns empty containers. Must use browser automation, then parse concatenated text format (`DDmonthHH:mm...`) from `a[href*="/event/"]` elements. Deduplicate by URL.
