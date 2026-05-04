@@ -83,10 +83,10 @@ def generate_index(hn_posts, events):
     hn_items = []
     for i, (date_str, filename) in enumerate(hn_posts):
         hn_items.append(f"""            <li>
-                <a href="hn/{filename}">
-                    <span class="rank">{i + 1}</span>
+                <a href="hn/{date_str}.html">
+                    <span class="rank">#{i + 1}</span>
                     <div class="info">
-                        <h2>HN Top 10 — {format_date(date_str)}</h2>
+                        <h2>{format_date(date_str)}</h2>
                         <p>Top 10 Hacker News posts for {format_date(date_str)}</p>
                     </div>
                     <span class="arrow">→</span>
