@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API &bull; 2026-05-05</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://tweedegolf.nl/en/blog/237/async-rust-never-left-the-mvp-state" target="_blank">Async Rust never left the MVP state</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 170</span>
+                <span class="comments">💬 82</span>
+                <span class="by">👤 pjmlp</span>
+            </div>
+            <div class="summary"><p>**I've previously explained async bloat and some work-arounds for it, but would much prefer to solve the issue at the root, in the compiler. I've submitted a Project Goal, and am looking for help to fund the effort.** I love me some async Rust! It's amazing how we can write executor agnostic code that can run concurrently on huge servers and tiny microcontrollers.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://tweedegolf.nl/en/blog/237/async-rust-never-left-the-mvp-state" target="_blank">https://tweedegolf.nl/en/blog/237/async-rust-never-left-the-mvp-state</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="https://distr.sh/blog/running-docker-in-production/" target="_blank">Should I Run Plain Docker Compose in Production in 2026?</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 48</span>
+                <span class="comments">💬 30</span>
+                <span class="by">👤 pmig</span>
+            </div>
+            <div class="summary"><p>I am Philip—an engineer working at Distr, which helps software and AI companies distribute their applications to self-managed environments. Our Open Source Software Distribution platform is available on GitHub (`github.com/distr-sh/distr`) and orchestrates both Docker Compose and Docker Swarm deployments on customer hosts every day. Most of the production incidents I have seen on Docker Compose hosts come...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://distr.sh/blog/running-docker-in-production/" target="_blank">https://distr.sh/blog/running-docker-in-production/</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://github.com/oven-sh/bun/commit/46d3bc29f270fa881dd5730ef1549e88407701a5" target="_blank">Bun is being ported from Zig to Rust</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 537</span>
+                <span class="comments">💬 376</span>
+                <span class="by">👤 SergeAx</span>
+            </div>
+            <div class="summary"><p>Bun's team is porting the runtime from Zig to Rust in a two-phase approach. Phase A produces a draft .rs file next to each .zig that captures the logic faithfully — it doesn't need to compile yet. Phase B wires up Cargo.toml and makes each crate compile. The porting guide bans popular Rust async libraries (tokio, rayon, hyper, async-trait); Bun owns its own event loop and syscalls. No async fn is allowed — everything stays as callbacks + state machines, matching the Zig original.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://github.com/oven-sh/bun/commit/46d3bc29f270fa881dd5730ef1549e88407701a5" target="_blank">https://github.com/oven-sh/bun/commit/46d3bc29f270fa881dd5730ef1549e88407701a5</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://walzr.com/empty-screenings" target="_blank">Empty Screenings – Finds AMC movie screenings with few or no tickets sold</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 162</span>
+                <span class="comments">💬 130</span>
+                <span class="by">👤 MrBuddyCasino</span>
+            </div>
+            <div class="summary"><p>Empty Screenings Empty Screenings About 10% of AMC movie showings sell zero tickets.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://walzr.com/empty-screenings" target="_blank">https://walzr.com/empty-screenings</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html" target="_blank">Lessons for Agentic Coding: What should we do when code is cheap?</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 73</span>
+                <span class="comments">💬 59</span>
+                <span class="by">👤 ingve</span>
+            </div>
+            <div class="summary"><p>10 Lessons for Agentic Coding May 4, 2026 DEVELOPMENT 10 Lessons for Agentic Coding What should we do when code is cheap? Lately, this blog has featured a lot of writing about agentic coding. Frontier models are _really_ good at coding these days, much better than they are at other tasks.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html" target="_blank">https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://sethmlarson.dev/hand-drawn-qr-codes" target="_blank">Hand Drawn QR Codes</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 122</span>
+                <span class="comments">💬 21</span>
+                <span class="by">👤 jollyjerry</span>
+            </div>
+            <div class="summary"><p>Hand‑drawn QR codes — Seth Larson Hand‑drawn QR codes Seth Larson @ 2025-07-01 I really like QR codes. Recently I purchased a new sticky-note-like pad from a new local stationery store in Minneapolis. The sheets have a 10x10 grid and 2x10 grid.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://sethmlarson.dev/hand-drawn-qr-codes" target="_blank">https://sethmlarson.dev/hand-drawn-qr-codes</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/" target="_blank">When everyone has AI and the company still learns nothing</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 12</span>
+                <span class="comments">💬 0</span>
+                <span class="by">👤 youngbrioche</span>
+            </div>
+            <div class="summary"><p>What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Robert Glaser 05 May 2026— 9 min read !Image 2: When everyone has AI and the company still learns nothing Ethan Mollick has been...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/" target="_blank">https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learn...</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/" target="_blank">Google Chrome silently installs a 4 GB AI model on your device without consent</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 288</span>
+                <span class="comments">💬 287</span>
+                <span class="by">👤 john-doe</span>
+            </div>
+            <div class="summary"><p>Two weeks ago I wrote about Anthropic silently registering a Native Messaging bridge in seven Chromium-based browsers on every machine where Claude Desktop was installed [1]. The pattern was: install on user launch of product A, write configuration into the user's installs of products B, C, D, E, F, G, H without asking. Reach across vendor trust boundaries.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/" target="_blank">https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://openai.com/index/delivering-low-latency-voice-ai-at-scale/" target="_blank">How OpenAI delivers low-latency voice AI at scale</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 410</span>
+                <span class="comments">💬 129</span>
+                <span class="by">👤 Sean-Der</span>
+            </div>
+            <div class="summary"><p>Voice AI only feels natural if conversation moves at the speed of speech. When the network gets in the way, people hear it immediately as awkward pauses, clipped interruptions, or delayed barge-in. That matters for ChatGPT voice, for developers building with the Realtime API, for agents working in interactive workflows, and for models that need to process audio while a user is still talking.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://openai.com/index/delivering-low-latency-voice-ai-at-scale/" target="_blank">https://openai.com/index/delivering-low-latency-voice-ai-at-scale/</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://www.dragonsreach.it/2026/05/04/cve-2026-31431-copy-fail-rootless-containers/" target="_blank">CVE-2026-31431: Copy Fail vs. rootless containers</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 113</span>
+                <span class="comments">💬 48</span>
+                <span class="by">👤 averi</span>
+            </div>
+            <div class="summary"><p>rootless containers - Andrea Veri's Blog CVE-2026-31431: Copy Fail vs. After that post went out I spent the weekend setting up a lab to actually run the exploit, trace it at the syscall level, and verify that the rootless Podman architecture we deploy on GNOME’s runners would contain it. This post documents the entire process: from disassembling the shellcode to watching the kernel reject the privilege escalation in real time.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.dragonsreach.it/2026/05/04/cve-2026-31431-copy-fail-rootless-containers/" target="_blank">https://www.dragonsreach.it/2026/05/04/cve-2026-31431-copy-fail-rootless-cont...</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API &bull; 2026-05-05</p>
+        </footer>
+    </div>
+</body>
+</html>
