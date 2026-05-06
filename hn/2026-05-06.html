@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API &bull; 2026-05-06</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank">Agents can now create Cloudflare accounts, buy domains, and deploy</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 356</span>
+                <span class="comments">💬 199</span>
+                <span class="by">👤 rolph</span>
+            </div>
+            <div class="summary"><p>This post is also available in 한국어. Coding agents are great at building software. But to deploy to production they need three things from the cloud they want to host their app —an account, a way to pay, and an API token.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank">https://blog.cloudflare.com/agents-stripe-projects/</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="https://us.starlabs.systems/pages/starfighter" target="_blank">StarFighter 16-Inch</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 372</span>
+                <span class="comments">💬 196</span>
+                <span class="by">👤 signa11</span>
+            </div>
+            <div class="summary"><p>StarFighter A full-size Linux performance laptop with premium materials, a haptic trackpad, open firmware options, and room for heavier workloads. A true matte display with a protective coating allows colours to shine while diffusing ambient light. 3840x2400 4K Resolution Enjoy highly accurate colours that are crisp and clear.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://us.starlabs.systems/pages/starfighter" target="_blank">https://us.starlabs.systems/pages/starfighter</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://www.aaedmusa.com/projects/cara2" target="_blank">CARA 2.0 – “I Built a Better Robot Dog”</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 178</span>
+                <span class="comments">💬 24</span>
+                <span class="by">👤 hakonjdjohnsen</span>
+            </div>
+            <div class="summary"><p>**CARA 2.0 (05/01/2026)** **Prologue** On May 31st, 2024, I uploaded a video titled High Precision Speed Reducer Using Rope, where I built a niche speed reducer called a capstan drive. Little did I know that this video would go viral and brand me as the “capstan guy”. Roughly 2 years later, this is still my highest-viewed video, and I still get lots of emails...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.aaedmusa.com/projects/cara2" target="_blank">https://www.aaedmusa.com/projects/cara2</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://coe.gatech.edu/news/2026/04/batteries-not-included-or-required-these-smart-home-sensors" target="_blank">Batteries Not Included, or Required, for These Smart Home Sensors</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 46</span>
+                <span class="comments">💬 18</span>
+                <span class="by">👤 gnabgib</span>
+            </div>
+            <div class="summary"><p>Georgia Tech researchers have created battery-free metal tags smaller than a penny that emit unique ultrasonic fingerprints when struck. These tags can detect door openings, count gym reps, or track bathroom use for elderly relatives — all without batteries, at a cost of just a few cents each. The shape of each disk determines its ultrasonic frequency, enabling unique identification with near-perfect privacy since the sound only travels about a meter.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://coe.gatech.edu/news/2026/04/batteries-not-included-or-required-these-smart-home-sensors" target="_blank">https://coe.gatech.edu/news/2026/04/batteries-not-included-or-required-these-...</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://red-squares.cian.lol/" target="_blank">Show HN: Red Squares – GitHub outages as contributions</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 10</span>
+                <span class="comments">💬 1</span>
+                <span class="by">👤 cianmm</span>
+            </div>
+            <div class="summary"><p>The contribution graph nobody asked for. Each red square is a day GitHub broke; the darker the square, the longer it stayed broken. 35.1 days of GitHub downtime in the last year Across 170 days with at least one incident · worst day Thu, Nov 20, 2025 (1.1 days) data fetched live A satire of GitHub's contribution chart.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://red-squares.cian.lol/" target="_blank">https://red-squares.cian.lol/</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://katedaviesdesigns.com/2026/04/29/knitting-bullshit/" target="_blank">Knitting bullshit</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 91</span>
+                <span class="comments">💬 44</span>
+                <span class="by">👤 ColinEberhardt</span>
+            </div>
+            <div class="summary"><p>In what follows, “bullshit” is used very much in the sense that Princeton philosopher Harry Frankfurt describes in his seminal essay, _On Bullshit_ (1986; 2005). For Frankfurt, bullshit is an utterance with “a lack of connection to concern with truth” and an “indifference to how things really are.” From the off, Frankfurt tells us, it is important to understand that bullshit is, in its peculiarly execrable nature, materially different to a...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://katedaviesdesigns.com/2026/04/29/knitting-bullshit/" target="_blank">https://katedaviesdesigns.com/2026/04/29/knitting-bullshit/</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38" target="_blank">DNSSEC disruption affecting .de domains – Resolved</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 679</span>
+                <span class="comments">💬 352</span>
+                <span class="by">👤 warpspin</span>
+            </div>
+            <div class="summary"><p>**May 5, 2026 23:28 CEST May 5, 2026 21:28 UTC** **INVESTIGATING** Frankfurt am Main, 5 May 2026 – DENIC eG is currently experiencing a disruption in its DNS service for .de domains. As a result, all DNSSEC-signed .de domains are currently affected in their reachability. The root cause of the disruption has not yet been fully identified.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38" target="_blank">https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f...</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://draxinar.github.io/articles/2026-05-01-uodemo-reverse-engineering.html" target="_blank">Reverse-engineering the 1998 Ultima Online demo server</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 51</span>
+                <span class="comments">💬 7</span>
+                <span class="by">👤 notsentient</span>
+            </div>
+            <div class="summary"><p>May 1, 2026 After 10 years of on-and-off work, I’m releasing a full reverse-engineering of the 1998 Ultima Online demo server: https://github.com/draxinar/ouo. About 5,000 functions disassembled from MSVC x86 and translated into portable C99, with each function compared instruction-by-instruction against the binary. UoDemo.exe For those who don’t know, Ultima Online is a 1997 MMORPG developed by Origin...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://draxinar.github.io/articles/2026-05-01-uodemo-reverse-engineering.html" target="_blank">https://draxinar.github.io/articles/2026-05-01-uodemo-reverse-engineering.html</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/" target="_blank">Accelerating Gemma 4: faster inference with multi-token prediction drafters</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 585</span>
+                <span class="comments">💬 273</span>
+                <span class="by">👤 amrrs</span>
+            </div>
+            <div class="summary"><p>Google is releasing Multi-Token Prediction (MTP) drafters for the Gemma 4 family, enabling up to 3x inference speedup through speculative decoding. The lightweight drafter predicts multiple future tokens at once, which the target model then verifies in parallel — accepting the entire sequence in a single forward pass. This addresses the memory-bandwidth bottleneck in standard LLM inference, delivering dramatically improved responsiveness for on-device AI, chat applications, voice interfaces, and agentic workflows.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/" target="_blank">https://blog.google/innovation-and-ai/technology/developers-tools/multi-token...</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://openrss.org/blog/youtube-your-feeds-are-broken" target="_blank">YouTube, your RSS feeds are broken</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 141</span>
+                <span class="comments">💬 57</span>
+                <span class="by">👤 veeti</span>
+            </div>
+            <div class="summary"><p>We would rather use the feeds you offer for each of your channels. You know, the ones you're hiding? Well, your relationship with these feeds has gone from neglectful to borderline hostile, and we're tired of pretending otherwise.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://openrss.org/blog/youtube-your-feeds-are-broken" target="_blank">https://openrss.org/blog/youtube-your-feeds-are-broken</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API &bull; 2026-05-06</p>
+        </footer>
+    </div>
+</body>
+</html>
