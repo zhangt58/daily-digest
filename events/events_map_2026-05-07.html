@@ -837,9 +837,6 @@
         eventList.appendChild(card);
     });
 
-    // Initialize count badge and calendar date filter on page load
-    applyFilters();
-
     // Fit map to show all markers
     const group = L.featureGroup(markers.map(m => m.marker));
     map.fitBounds(group.getBounds().pad(0.08));
@@ -977,6 +974,9 @@
             applyFilters();
         }
     });
+
+    // Initialize count badge on page load
+    applyFilters();
 
     // Combined filter function
     function applyFilters() {
