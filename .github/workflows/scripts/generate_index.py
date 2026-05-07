@@ -3,7 +3,7 @@
 
 import os, re, datetime, shutil
 
-repo_wdir = "../../"
+repo_wdir = "../../../"
 hn_dir = os.path.join(repo_wdir, "hn")
 events_dir = os.path.join(repo_wdir, "events")
 dist_dir = os.path.join(repo_wdir, "dist")

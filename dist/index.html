@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pocket</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <title>Daily Digest</title>
+    <style>* { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0a0a0a;
@@ -22,14 +21,10 @@
             background-clip: text; margin-bottom: 10px;
         }
         header p { color: #888; font-size: 1rem; }
-        .section { margin-bottom: 40px; }
         .section-title {
             font-size: 1.1rem; font-weight: 700; color: #f7c948;
             padding: 16px 0 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 12px;
-        }
-        .section-subtitle {
-            font-size: 0.85rem; color: #666; margin-top: -8px; margin-bottom: 16px;
         }
         .list { list-style: none; }
         .list li {
@@ -55,152 +50,155 @@
         }
         .rank {
             font-size: 1.4rem; font-weight: 900;
-            color: #f7c948; min-width: 36px; text-align: center;
+            color: #f7c948; min-width: 36px;
         }
         .info { flex: 1; }
         .info h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
         .info p { font-size: 0.85rem; color: #888; }
-        .arrow { color: #555; font-size: 1.2rem; }
-        .empty { padding: 18px 24px; color: #555; }
-        footer {
-            text-align: center; padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #555; font-size: 0.85rem;
-        }
-    </style>
+        .arrow { color: #555; font-size: 1.2rem; }</style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔥 Pocket</h1>
-            <p>Hacker News daily + Michigan events weekly</p>
+            <h1>🔥 Daily Digest</h1>
+            <p>Hacker News reports &amp; Michigan events</p>
         </header>
-
-        <div class="section">
-            <div class="section-title">📰 Daily — HN Top 10 (11 days)</div>
-            <p class="section-subtitle">Updated every day at 8:00 AM</p>
-            <ul class="list">
+        <div class="section-title">🗺 Michigan Events</div>
+        <ul class="list">
+            <li>
+                <a href="events/hn_events_map_2026-05-03.html">
+                    <span class="rank">🗺</span>
+                    <div class="info">
+                        <h2>Events Map — May 03, 2026</h2>
+                        <p>Mid Michigan &amp; Lake Michigan events</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+            <li>
+                <a href="events/events_map_2026-05-07.html">
+                    <span class="rank">🗺</span>
+                    <div class="info">
+                        <h2>Events Map — May 07, 2026</h2>
+                        <p>Mid Michigan &amp; Lake Michigan events</p>
+                    </div>
+                    <span class="arrow">→</span>
+                </a>
+            </li>
+        </ul>
+        <div class="section-title">📄 HN Top 10</div>
+        <ul class="list">
             <li>
                 <a href="hn/2026-05-07.html">
-                    <span class="rank">1</span>
+                    <span class="rank">#7</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 07, 2026</h2>
+                        <h2>May 07, 2026</h2>
+                        <p>hn_top10_2026-05-07.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-06.html">
-                    <span class="rank">2</span>
+                    <span class="rank">#6</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 06, 2026</h2>
+                        <h2>May 06, 2026</h2>
+                        <p>hn_top10_2026-05-06.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-05.html">
-                    <span class="rank">3</span>
+                    <span class="rank">#5</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 05, 2026</h2>
+                        <h2>May 05, 2026</h2>
+                        <p>hn_top10_2026-05-05.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-04.html">
-                    <span class="rank">4</span>
+                    <span class="rank">#4</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 04, 2026</h2>
+                        <h2>May 04, 2026</h2>
+                        <p>hn_top10_2026-05-04.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-03.html">
-                    <span class="rank">5</span>
+                    <span class="rank">#3</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 03, 2026</h2>
+                        <h2>May 03, 2026</h2>
+                        <p>hn_top10_2026-05-03.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-02.html">
-                    <span class="rank">6</span>
+                    <span class="rank">#2</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 02, 2026</h2>
+                        <h2>May 02, 2026</h2>
+                        <p>hn_top10_2026-05-02.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-05-01.html">
-                    <span class="rank">7</span>
+                    <span class="rank">#1</span>
                     <div class="info">
-                        <h2>HN Top 10 — May 01, 2026</h2>
+                        <h2>May 01, 2026</h2>
+                        <p>hn_top10_2026-05-01.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-04-30.html">
-                    <span class="rank">8</span>
+                    <span class="rank">#30</span>
                     <div class="info">
-                        <h2>HN Top 10 — April 30, 2026</h2>
+                        <h2>April 30, 2026</h2>
+                        <p>hn_top10_2026-04-30.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-04-29.html">
-                    <span class="rank">9</span>
+                    <span class="rank">#29</span>
                     <div class="info">
-                        <h2>HN Top 10 — April 29, 2026</h2>
+                        <h2>April 29, 2026</h2>
+                        <p>hn_top10_2026-04-29.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-04-28.html">
-                    <span class="rank">10</span>
+                    <span class="rank">#28</span>
                     <div class="info">
-                        <h2>HN Top 10 — April 28, 2026</h2>
+                        <h2>April 28, 2026</h2>
+                        <p>hn_top10_2026-04-28.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
             <li>
                 <a href="hn/2026-04-27.html">
-                    <span class="rank">11</span>
+                    <span class="rank">#27</span>
                     <div class="info">
-                        <h2>HN Top 10 — April 27, 2026</h2>
+                        <h2>April 27, 2026</h2>
+                        <p>hn_top10_2026-04-27.html</p>
                     </div>
                     <span class="arrow">→</span>
                 </a>
             </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <div class="section-title">🗺 Weekly — Michigan Events (1 weeks)</div>
-            <p class="section-subtitle">Updated every Friday at 10:00 AM</p>
-            <ul class="list">
-            <li>
-                <a href="events/hn_events_map_2026-05-03.html">
-                    <span class="rank">🗺</span>
-                    <div class="info">
-                        <h2>Michigan Events — May 03, 2026</h2>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-            </li>
-            </ul>
-        </div>
-
-        <footer>
-            <p>Generated May 07, 2026 at 07:01</p>
-        </footer>
+        </ul>
     </div>
 </body>
 </html>
