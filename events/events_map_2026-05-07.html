@@ -1,817 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lake Michigan Weekend Events Map - May 2026</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #0f172a;
-            --bg-card-hover: #172033;
-            --bg-header: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            --bg-legend: rgba(15, 23, 42, 0.92);
-            --bg-popup: #1e293b;
-            --bg-filter: transparent;
-            --bg-filter-hover: rgba(59, 130, 246, 0.12);
-            --bg-filter-active: #3b82f6;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --text-heading: #f1f5f9;
-            --text-time: #60a5fa;
-            --text-gradient-1: #60a5fa;
-            --text-gradient-2: #a78bfa;
-            --border-color: #334155;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.3);
-            --marker-shadow: rgba(0, 0, 0, 0.4);
-            --marker-border: #fff;
-            --tag-outdoor-bg: #065f46; --tag-outdoor-fg: #6ee7b7;
-            --tag-festival-bg: #7c2d12; --tag-festival-fg: #fdba74;
-            --tag-library-bg: #1e3a5f; --tag-library-fg: #93c5fd;
-            --tag-nature-bg: #064e3b; --tag-nature-fg: #86efac;
-            --tag-educational-bg: #4c1d95; --tag-educational-fg: #c4b5fd;
-            --tag-free-bg: #713f12; --tag-free-fg: #fde68a;
-            --tag-starwars-bg: #7c2d12; --tag-starwars-fg: #fdba74;
-            --tag-sport-bg: #1e3a5f; --tag-sport-fg: #67e8f9;
-            --toggle-bg: #475569;
-            --toggle-knob: #f1f5f9;
-            --toggle-icon: "🌙";
-            --scrollbar-track: #1e293b;
-            --scrollbar-thumb: #475569;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
-            --radius: 12px;
-            --radius-sm: 8px;
-            --radius-pill: 999px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Michigan Weekend Events — 2026-05-07</title>
 
-        [data-theme="light"] {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
-            --bg-header: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            --bg-legend: rgba(255, 255, 255, 0.96);
-            --bg-popup: #ffffff;
-            --bg-filter: transparent;
-            --bg-filter-hover: rgba(59, 130, 246, 0.08);
-            --bg-filter-active: #3b82f6;
-            --text-primary: #334155;
-            --text-secondary: #64748b;
-            --text-heading: #0f172a;
-            --text-time: #2563eb;
-            --text-gradient-1: #2563eb;
-            --text-gradient-2: #7c3aed;
-            --border-color: #e2e8f0;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.15);
-            --marker-shadow: rgba(0, 0, 0, 0.12);
-            --marker-border: #e2e8f0;
-            --tag-outdoor-bg: #d1fae5; --tag-outdoor-fg: #065f46;
-            --tag-festival-bg: #ffedd5; --tag-festival-fg: #9a3412;
-            --tag-library-bg: #dbeafe; --tag-library-fg: #1e40af;
-            --tag-nature-bg: #dcfce7; --tag-nature-fg: #166534;
-            --tag-educational-bg: #ede9fe; --tag-educational-fg: #5b21b6;
-            --tag-free-bg: #fef3c7; --tag-free-fg: #92400e;
-            --tag-starwars-bg: #ffedd5; --tag-starwars-fg: #9a3412;
-            --tag-sport-bg: #dbeafe; --tag-sport-fg: #0e7490;
-            --toggle-bg: #cbd5e1;
-            --toggle-knob: #ffffff;
-            --scrollbar-track: #f1f5f9;
-            --scrollbar-thumb: #cbd5e1;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-        }
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+:root {
+  --bg: #0f172a; --bg2: #1e293b; --text: #e2e8f0; --text2: #94a3b8;
+  --border: #334155; --accent: #f97316; --accent2: #fb923c;
+  --card-bg: #1e293b; --hover: #334155; --shadow: rgba(0,0,0,0.4);
+  --map-tile: https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png;
+  --map-attr: © <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>
+}
+[data-theme="light"] {
+  --bg: #f1f5f9; --bg2: #ffffff; --text: #1e293b; --text2: #64748b;
+  --border: #cbd5e1; --accent: #ea580c; --accent2: #f97316;
+  --card-bg: #ffffff; --hover: #f1f5f9; --shadow: rgba(0,0,0,0.1);
+  --map-tile: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png;
+  --map-attr: © <a href="https://www.openstreetmap.org/copyright">OSM</a>
+}
 
-        body {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            transition: background 0.35s ease, color 0.35s ease;
-            overflow: hidden;
-            height: 100vh;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ====== HEADER ====== */
-        #header {
-            background: var(--bg-header);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 24px;
-            transition: background 0.35s ease, border-color 0.35s ease;
-            z-index: 2000;
-            position: relative;
-        }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); }
 
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0 10px;
-        }
+/* Header */
+.header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.header-top h1 { font-size: 18px; }
+.header-top h1 span { color: var(--accent); }
+.theme-btn { background: var(--border); border: none; color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+.theme-btn:hover { background: var(--accent); color: #fff; }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.search-row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+#search { flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font-size: 14px; }
+#search::placeholder { color: var(--text2); }
+#search-clear { background: var(--border); border: none; color: var(--text); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: none; font-size: 14px; }
+#search-clear.show { display: flex; align-items: center; justify-content: center; }
+#event-count { color: var(--text2); font-size: 13px; white-space: nowrap; }
 
-        .brand-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
+.calendar-row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+#calendar { position: relative; }
+#calendar .flatpickr-day.selected { background: var(--accent); border-color: var(--accent); }
+#calendar-filter { font-size: 12px; color: var(--text2); padding: 4px 8px; background: var(--bg); border-radius: 4px; display: none; }
+#calendar-filter.show { display: inline-block; }
 
-        .brand-text h1 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            line-height: 1.2;
-        }
+/* Category pills */
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg); color: var(--text2); font-size: 12px; cursor: pointer; transition: all 0.2s; user-select: none; }
+.pill:hover { border-color: var(--accent); color: var(--text); }
+.pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-        .brand-text .subtitle {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
+/* Main layout */
+.main { display: flex; height: calc(100vh - 220px); min-height: 400px; }
+.sidebar { width: 360px; overflow-y: auto; background: var(--bg2); border-right: 1px solid var(--border); flex-shrink: 0; }
+#map { flex: 1; z-index: 1; }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* Event cards */
+.event-card { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+.event-card:hover { background: var(--hover); }
+.event-card .date { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+.event-card .time { font-size: 11px; color: var(--text2); }
+.event-card .title { font-size: 13px; font-weight: 500; margin: 4px 0; line-height: 1.3; }
+.event-card .location { font-size: 11px; color: var(--text2); }
+.event-card .site { font-size: 10px; color: var(--accent2); margin-top: 2px; }
 
-        .count-badge {
-            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2));
-            color: #fff;
-            padding: 5px 14px;
-            border-radius: var(--radius-pill);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
+/* Legend */
+.legend { background: var(--card-bg); padding: 10px 14px; border-radius: 8px; font-size: 11px; box-shadow: 0 2px 8px var(--shadow); margin: 12px; z-index: 1000; position: relative; }
+.legend h4 { margin-bottom: 6px; font-size: 12px; }
+.legend-item { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-        /* ====== THEME TOGGLE ====== */
-        #theme-toggle {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 1.15rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        #theme-toggle:hover {
-            border-color: var(--accent);
-            background: var(--bg-filter-hover);
-            box-shadow: 0 0 0 2px var(--accent-glow);
-        }
-
-        #theme-toggle:active {
-            transform: scale(0.94);
-        }
-
-        #theme-toggle .icon-sun,
-        #theme-toggle .icon-moon {
-            position: absolute;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-
-        [data-theme="dark"] #theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(0); }
-        [data-theme="dark"] #theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
-        [data-theme="light"] #theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
-        [data-theme="light"] #theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0); }
-
-        /* ====== FILTER BAR ====== */
-        .filter-bar {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0 0 12px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .filter-bar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .filter-btn {
-            padding: 6px 14px;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--border-color);
-            background: var(--bg-filter);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .filter-btn .emoji {
-            font-size: 0.9rem;
-            line-height: 1;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--accent);
-            background: var(--bg-filter-hover);
-            color: var(--text-primary);
-        }
-
-        .filter-btn.active {
-            background: var(--bg-filter-active);
-            border-color: var(--bg-filter-active);
-            color: #ffffff;
-            box-shadow: 0 0 0 2px var(--accent-glow);
-        }
-
-        .filter-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* ====== MAP CONTAINER ====== */
-        #map-container {
-            display: flex;
-            height: calc(100vh - 140px);
-            margin-bottom: 12px;
-        }
-
-        #map {
-            flex: 1;
-            min-height: 400px;
-        }
-
-        #sidebar {
-            width: 360px;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border-color);
-            overflow-y: auto;
-            padding: 16px 16px 60px 16px;
-            transition: background 0.35s ease, border-color 0.35s ease;
-            scrollbar-width: thin;
-            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-        }
-
-        #sidebar::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        #sidebar::-webkit-scrollbar-track {
-            background: var(--scrollbar-track);
-        }
-
-        #sidebar::-webkit-scrollbar-thumb {
-            background: var(--scrollbar-thumb);
-            border-radius: 10px;
-        }
-
-        /* ====== EVENT CARDS ====== */
-        .event-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .event-card:hover {
-            border-color: var(--accent);
-            background: var(--bg-card-hover);
-            transform: translateX(3px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .event-card .event-title {
-            font-weight: 600;
-            font-size: 0.88rem;
-            color: var(--text-heading);
-            margin-bottom: 4px;
-            line-height: 1.3;
-        }
-
-        .event-card .event-location {
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .event-card .event-time {
-            font-size: 0.75rem;
-            color: var(--text-time);
-            margin-top: 3px;
-        }
-
-        .event-card .event-tag {
-            display: inline-block;
-            font-size: 0.62rem;
-            padding: 2px 8px;
-            border-radius: var(--radius-pill);
-            margin-top: 6px;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
-
-        .tag-outdoor { background: var(--tag-outdoor-bg); color: var(--tag-outdoor-fg); }
-        .tag-festival { background: var(--tag-festival-bg); color: var(--tag-festival-fg); }
-        .tag-library { background: var(--tag-library-bg); color: var(--tag-library-fg); }
-        .tag-nature { background: var(--tag-nature-bg); color: var(--tag-nature-fg); }
-        .tag-educational { background: var(--tag-educational-bg); color: var(--tag-educational-fg); }
-        .tag-free { background: var(--tag-free-bg); color: var(--tag-free-fg); }
-        .tag-starwars { background: var(--tag-starwars-bg); color: var(--tag-starwars-fg); }
-        .tag-sport { background: var(--tag-sport-bg); color: var(--tag-sport-fg); }
-
-
-        /* ====== SITE FILTER ====== */
-        .site-btn {
-            padding: 5px 12px;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--border-color);
-            background: var(--bg-filter);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .site-btn .emoji {
-            font-size: 0.85rem;
-            line-height: 1;
-        }
-
-        .site-btn:hover {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.08);
-            color: var(--text-primary);
-        }
-
-        .site-btn.active {
-            background: #10b981;
-            border-color: #10b981;
-            color: #ffffff;
-            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
-        }
-
-        .site-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* ====== LEGEND ====== */
-
-        .legend-control {
-            padding-bottom: 4px;
-        }
-
-        .legend {
-            background: var(--bg-legend);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 10px 14px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            font-size: 0.72rem;
-            color: var(--text-primary);
-            transition: all 0.35s ease;
-            box-shadow: var(--shadow-md);
-            margin: 10px;
-            z-index: 1000;
-        }
-
-        @media (min-width: 641px) {
-            .legend {
-                margin: 16px;
-            }
-        }
-
-        .legend-title {
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--text-heading);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            margin: 3px 0;
-            color: var(--text-secondary);
-        }
-
-        .legend-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            border: 1.5px solid rgba(255,255,255,0.15);
-        }
-
-        /* ====== POPUP ====== */
-        .leaflet-popup-content-wrapper {
-            background: var(--bg-popup) !important;
-            color: var(--text-primary) !important;
-            border-radius: var(--radius) !important;
-            border: 1px solid var(--border-color) !important;
-            box-shadow: var(--shadow-md) !important;
-            transition: all 0.35s ease;
-        }
-
-        .leaflet-popup-tip {
-            background: var(--bg-popup) !important;
-            border: 1px solid var(--border-color) !important;
-        }
-
-        .leaflet-popup-content {
-            margin: 12px 16px !important;
-            font-family: 'Inter', 'Segoe UI', sans-serif !important;
-        }
-
-        .popup-title {
-            font-weight: 700;
-            font-size: 0.88rem;
-            margin-bottom: 6px;
-            color: var(--text-heading);
-            line-height: 1.3;
-        }
-
-        .popup-detail {
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-            margin: 3px 0;
-        }
-
-        .popup-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 8px;
-            color: var(--accent);
-            font-size: 0.75rem;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 4px 0;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        .popup-link:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        /* ====== RESPONSIVE ====== */
-        @media (max-width: 900px) {
-            #header { padding: 0 16px; }
-            .header-top { padding: 10px 0 8px; }
-            .brand-text h1 { font-size: 1rem; }
-            .brand-icon { width: 30px; height: 30px; font-size: 0.9rem; }
-            #theme-toggle { width: 36px; height: 36px; font-size: 1rem; }
-            .filter-btn { padding: 5px 10px; font-size: 0.72rem; }
-            #sidebar { width: 300px; padding: 12px; }
-        }
-
-        @media (max-width: 640px) {
-            #map-container { flex-direction: column; }
-            #map { min-height: 45vh; flex: none; }
-            #sidebar {
-                width: 100%;
-                flex: 1;
-                border-left: none;
-                border-top: 1px solid var(--border-color);
-                padding: 12px;
-            }
-            .brand-icon { display: none; }
-            .brand-text .subtitle { display: none; }
-            .count-badge { font-size: 0.7rem; padding: 4px 10px; }
-        }
-    </style>
+/* Responsive */
+@media (max-width: 768px) {
+  .main { flex-direction: column; }
+  .sidebar { width: 100%; height: 300px; order: 2; }
+  #map { height: 350px; order: 1; }
+}
+</style>
 </head>
 <body>
-    <div id="header">
-        <div class="header-top">
-            <div class="brand">
-                <div class="brand-icon">🗺️</div>
-                <div class="brand-text">
-                    <h1>Mid Michigan & Lake Michigan Events</h1>
-                    <div class="subtitle">Kid-Friendly Events Across 7 Regions — May 2026</div>
-                </div>
-            </div>
-            <div class="header-actions">
-                <span class="count-badge" id="count">150 events</span>
-                <button id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">
-                    <span class="icon-moon">🌙</span>
-                    <span class="icon-sun">☀️</span>
-                </button>
-            </div>
-        </div>
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all"><span class="emoji">📋</span>All</button>
-            <button class="filter-btn" data-filter="outdoor"><span class="emoji">🌳</span>Outdoor</button>
-            <button class="filter-btn" data-filter="festival"><span class="emoji">🎪</span>Festival</button>
-            <button class="filter-btn" data-filter="library"><span class="emoji">📚</span>Library</button>
-            <button class="filter-btn" data-filter="nature"><span class="emoji">🦎</span>Nature</button>
-            <button class="filter-btn" data-filter="educational"><span class="emoji">🎓</span>Educational</button>
-            <button class="filter-btn" data-filter="free"><span class="emoji">🎉</span>Free</button>
-            <button class="filter-btn" data-filter="starwars"><span class="emoji">⚔️</span>Star Wars</button>
-            <button class="filter-btn" data-filter="sport"><span class="emoji">🏊</span>Sports</button>
-        </div>
-        <div class="filter-bar">
-            <button class="site-btn active" data-site="all"><span class="emoji">🌍</span>All Regions</button>
-            <button class="site-btn" data-site="Detroit Metro"><span class="emoji">🏙️</span>Detroit Metro</button>
-            <button class="site-btn" data-site="South Haven"><span class="emoji">🌊</span>South Haven</button>
-            <button class="site-btn" data-site="Traverse City"><span class="emoji">🍒</span>Traverse City</button>
-            <button class="site-btn" data-site="Grand Haven"><span class="emoji">🏖️</span>Grand Haven</button>
-            <button class="site-btn" data-site="Mt. Pleasant"><span class="emoji">🏫</span>Mt. Pleasant</button>
-            <button class="site-btn" data-site="Battle Creek"><span class="emoji">🌽</span>Battle Creek</button>
-            <button class="site-btn" data-site="Grand Rapids"><span class="emoji">🌷</span>Grand Rapids</button>
-        </div>
-    </div>
 
-    <div id="map-container">
-        <div id="map"></div>
-        <div id="sidebar"></div>
-    </div>
+<div class="header">
+  <div class="header-top">
+    <h1>🗺️ Lake Michigan <span>Weekend Events</span> — 2026-05-07</h1>
+    <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+  </div>
+  <div class="search-row">
+    <input type="text" id="search" placeholder="Search events, locations, categories..." oninput="onSearch()">
+    <button id="search-clear" onclick="clearSearch()">✕</button>
+    <span id="event-count"></span>
+  </div>
+  <div class="calendar-row">
+    <div id="calendar"></div>
+    <span id="calendar-filter"></span>
+  </div>
+  <div class="filter-row" id="filters"></div>
+</div>
 
-    <script>
-    const events = [{"title": "Weekend Hayrides", "date": "May 3, 2026", "time": "12:00 PM - 4:00 PM", "location": "KENSINGTON METRO PARK FARM CENTER", "lat": 42.4914, "lon": -83.0936, "category": "outdoor", "url": "https://littleguidedetroit.com/event/weekend-hayrides-2/2026-05-03/", "site": "Detroit Metro"}, {"title": "Princess and Pirate Tea", "date": "May 3, 2026", "time": "12:00 PM - 2:00 PM", "location": "PLYMOUTH HISTORICAL MUSEUM", "lat": 42.4207, "lon": -83.4976, "category": "library", "url": "https://littleguidedetroit.com/event/princess-and-pirate-tea/", "site": "Detroit Metro"}, {"title": "Free Mini Train Rides", "date": "May 3, 2026", "time": "12:00 PM - 4:00 PM", "location": "Starr-Jaycee Park", "lat": 42.3766, "lon": -83.0586, "category": "nature", "url": "https://littleguidedetroit.com/event/free-mini-train-rides-2/2026-05-03/", "site": "Detroit Metro"}, {"title": "Asian American & Pacific Islander Fest", "date": "May 3, 2026", "time": "1:00 PM - 4:30 PM", "location": "FARMINGTON COMMUNITY LIBRARY", "lat": 42.4783, "lon": -83.3965, "category": "outdoor", "url": "https://littleguidedetroit.com/event/asian-american-pacific-islander-fest/", "site": "Detroit Metro"}, {"title": "Lansing Spring Carnival", "date": "May 3, 2026", "time": "1:00 PM - 10:00 PM", "location": "Abundant Grace Faith Church", "lat": 42.748, "lon": -84.5516, "category": "festival", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-03/", "site": "Detroit Metro"}, {"title": "Feeding Time in the Nature Center", "date": "May 3, 2026", "time": "1:00 PM - 2:00 PM", "location": "Stony Creek Nature Center", "lat": 42.5547, "lon": -83.7338, "category": "nature", "url": "https://littleguidedetroit.com/event/feeding-time-in-the-nature-center-2/", "site": "Detroit Metro"}, {"title": "Tulip Fest", "date": "May 3, 2026", "time": "1:00 PM - 3:00 PM", "location": "Twelve Mile Crossing at Fountain Walk", "lat": 42.5226, "lon": -83.108, "category": "outdoor", "url": "https://littleguidedetroit.com/event/tulip-fest/", "site": "Detroit Metro"}, {"title": "Star Wars Day Celebration", "date": "May 3, 2026", "time": "1:00 PM - 5:00 PM", "location": "Longway Planetarium", "lat": 42.4753, "lon": -83.3901, "category": "festival", "url": "https://littleguidedetroit.com/event/star-wars-day-celebration/", "site": "Detroit Metro"}, {"title": "Bloom Where You're Planted", "date": "May 3, 2026", "time": "1:00 PM - 4:00 PM", "location": "CRANBROOK SCIENCE MUSEUM", "lat": 42.5023, "lon": -83.2668, "category": "library", "url": "https://littleguidedetroit.com/event/bloom-where-youre-planted/", "site": "Detroit Metro"}, {"title": "Farmers Market", "date": "May 3, 2026", "time": "10:00 AM - 2:00 PM", "location": "MSU Tollgate Farm", "lat": 42.7165, "lon": -84.4987, "category": "outdoor", "url": "https://littleguidedetroit.com/event/farmers-market-3/", "site": "Detroit Metro"}, {"title": "The Star Wars Experience", "date": "May 3, 2026", "time": "12:00 PM - 4:00 PM", "location": "Theut's Flower Barn", "lat": 42.5157, "lon": -83.1529, "category": "festival", "url": "https://littleguidedetroit.com/event/the-star-wars-experience-2/", "site": "Detroit Metro"}, {"title": "Crawling for a Cure 5K", "date": "May 3, 2026", "time": "9:30 AM - 1:00 PM", "location": "Greektown", "lat": 42.3386, "lon": -83.0476, "category": "sport", "url": "https://littleguidedetroit.com/event/crawling-for-a-cure-5k/", "site": "Detroit Metro"}, {"title": "Spring at Blake Farms", "date": "May 3, 2026", "time": "10:00 AM - 4:30 PM", "location": "Blake Farms and Apple Orchard", "lat": 42.448, "lon": -83.1265, "category": "outdoor", "url": "https://littleguidedetroit.com/event/spring-at-blake-farms/", "site": "Detroit Metro"}, {"title": "Nature Day", "date": "May 3, 2026", "time": "12:00 PM - 2:00 PM", "location": "BELLE ISLE NATURE CENTER", "lat": 42.3421, "lon": -82.9717, "category": "nature", "url": "https://littleguidedetroit.com/event/nature-day/", "site": "Detroit Metro"}, {"title": "Family Fishing Derby", "date": "May 3, 2026", "time": "8:00 AM - 3:00 PM", "location": "Stony Creek Metropark", "lat": 42.5547, "lon": -83.7338, "category": "nature", "url": "https://littleguidedetroit.com/event/family-fishing-derby-3/", "site": "Detroit Metro"}, {"title": "Star Wars Day Fun Run", "date": "May 3, 2026", "time": "8:00 AM - 2:00 PM", "location": "Greektown", "lat": 42.3386, "lon": -83.0476, "category": "sport", "url": "https://littleguidedetroit.com/event/star-wars-day-fun-run/", "site": "Detroit Metro"}, {"title": "Star Wars Day Celebration", "date": "May 3, 2026", "time": "1:00 PM - 5:00 PM", "location": "Longway Planetarium", "lat": 42.4753, "lon": -83.3901, "category": "festival", "url": "https://littleguidedetroit.com/event/star-wars-day-celebration/2026-05-03/", "site": "Detroit Metro"}, {"title": "Farmers Market", "date": "May 3, 2026", "time": "10:00 AM - 2:00 PM", "location": "MSU Tollgate Farm", "lat": 42.7165, "lon": -84.4987, "category": "outdoor", "url": "https://littleguidedetroit.com/event/farmers-market-3/2026-05-03/", "site": "Detroit Metro"}, {"title": "Spring at Blake Farms", "date": "May 3, 2026", "time": "10:00 AM - 4:30 PM", "location": "Blake Farms and Apple Orchard", "lat": 42.448, "lon": -83.1265, "category": "outdoor", "url": "https://littleguidedetroit.com/event/spring-at-blake-farms/2026-05-03/", "site": "Detroit Metro"}, {"title": "Nature Day", "date": "May 3, 2026", "time": "12:00 PM - 2:00 PM", "location": "BELLE ISLE NATURE CENTER", "lat": 42.3421, "lon": -82.9717, "category": "nature", "url": "https://littleguidedetroit.com/event/nature-day/2026-05-03/", "site": "Detroit Metro"}, {"title": "Weekend Hayrides", "date": "May 9, 2026", "time": "12:00 PM - 4:00 PM", "location": "KENSINGTON METRO PARK FARM CENTER", "lat": 42.4914, "lon": -83.0936, "category": "outdoor", "url": "https://littleguidedetroit.com/event/weekend-hayrides-2/2026-05-09/", "site": "Detroit Metro"}, {"title": "Free Mini Train Rides", "date": "May 9, 2026", "time": "12:00 PM - 4:00 PM", "location": "Starr-Jaycee Park", "lat": 42.3766, "lon": -83.0586, "category": "nature", "url": "https://littleguidedetroit.com/event/free-mini-train-rides-2/2026-05-09/", "site": "Detroit Metro"}, {"title": "Lansing Spring Carnival", "date": "May 9, 2026", "time": "1:00 PM - 10:00 PM", "location": "Abundant Grace Faith Church", "lat": 42.748, "lon": -84.5516, "category": "festival", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-09/", "site": "Detroit Metro"}, {"title": "Star Wars Day Celebration", "date": "May 9, 2026", "time": "1:00 PM - 5:00 PM", "location": "Longway Planetarium", "lat": 42.4753, "lon": -83.3901, "category": "festival", "url": "https://littleguidedetroit.com/event/star-wars-day-celebration/2026-05-09/", "site": "Detroit Metro"}, {"title": "Farmers Market", "date": "May 9, 2026", "time": "10:00 AM - 2:00 PM", "location": "MSU Tollgate Farm", "lat": 42.7165, "lon": -84.4987, "category": "outdoor", "url": "https://littleguidedetroit.com/event/farmers-market-3/2026-05-09/", "site": "Detroit Metro"}, {"title": "Spring at Blake Farms", "date": "May 9, 2026", "time": "10:00 AM - 4:30 PM", "location": "Blake Farms and Apple Orchard", "lat": 42.448, "lon": -83.1265, "category": "outdoor", "url": "https://littleguidedetroit.com/event/spring-at-blake-farms/2026-05-09/", "site": "Detroit Metro"}, {"title": "Nature Day", "date": "May 9, 2026", "time": "12:00 PM - 2:00 PM", "location": "BELLE ISLE NATURE CENTER", "lat": 42.3421, "lon": -82.9717, "category": "nature", "url": "https://littleguidedetroit.com/event/nature-day/2026-05-09/", "site": "Detroit Metro"}, {"title": "Mother's Day Brunch", "date": "May 10, 2026", "time": "10:00 AM", "location": "South Haven, MI", "lat": 42.4059, "lon": -86.3163, "category": "sport", "url": "https://www.southhavenmi.com/event/mothers-day-brunch/", "site": "South Haven"}, {"title": "South Haven Farmers Market", "date": "May 10, 2026", "time": "9:00 AM", "location": "South Haven, MI", "lat": 42.4059, "lon": -86.3163, "category": "outdoor", "url": "https://www.southhavenmi.com/event/south-haven-farmers-market/", "site": "South Haven"}, {"title": "Yacht Club Regatta", "date": "May 9, 2026", "time": "9:00 AM", "location": "South Haven, MI", "lat": 42.4059, "lon": -86.3163, "category": "sport", "url": "https://www.southhavenmi.com/event/yacht-club-regatta/", "site": "South Haven"}, {"title": "Bike Rodeo", "date": "May 9, 2026", "time": "10:00 AM", "location": "South Haven, MI", "lat": 42.4059, "lon": -86.3163, "category": "sport", "url": "https://www.southhavenmi.com/event/bike-rodeo/", "site": "South Haven"}, {"title": "Lake Michigan Music Series", "date": "May 9, 2026", "time": "5:00 PM", "location": "South Haven, MI", "lat": 42.4059, "lon": -86.3163, "category": "festival", "url": "https://www.southhavenmi.com/event/lake-michigan-music-series-2/", "site": "South Haven"}, {"title": "Grand Traverse Farmers' Market", "date": "Recurring Saturday until Oct 3, 2026", "time": "", "location": "Downtown Square", "lat": 44.7631, "lon": -85.6206, "category": "outdoor", "url": "https://www.traversecity.com/event-detail/grand-traverse-farmers-market/140945/", "site": "Traverse City"}, {"title": "TC Cherry Festival 2026", "date": "Jun 12 - Jun 21, 2026", "time": "", "location": "Traverse City, MI", "lat": 44.7631, "lon": -85.6206, "category": "festival", "url": "https://www.traversecity.com/event-detail/tc-cherry-festival-2026/137990/", "site": "Traverse City"}, {"title": "The Alluvion - Live Music Friday", "date": "Recurring Friday until Sep 4, 2026", "time": "", "location": "The Alluvion", "lat": 44.758, "lon": -85.605, "category": "festival", "url": "https://www.traversecity.com/event-detail/the-alluvion-live-music-friday/150111/", "site": "Traverse City"}, {"title": "Traverse City Farmers' Market", "date": "Recurring Wednesday until Oct 7, 2026", "time": "", "location": "Downtown Square", "lat": 44.7631, "lon": -85.6206, "category": "outdoor", "url": "https://www.traversecity.com/event-detail/traverse-city-farmers-market/140800/", "site": "Traverse City"}, {"title": "Dune Bird Winery Tasting", "date": "Dates vary between Apr 30 - May 3", "time": "", "location": "Dune Bird Winery", "lat": 44.795, "lon": -85.585, "category": "outdoor", "url": "https://www.traversecity.com/event-detail/dune-bird-winery-tasting/149823/", "site": "Traverse City"}, {"title": "Interlochen Chamber Music Festival", "date": "Jun 2 - Jul 19, 2026", "time": "", "location": "Interlochen Center for the Arts", "lat": 44.606, "lon": -85.628, "category": "festival", "url": "https://www.traversecity.com/event-detail/interlochen-chamber-music-festival/138531/", "site": "Traverse City"}, {"title": "Brengman Family Wines Tour", "date": "Dates vary between May 1 - Sep 30", "time": "", "location": "Brengman Family Wines", "lat": 44.78, "lon": -85.59, "category": "outdoor", "url": "https://www.traversecity.com/event-detail/brengman-family-wines-tour/148203/", "site": "Traverse City"}, {"title": "Central United Methodist Church Concert", "date": "May 10, 2026", "time": "", "location": "Central United Methodist Church", "lat": 44.761, "lon": -85.61, "category": "festival", "url": "https://www.traversecity.com/event-detail/central-united-methodist-church-concert/150876/", "site": "Traverse City"}, {"title": "Musical Fountain Show", "date": "May 8, 2026", "time": "Saturdays 7:30 PM - 9:00 PM", "location": "Grand Haven, MI", "lat": 43.065, "lon": -86.227, "category": "festival", "url": "https://www.visitgrandhaven.com/events/musical-fountain-show/", "site": "Grand Haven"}, {"title": "Grand Haven Farmers Market", "date": "May 3, 2026", "time": "Saturday 8:00 AM - 1:00 PM", "location": "Grand Haven, MI", "lat": 43.064, "lon": -86.225, "category": "outdoor", "url": "https://www.visitgrandhaven.com/events/grand-haven-farmers-market/", "site": "Grand Haven"}, {"title": "Grand Haven Kite Festival", "date": "May 9, 2026", "time": "10:00 AM - 4:00 PM", "location": "Grand Haven, MI", "lat": 43.065, "lon": -86.227, "category": "festival", "url": "https://www.visitgrandhaven.com/events/grand-haven-kite-festival/", "site": "Grand Haven"}, {"title": "Grand Haven Beach Cleanup", "date": "May 9, 2026", "time": "9:00 AM - 12:00 PM", "location": "Grand Haven, MI", "lat": 43.065, "lon": -86.227, "category": "nature", "url": "https://www.visitgrandhaven.com/events/grand-haven-beach-cleanup/", "site": "Grand Haven"}, {"title": "Tri-Cities Historical Museum Open House", "date": "May 9, 2026", "time": "11:00 AM - 3:00 PM", "location": "Grand Haven, MI", "lat": 43.065, "lon": -86.227, "category": "library", "url": "https://www.visitgrandhaven.com/events/tri-cities-historical-museum-open-house/", "site": "Grand Haven"}, {"title": "Sunset Concert Series", "date": "May 9, 2026", "time": "6:00 PM - 8:00 PM", "location": "Grand Haven, MI", "lat": 43.065, "lon": -86.227, "category": "festival", "url": "https://www.visitgrandhaven.com/events/sunset-concert-series/", "site": "Grand Haven"}, {"title": "Shelby Township Farmers Market", "date": "May 03", "time": "All day", "location": "Mt. Pleasant, MI", "lat": 43.5975, "lon": -84.7423, "category": "outdoor", "url": "https://meetmtp.com/event/shelby-township-farmers-market/", "site": "Mt. Pleasant"}, {"title": "MSU Extension Master Gardener Plant Sale", "date": "May 16", "time": "9:00 am - 1:00 pm", "location": "Mt. Pleasant, MI", "lat": 43.5975, "lon": -84.7423, "category": "outdoor", "url": "https://meetmtp.com/event/msu-extension-master-gardener-plant-sale/", "site": "Mt. Pleasant"}, {"title": "Mount Pleasant Art Walk", "date": "May 10", "time": "2:00 pm - 5:00 pm", "location": "Mt. Pleasant, MI", "lat": 43.5975, "lon": -84.7423, "category": "educational", "url": "https://meetmtp.com/event/mount-pleasant-art-walk/", "site": "Mt. Pleasant"}, {"title": "Downtown Farmers Market", "date": "May 09", "time": "8:00 am - 12:00 pm", "location": "Mt. Pleasant, MI", "lat": 43.5975, "lon": -84.7423, "category": "outdoor", "url": "https://meetmtp.com/event/downtown-farmers-market/", "site": "Mt. Pleasant"}, {"title": "Movies in the Park", "date": "May 10", "time": "6:00 pm - 9:00 pm", "location": "Mt. Pleasant, MI", "lat": 43.5975, "lon": -84.7423, "category": "nature", "url": "https://meetmtp.com/event/movies-in-the-park-2/", "site": "Mt. Pleasant"}, {"title": "Crawford County Farmers Market", "date": "May 9", "time": "", "location": "Battle Creek, MI", "lat": 42.3211, "lon": -85.1797, "category": "outdoor", "url": "https://www.battlecreekvisitors.org/event/crawford-county-farmers-market/", "site": "Battle Creek"}, {"title": "Battle Creek Community Theater", "date": "May 10", "time": "", "location": "Battle Creek, MI", "lat": 42.3211, "lon": -85.1797, "category": "educational", "url": "https://www.battlecreekvisitors.org/event/battle-creek-community-theater-2/", "site": "Battle Creek"}, {"title": "Whalebone City Brewery Tap Takeover", "date": "May 9", "time": "", "location": "Battle Creek, MI", "lat": 42.3211, "lon": -85.1797, "category": "outdoor", "url": "https://www.battlecreekvisitors.org/event/whalebone-city-brewery-tap-takeover/", "site": "Battle Creek"}, {"title": "Calvin University Art Exhibition", "date": "May 8", "time": "", "location": "Battle Creek, MI", "lat": 42.3211, "lon": -85.1797, "category": "educational", "url": "https://www.battlecreekvisitors.org/event/calvin-university-art-exhibition/", "site": "Battle Creek"}, {"title": "Downtown Walking Tour", "date": "May 3", "time": "", "location": "Battle Creek, MI", "lat": 42.3211, "lon": -85.1797, "category": "outdoor", "url": "https://www.battlecreekvisitors.org/event/downtown-walking-tour/", "site": "Battle Creek"}, {"title": "Upheaval Festival 2026", "date": "July 17, 2026", "time": "", "location": "Belknap Park", "lat": 42.9634, "lon": -85.6681, "category": "festival", "url": "https://www.experiencegr.com/event/upheaval-festival-2026/96783/", "site": "Grand Rapids"}, {"title": "Breakaway Music Festival 2026", "date": "August 14, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "festival", "url": "https://www.experiencegr.com/event/breakaway-music-festival-2026/96782/", "site": "Grand Rapids"}, {"title": "Burning Foot Beer Festival 2026", "date": "August 29, 2026", "time": "", "location": "Heritage Landing Park", "lat": 42.9557, "lon": -85.6684, "category": "festival", "url": "https://www.experiencegr.com/event/burning-foot-beer-festival-2026/96385/", "site": "Grand Rapids"}, {"title": "Pitbull", "date": "September 10, 2026", "time": "", "location": "Acrisure Amphitheater", "lat": 42.9634, "lon": -85.6342, "category": "educational", "url": "https://www.experiencegr.com/event/pitbull/96465/", "site": "Grand Rapids"}, {"title": "The Grand Rapids Lantern Festival", "date": "May 7, 2026", "time": "", "location": "John Ball Zoo", "lat": 42.9626, "lon": -85.6669, "category": "festival", "url": "https://www.experiencegr.com/event/the-grand-rapids-lantern-festival/96053/", "site": "Grand Rapids"}, {"title": "Tulip Time Festival 2026", "date": "May 7, 2026", "time": "", "location": "Tulip Time Festival", "lat": 42.9634, "lon": -85.6681, "category": "festival", "url": "https://www.experiencegr.com/event/tulip-time-festival-2026/88781/", "site": "Grand Rapids"}, {"title": "Cider Week GR", "date": "May 8, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "outdoor", "url": "https://www.experiencegr.com/event/cider-week-gr/95393/", "site": "Grand Rapids"}, {"title": "Amway River Bank Run 2026", "date": "May 9, 2026", "time": "", "location": "DeVos Place", "lat": 42.9634, "lon": -85.6681, "category": "sport", "url": "https://www.experiencegr.com/event/amway-river-bank-run-2026/96727/", "site": "Grand Rapids"}, {"title": "Michigan Cider Fest", "date": "May 16, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "outdoor", "url": "https://www.experiencegr.com/event/michigan-cider-fest/93529/", "site": "Grand Rapids"}, {"title": "The Gilmore Piano Festival", "date": "May 20, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "festival", "url": "https://www.experiencegr.com/event/the-gilmore-piano-festival/97811/", "site": "Grand Rapids"}, {"title": "Russell Dickerson", "date": "May 30, 2026", "time": "", "location": "Acrisure Amphitheater", "lat": 42.9634, "lon": -85.6342, "category": "educational", "url": "https://www.experiencegr.com/event/russell-dickerson/93608/", "site": "Grand Rapids"}, {"title": "Grand Rapids Asian-Pacific Festival 2026", "date": "June 12, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "festival", "url": "https://www.experiencegr.com/event/grand-rapids-asian-pacific-festival-2026/96344/", "site": "Grand Rapids"}, {"title": "Justice 4 All Juneteenth Jam", "date": "June 19, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "outdoor", "url": "https://www.experiencegr.com/event/justice-4-all-juneteenth-jam/96345/", "site": "Grand Rapids"}, {"title": "Grand Rapids Pride Festival", "date": "June 20, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "festival", "url": "https://www.experiencegr.com/event/grand-rapids-pride-festival/97412/", "site": "Grand Rapids"}, {"title": "Grand Rapids Fireworks", "date": "July 4, 2026", "time": "", "location": "Grand Rapids, MI", "lat": 42.9626, "lon": -85.6669, "category": "outdoor", "url": "https://www.experiencegr.com/event/grand-rapids-fireworks/96372/", "site": "Grand Rapids"}];
+<div class="main">
+  <div class="sidebar" id="sidebar"></div>
+  <div id="map"></div>
+</div>
 
-    const categoryColors = {
-        outdoor: '#22c55e',
-        festival: '#f97316',
-        library: '#3b82f6',
-        nature: '#10b981',
-        educational: '#a855f7',
-        free: '#eab308',
-        starwars: '#f97316',
-        sport: '#06b6d4'
-    };
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    const categoryEmojis = {
-        outdoor: '🌳',
-        festival: '🎪',
-        library: '📚',
-        nature: '🦎',
-        educational: '🎓',
-        free: '🎉',
-        starwars: '⚔️',
-        sport: '🏊'
-    };
+<script>
+const events = [{"title": "Canton Open Swim", "date": "May 7", "time": "12:00 PM - 1:00 PM", "location": "Goldfish Swim School – Canton", "url": "https://littleguidedetroit.com/event/canton-open-swim-2/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Birmingham Open Swim", "date": "May 7", "time": "12:00 PM - 1:00 PM", "location": "Goldfish Swim School – Birmingham", "url": "https://littleguidedetroit.com/event/birmingham-open-swim/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Baby Week Celebration with a Free Class", "date": "May 7", "time": "1:00 PM - 1:45 PM", "location": "GYMBOREE PLAY & MUSIC – ROCHESTER HILLS", "url": "https://littleguidedetroit.com/event/baby-week-celebration-with-a-free-class/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "festival"}, {"title": "First Thursday Hikes", "date": "May 7", "time": "2:00 PM - 3:30 PM", "location": "Detroit River International Wildlife Refuge", "url": "https://littleguidedetroit.com/event/first-thursday-hikes/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "nature"}, {"title": "Lansing Spring Carnival", "date": "May 7", "time": "4:00 PM - 10:00 PM", "location": "Abundant Grace Faith Church", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "festival"}, {"title": "Mother's Day Art Project", "date": "May 7", "time": "4:30 PM - 5:45 PM", "location": "Westland City Hall", "url": "https://littleguidedetroit.com/event/mothers-day-art-project/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Bird Walks", "date": "May 7", "time": "5:00 PM - 7:30 PM", "location": "EDSEL & ELEANOR FORD HOUSE", "url": "https://littleguidedetroit.com/event/bird-walks/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "nature"}, {"title": "Fishing 101", "date": "May 7", "time": "6:00 PM - 7:30 PM", "location": "Thelma Spencer Park", "url": "https://littleguidedetroit.com/event/fishing-101/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother Son Dance", "date": "May 7", "time": "6:00 PM - 7:30 PM", "location": "WIxom Community Center", "url": "https://littleguidedetroit.com/event/mother-son-dance-3/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "MILK & MEET", "date": "May 7", "time": "6:00 PM - 6:30 PM", "location": "MSU Tollgate Farm", "url": "https://littleguidedetroit.com/event/milk-meet/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.7165, "lon": -84.4987, "category": "outdoor"}, {"title": "GRAND RAPIDS LANTERN FESTIVAL", "date": "May 7", "time": "7:30 PM - 11:30 PM", "location": "John Ball Zoo", "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-07/", "site": "Detroit Metro", "parsed_date": "2026-05-07", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Mystery of the Mayan Medallion", "date": "May 8", "time": "All Day", "location": "CRANBROOK SCIENCE MUSEUM", "url": "https://littleguidedetroit.com/event/mystery-of-the-mayan-medallion/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.5023, "lon": -83.2668, "category": "outdoor"}, {"title": "PREK Story & STEAM", "date": "May 8", "time": "8:00 AM - 5:00 PM", "location": "DINOSAUR HILL NATURE PRESERVE", "url": "https://littleguidedetroit.com/event/prek-story-steam-2/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "library"}, {"title": "Blake's In Bloom", "date": "May 8", "time": "8:00 AM - 5:00 PM", "location": "Blake Farms and Apple Orchard", "url": "https://littleguidedetroit.com/event/blakes-in-bloom/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.448, "lon": -83.1265, "category": "outdoor"}, {"title": "Theut's Flower Barn Tulip Festival", "date": "May 8", "time": "9:00 AM - 6:00 PM", "location": "Theut's Flower Barn", "url": "https://littleguidedetroit.com/event/theuts-flower-barn-tulip-festival/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.5157, "lon": -83.1529, "category": "festival"}, {"title": "Little Creators (with Grown-Ups)", "date": "May 8", "time": "9:30 AM - 10:30 AM", "location": "The Suzanne Haskew Arts Center", "url": "https://littleguidedetroit.com/event/little-creators-with-grown-ups/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Sparking Science", "date": "May 8", "time": "10:00 AM - 11:00 AM", "location": "Impression 5 Science Center", "url": "https://littleguidedetroit.com/event/sparking-science-2/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "educational"}, {"title": "Outdoor Play Group", "date": "May 8", "time": "10:00 AM - 12:00 PM", "location": "Highland Township Public Library", "url": "https://littleguidedetroit.com/event/outdoor-play-group-2/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Free Community Play Date", "date": "May 8", "time": "10:00 AM - 12:00 PM", "location": "Recess Cafe", "url": "https://littleguidedetroit.com/event/free-community-play-date/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "free"}, {"title": "Rochester Open Swim", "date": "May 8", "time": "12:00 PM - 1:00 PM", "location": "Goldfish Swim School – Rochester", "url": "https://littleguidedetroit.com/event/rochester-open-swim/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Lansing Spring Carnival", "date": "May 8", "time": "12:00 PM - 10:00 PM", "location": "Abundant Grace Faith Church", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "festival"}, {"title": "Mother's Day Tea", "date": "May 8", "time": "12:30 PM - 3:00 PM", "location": "Meadowbrook Hall And Gardens", "url": "https://littleguidedetroit.com/event/mothers-day-tea/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Friday Guided Tours", "date": "May 8", "time": "1:00 PM - 2:00 PM", "location": "R.E. Olds Transportation Museum", "url": "https://littleguidedetroit.com/event/friday-guided-tours/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Paint with Mommy: Mermaid Set", "date": "May 8", "time": "4:00 PM - 6:00 PM", "location": "Painting With A Twist", "url": "https://littleguidedetroit.com/event/paint-with-mommy-mermaid-set/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Open Barn", "date": "May 8", "time": "5:00 PM - 8:00 PM", "location": "CHARLES L. BOWERS SCHOOL FARM", "url": "https://littleguidedetroit.com/event/open-barn/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Hooves & Hikes with a Farmer", "date": "May 8", "time": "6:00 PM - 7:00 PM", "location": "Hess-Hathaway Park", "url": "https://littleguidedetroit.com/event/hooves-hikes-with-a-farmer/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "nature"}, {"title": "Birmingham Family Swim", "date": "May 8", "time": "6:30 PM - 8:00 PM", "location": "Goldfish Swim School – Birmingham", "url": "https://littleguidedetroit.com/event/birmingham-family-swim/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Canton Open Swim", "date": "May 8", "time": "6:30 PM - 8:00 PM", "location": "Goldfish Swim School – Canton", "url": "https://littleguidedetroit.com/event/canton-open-swim/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Macomb Family Swim", "date": "May 8", "time": "6:30 PM - 8:00 PM", "location": "Goldfish Swim School – Macomb", "url": "https://littleguidedetroit.com/event/macomb-family-swim/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Rochester Family Swim", "date": "May 8", "time": "6:30 PM - 8:00 PM", "location": "Goldfish Swim School – Rochester", "url": "https://littleguidedetroit.com/event/rochester-family-swim/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day Family Swim at Goldfish Swim School – Birmingham", "date": "May 8", "time": "6:30 PM - 8:00 PM", "location": "Goldfish Swim School – Birmingham", "url": "https://littleguidedetroit.com/event/may-flowers-open-swim/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "GRAND RAPIDS LANTERN FESTIVAL", "date": "May 8", "time": "7:30 PM - 11:30 PM", "location": "John Ball Zoo", "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-08/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Bat Chat", "date": "May 8", "time": "8:00 PM - 9:30 PM", "location": "DINOSAUR HILL NATURE PRESERVE", "url": "https://littleguidedetroit.com/event/bat-chat/", "site": "Detroit Metro", "parsed_date": "2026-05-08", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mystery of the Mayan Medallion", "date": "May 9", "time": "All Day", "location": "CRANBROOK SCIENCE MUSEUM", "url": "https://littleguidedetroit.com/event/mystery-of-the-mayan-medallion/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5023, "lon": -83.2668, "category": "outdoor"}, {"title": "Michigan Humane's Tailgate", "date": "May 9", "time": "7:30 AM - 2:00 PM", "location": "Roosevelt Park", "url": "https://littleguidedetroit.com/event/michigan-humanes-tailgate/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "World Migratory Bird Day at Fenner", "date": "May 9", "time": "8:00 AM - 8:00 PM", "location": "Fenner Nature Center'", "url": "https://littleguidedetroit.com/event/world-migratory-bird-day-at-fenner/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Blake's In Bloom", "date": "May 9", "time": "8:00 AM - 5:00 PM", "location": "Blake Farms and Apple Orchard", "url": "https://littleguidedetroit.com/event/blakes-in-bloom/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.448, "lon": -83.1265, "category": "outdoor"}, {"title": "Howell Touch a Truck", "date": "May 9", "time": "9:00 AM - 2:00 PM", "location": "Kensington Valley Outlets", "url": "https://littleguidedetroit.com/event/howell-touch-a-truck/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Open Barn", "date": "May 9", "time": "9:00 AM - 4:00 PM", "location": "CHARLES L. BOWERS SCHOOL FARM", "url": "https://littleguidedetroit.com/event/open-barn-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Family Fishing Frenzy", "date": "May 9", "time": "9:00 AM - 12:00 PM", "location": "HERITAGE PARK – CANTON", "url": "https://littleguidedetroit.com/event/family-fishing-frenzy/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Open Climb then Play", "date": "May 9", "time": "9:00 AM - 10:30 AM", "location": "Troy Gym – TG4", "url": "https://littleguidedetroit.com/event/open-climb-then-play/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Theut's Flower Barn Tulip Festival", "date": "May 9", "time": "9:00 AM - 6:00 PM", "location": "Theut's Flower Barn", "url": "https://littleguidedetroit.com/event/theuts-flower-barn-tulip-festival/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5157, "lon": -83.1529, "category": "festival"}, {"title": "Annual Garden Party in the Alley", "date": "May 9", "time": "10:00 AM - 5:00 PM", "location": "Downtown Howell", "url": "https://littleguidedetroit.com/event/annual-garden-party-in-the-alley/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "ART BIRMINGHAM", "date": "May 9", "time": "10:00 AM - 6:00 PM", "location": "Shain Park", "url": "https://littleguidedetroit.com/event/art-birmingham/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day Wildflower Walk", "date": "May 9", "time": "10:00 AM - 2:00 PM", "location": "Kensington Nature Center", "url": "https://littleguidedetroit.com/event/mothers-day-wildflower-wal/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lakeshore Stroll", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "Lake Erie Marshlands Museum", "url": "https://littleguidedetroit.com/event/lakeshore-stroll/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Garden Club: Indian Springs", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "Indian Springs Environmental Discovery Center", "url": "https://littleguidedetroit.com/event/garden-club-indian-springs/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Project Kidsight Vision Screening", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "BALDWIN PUBLIC LIBRARY", "url": "https://littleguidedetroit.com/event/project-kidsight-vision-screening-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day Mini-Golf Weekend", "date": "May 9", "time": "10:00 AM - 5:00 PM", "location": "CRANBROOK ART MUSEUM", "url": "https://littleguidedetroit.com/event/mothers-day-mini-golf-weekend/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day Weekend Brunch", "date": "May 9", "time": "10:00 AM - 2:00 PM", "location": "Jojo's Shake Bar", "url": "https://littleguidedetroit.com/event/mothers-day-weekend-brunch/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "May LEGO Club", "date": "May 9", "time": "10:00 AM - 11:30 AM", "location": "Sloan Museum", "url": "https://littleguidedetroit.com/event/may-lego-club/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Baby Week Celebration with a Free Class", "date": "May 9", "time": "10:45 AM - 11:30 AM", "location": "GYMBOREE PLAY & MUSIC – ROCHESTER HILLS", "url": "https://littleguidedetroit.com/event/baby-week-celebration-with-a-free-class/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "festival"}, {"title": "Family Day", "date": "May 9", "time": "11:00 AM - 3:00 PM", "location": "Museum of Contemporary Art Detroit (MOCAD)", "url": "https://littleguidedetroit.com/event/family-day/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lansing Spring Carnival", "date": "May 9", "time": "12:00 PM - 10:30 PM", "location": "Abundant Grace Faith Church", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "festival"}, {"title": "2026 WCSO Car Seat Safety Check-In", "date": "May 9", "time": "12:00 PM - 3:30 PM", "location": "YPSILANTI DISTRICT LIBRARY", "url": "https://littleguidedetroit.com/event/2026-wcso-car-seat-safety-check-in-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lost Lake Open House", "date": "May 9", "time": "12:00 PM - 3:00 PM", "location": "LOST LAKE NATURE PARK", "url": "https://littleguidedetroit.com/event/lost-lake-open-house-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "free"}, {"title": "Weekend Hayrides", "date": "May 9", "time": "12:00 PM - 4:00 PM", "location": "KENSINGTON METRO PARK FARM CENTER", "url": "https://littleguidedetroit.com/event/weekend-hayrides-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.4914, "lon": -83.0936, "category": "outdoor"}, {"title": "Talkin' About Series", "date": "May 9", "time": "1:00 PM - 2:00 PM", "location": "Oakwoods Metropark Nature Center", "url": "https://littleguidedetroit.com/event/talkin-about-series-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Kids Outdoor Craft Hour", "date": "May 9", "time": "1:00 PM - 2:00 PM", "location": "Stony Creek Nature Center", "url": "https://littleguidedetroit.com/event/kids-outdoor-craft-hour-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "MILK & MEET", "date": "May 9", "time": "1:00 PM - 1:30 PM", "location": "MSU Tollgate Farm", "url": "https://littleguidedetroit.com/event/milk-meet/2026-05-09/1/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.7165, "lon": -84.4987, "category": "outdoor"}, {"title": "Magic: the Gathering Game Day", "date": "May 9", "time": "2:00 PM - 4:00 PM", "location": "Henry Ford Centennial Library", "url": "https://littleguidedetroit.com/event/magic-the-gathering-game-day/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Drop-in Mother's Day Cards", "date": "May 9", "time": "2:00 PM - 4:00 PM", "location": "Troy Public Library", "url": "https://littleguidedetroit.com/event/drop-in-mothers-day-cards/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Kids Safety Day", "date": "May 9", "time": "2:00 PM - 5:00 PM", "location": "Tattan Park", "url": "https://littleguidedetroit.com/event/kids-safety-day/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lake Michigan Fish & Game Expo", "date": "Thu Apr 16, 2026", "time": "All day", "location": "South Haven Convention Center", "url": "https://www.southhavenmi.com/events/lake-michigan-fish-game-expo-1208", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "outdoor"}, {"title": "Mother's Day Brunch Cruise on the Pere Marquette", "date": "Fri May 8, 2026", "time": "All day", "location": "South Haven Marina", "url": "https://www.southhavenmi.com/events/mothers-day-brunch-cruise-on-the-pere-marquette-1351", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "sport"}, {"title": "Mother's Day Market", "date": "Sat May 9, 2026", "time": "All day", "location": "Downtown South Haven", "url": "https://www.southhavenmi.com/events/mothers-day-market-1352", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "outdoor"}, {"title": "South Haven Dog Days of Summer Kick-Off", "date": "Sat May 16, 2026", "time": "All day", "location": "Lake Park", "url": "https://www.southhavenmi.com/events/south-haven-dog-days-of-summer-kick-off-1353", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "outdoor"}, {"title": "Summerfest", "date": "Sat May 23, 2026", "time": "All day", "location": "Downtown South Haven", "url": "https://www.southhavenmi.com/events/summerfest-1354", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "outdoor"}, {"title": "South Haven Wine & Food Festival", "date": "Sat Jun 13, 2026", "time": "All day", "location": "Lake Park", "url": "https://www.southhavenmi.com/events/south-haven-wine-food-festival-1355", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "festival"}, {"title": "Juneteenth Celebration", "date": "Sat Jun 20, 2026", "time": "All day", "location": "Lake Park", "url": "https://www.southhavenmi.com/events/juneteenth-celebration-1356", "site": "South Haven", "parsed_date": "unknown", "lat": 42.4059, "lon": -86.3163, "category": "festival"}, {"title": "Taste of Old Mission Peninsula", "date": "May 7, 2026", "time": "All day", "location": "Old Mission Peninsula", "url": "https://www.traversecity.com/events/taste-old-mission-peninsula/", "site": "Traverse City", "parsed_date": "2026-05-07", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Traverse City Film & Video Festival", "date": "May 8-10, 2026", "time": "All day", "location": "Downtown Traverse City", "url": "https://www.traversecity.com/events/traverse-city-film-video-festival/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "festival"}, {"title": "TC Bike Tour", "date": "May 9, 2026", "time": "All day", "location": "Traverse City", "url": "https://www.traversecity.com/events/tc-bike-tour/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Festival of the Arts Preview", "date": "May 15, 2026", "time": "All day", "location": "Downtown Traverse City", "url": "https://www.traversecity.com/events/festival-arts-preview/", "site": "Traverse City", "parsed_date": "2026-05-15", "lat": 44.7631, "lon": -85.6206, "category": "festival"}, {"title": "Festival of the Arts", "date": "May 22-24, 2026", "time": "All day", "location": "Downtown Traverse City", "url": "https://www.traversecity.com/events/festival-arts/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "festival"}, {"title": "Grand Haven Mother's Day Parade", "date": "May 7, 2026", "time": "All day", "location": "Downtown Grand Haven", "url": "https://www.visitgrandhaven.com/events/grand-haven-mothers-day-parade/", "site": "Grand Haven", "parsed_date": "2026-05-07", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Grand Haven Art in the Park", "date": "May 9, 2026", "time": "All day", "location": "Downtown Grand Haven", "url": "https://www.visitgrandhaven.com/events/grand-haven-art-park/", "site": "Grand Haven", "parsed_date": "2026-05-09", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Grand Haven Farmers Market", "date": "May 16, 2026", "time": "All day", "location": "Downtown Grand Haven", "url": "https://www.visitgrandhaven.com/events/grand-haven-farmers-market/", "site": "Grand Haven", "parsed_date": "2026-05-16", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Grand Haven Jazz Festival", "date": "May 23, 2026", "time": "All day", "location": "Downtown Grand Haven", "url": "https://www.visitgrandhaven.com/events/grand-haven-jazz-festival/", "site": "Grand Haven", "parsed_date": "2026-05-23", "lat": 43.065, "lon": -86.227, "category": "festival"}, {"title": "Grand Haven Lighthouse Tour", "date": "May 30, 2026", "time": "All day", "location": "Grand Haven Lighthouse", "url": "https://www.visitgrandhaven.com/events/grand-haven-lighthouse-tour/", "site": "Grand Haven", "parsed_date": "2026-05-30", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "No More Stolen Sisters: A REDress Exhibit", "date": "28 APR", "time": "10:00 am - 4:00 pm", "location": "", "url": "https://meetmtp.com/event/no-more-stolen-sisters-a-redress-exhibit/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Birds on the Brink: Watercolor Studies", "date": "07 MAY", "time": "2:00 pm", "location": "", "url": "https://meetmtp.com/event/birds-on-the-brink-watercolor-studies/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "SDB Author Event: Kory Shrum", "date": "07 MAY", "time": "7:00 pm", "location": "", "url": "https://meetmtp.com/event/sdb-author-event/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Broadway Players Present: Rumors", "date": "08 MAY", "time": "7:00 pm", "location": "", "url": "https://meetmtp.com/event/rumors/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Jeff Dunham", "date": "08 MAY", "time": "8:00 pm", "location": "", "url": "https://meetmtp.com/event/jeff-dunham/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Pressed Botanical Teacups", "date": "09 MAY", "time": "1:00 pm", "location": "", "url": "https://meetmtp.com/event/pressed-botanical-teacups/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "The Temptations and the Four Tops", "date": "09 MAY", "time": "8:00 pm", "location": "", "url": "https://meetmtp.com/event/the-tempations-and-the-four-tops/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Michigan Orchids in Watercolor", "date": "12 MAY", "time": "3:00 pm", "location": "", "url": "https://meetmtp.com/event/michigan-orchids-in-watercolor/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Introduction to Portrait Drawing", "date": "12 MAY", "time": "5:30 pm", "location": "", "url": "https://meetmtp.com/event/introduction-to-portrait-drawing/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Chippewa Valley Audubon Club Program: The Pine River", "date": "13 MAY", "time": "7:00 pm", "location": "", "url": "https://meetmtp.com/event/chippewa-valley-audubon-club-program/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "The Care Games 2026", "date": "14 MAY", "time": "5:30 pm", "location": "", "url": "https://meetmtp.com/event/the-care-games-2026/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Watercolor Plein Air for Beginners", "date": "15 MAY", "time": "9:00 am", "location": "", "url": "https://meetmtp.com/event/watercolor-plein-air-for-beginners/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Yarn Dyeing Workshop", "date": "16 MAY", "time": "11:00 am", "location": "", "url": "https://meetmtp.com/event/yarn-dyeing-workshop/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "educational"}, {"title": "Public Safety Expo", "date": "16 MAY", "time": "11:00 am", "location": "", "url": "https://meetmtp.com/event/public-safety-expo/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Wine & Watercolors", "date": "16 MAY", "time": "6:00 pm", "location": "", "url": "https://meetmtp.com/event/wine-watercolors/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Monster Truck Throwdown", "date": "17 MAY", "time": "11:00 am", "location": "", "url": "https://meetmtp.com/event/monster-truck-throwdown/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Alma Highland Festival and Games", "date": "22 MAY", "time": "All day", "location": "", "url": "https://meetmtp.com/event/alma-highland-festival-and-games/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "festival"}, {"title": "Figure Drawing Club", "date": "22 MAY", "time": "5:30 pm", "location": "", "url": "https://meetmtp.com/event/figure-drawing-club/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "SDB Author Event: Allison Bartlett", "date": "23 MAY", "time": "10:00 am", "location": "", "url": "https://meetmtp.com/event/sdb-author-event-2/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Kansas", "date": "23 MAY", "time": "7:00 pm", "location": "", "url": "https://meetmtp.com/event/kansas/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Colored Pencil Drawing: Advanced", "date": "25 MAY", "time": "6:00 pm", "location": "", "url": "https://meetmtp.com/event/colored-pencil-drawing-advanced-may/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Alcohol Ink: Tulips", "date": "27 MAY", "time": "1:00 pm", "location": "", "url": "https://meetmtp.com/event/alcohol-ink-tulips/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Special Olympics Michigan State Summer Games", "date": "28 MAY", "time": "6:00 pm", "location": "", "url": "https://meetmtp.com/event/special-olympics-michigan-state-summer-games/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Paint the Pavement", "date": "30 MAY", "time": "7:00 am", "location": "", "url": "https://meetmtp.com/event/paint-the-pavement/", "site": "Mt. Pleasant", "parsed_date": "unknown", "lat": 43.5975, "lon": -84.7423, "category": "outdoor"}, {"title": "Battle Creek Reads: \"West With Giraffes\"", "date": "May 07", "time": "All day", "location": "Binder Park Zoo", "url": "https://www.battlecreekvisitors.org/event/battle-creek-reads%3a-west-with-giraffes/1207/", "site": "Battle Creek", "parsed_date": "2026-05-07", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Battle of the Creek Bands", "date": "May 15", "time": "All day", "location": "New Holland Brewing", "url": "https://www.battlecreekvisitors.org/event/battle-of-the-creek-bands/1166/", "site": "Battle Creek", "parsed_date": "2026-05-15", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Spring into the Arts", "date": "May 15", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/spring-into-the-arts/1204/", "site": "Battle Creek", "parsed_date": "2026-05-15", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Memorial Day Parade", "date": "May 25", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/memorial-day-parade/1250/", "site": "Battle Creek", "parsed_date": "2026-05-25", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Battle Creek Community Spelling Bee", "date": "Jun 06", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/battle-creek-community-spelling-bee/1201/", "site": "Battle Creek", "parsed_date": "2026-06-06", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Yes! Trio featuring Ali Jackson, Aaron Goldberg & Omer Avital", "date": "May 07", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/yes!-trio-featuring-ali-jackson-aaron-goldberg-%26-omer-avital/1115/", "site": "Battle Creek", "parsed_date": "2026-05-07", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Corks & Crafts Tasting Event", "date": "May 09", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/corks-%26-crafts-tasting-event/1130/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Marshall Museums Dollar Day", "date": "May 09", "time": "All day", "location": "Battle Creek, MI", "url": "https://www.battlecreekvisitors.org/event/marshall-museums-dollar-day/1245/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "educational"}, {"title": "Brooks Nature Area: World Migratory Bird Hike Day", "date": "May 09", "time": "All day", "location": "Brooks Nature Area", "url": "https://www.battlecreekvisitors.org/event/brooks-nature-area%3a-world-migratory-bird-hike-day/1246/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "nature"}, {"title": "The Grand Rapids Lantern Festival", "date": "May 7, 2026", "time": "All day", "location": "John Ball Zoo", "url": "https://www.experiencegr.com/event/the-grand-rapids-lantern-festival/96053/", "site": "Grand Rapids", "parsed_date": "2026-05-07", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Tulip Time Festival 2026", "date": "May 7, 2026", "time": "All day", "location": "Tulip Time Festival", "url": "https://www.experiencegr.com/event/tulip-time-festival-2026/88781/", "site": "Grand Rapids", "parsed_date": "2026-05-07", "lat": 42.9634, "lon": -85.6681, "category": "festival"}, {"title": "Cider Week GR", "date": "May 8, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/cider-week-gr/95393/", "site": "Grand Rapids", "parsed_date": "2026-05-08", "lat": 42.9626, "lon": -85.6669, "category": "outdoor"}, {"title": "Amway River Bank Run 2026", "date": "May 9, 2026", "time": "All day", "location": "DeVos Place", "url": "https://www.experiencegr.com/event/amway-river-bank-run-2026/96727/", "site": "Grand Rapids", "parsed_date": "2026-05-09", "lat": 42.9634, "lon": -85.6681, "category": "sport"}, {"title": "Michigan Cider Fest", "date": "May 16, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/michigan-cider-fest/93529/", "site": "Grand Rapids", "parsed_date": "2026-05-16", "lat": 42.9626, "lon": -85.6669, "category": "outdoor"}, {"title": "The Gilmore Piano Festival", "date": "May 20, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/the-gilmore-piano-festival/97811/", "site": "Grand Rapids", "parsed_date": "2026-05-20", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Russell Dickerson", "date": "May 30, 2026", "time": "All day", "location": "Acrisure Amphitheater", "url": "https://www.experiencegr.com/event/russell-dickerson/93608/", "site": "Grand Rapids", "parsed_date": "2026-05-30", "lat": 42.9634, "lon": -85.6342, "category": "outdoor"}, {"title": "Grand Rapids Asian-Pacific Festival 2026", "date": "June 12, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/grand-rapids-asian-pacific-festival-2026/96344/", "site": "Grand Rapids", "parsed_date": "2026-06-12", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Justice 4 All Juneteenth Jam", "date": "June 19, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/justice-4-all-juneteenth-jam/96345/", "site": "Grand Rapids", "parsed_date": "2026-06-19", "lat": 42.9626, "lon": -85.6669, "category": "outdoor"}, {"title": "Grand Rapids Pride Festival", "date": "June 20, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/grand-rapids-pride-festival/97412/", "site": "Grand Rapids", "parsed_date": "2026-06-20", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Grand Rapids Fireworks", "date": "July 4, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/grand-rapids-fireworks/96372/", "site": "Grand Rapids", "parsed_date": "2026-07-04", "lat": 42.9626, "lon": -85.6669, "category": "outdoor"}, {"title": "Upheaval Festival 2026", "date": "July 17, 2026", "time": "All day", "location": "Belknap Park", "url": "https://www.experiencegr.com/event/upheaval-festival-2026/96783/", "site": "Grand Rapids", "parsed_date": "2026-07-17", "lat": 42.9634, "lon": -85.6681, "category": "festival"}, {"title": "Breakaway Music Festival 2026", "date": "August 14, 2026", "time": "All day", "location": "Grand Rapids, MI", "url": "https://www.experiencegr.com/event/breakaway-music-festival-2026/96782/", "site": "Grand Rapids", "parsed_date": "2026-08-14", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Burning Foot Beer Festival 2026", "date": "August 29, 2026", "time": "All day", "location": "Heritage Landing Park", "url": "https://www.experiencegr.com/event/burning-foot-beer-festival-2026/96385/", "site": "Grand Rapids", "parsed_date": "2026-08-29", "lat": 42.9557, "lon": -85.6684, "category": "festival"}, {"title": "Pitbull", "date": "September 10, 2026", "time": "All day", "location": "Acrisure Amphitheater", "url": "https://www.experiencegr.com/event/pitbull/96465/", "site": "Grand Rapids", "parsed_date": "2026-09-10", "lat": 42.9634, "lon": -85.6342, "category": "outdoor"}];
 
-    // Reusable tile layer reference
-    const baseTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-        maxZoom: 19
-    });
+// Category colors
+const CAT_COLORS = {
+  outdoor: '#22c55e', festival: '#f97316', library: '#3b82f6',
+  nature: '#10b981', educational: '#8b5cf6', free: '#ef4444',
+  sport: '#06b6d4', music: '#ec4899', art: '#f59e0b', food: '#84cc16',
+  family: '#6366f1', culture: '#d946ef', community: '#14b8a6',
+  other: '#94a3b8'
+};
+const CAT_LABELS = {
+  outdoor: '🌳 Outdoor', festival: '🎪 Festival', library: '📚 Library',
+  nature: '🌿 Nature', educational: '🎓 Educational', free: '🆓 Free',
+  sport: '⚽ Sport', music: '🎵 Music', art: '🎨 Art', food: '🍔 Food',
+  family: '👨‍👩‍👧 Family', culture: '🎭 Culture', community: '🤝 Community',
+  other: '📌 Other'
+};
 
-    // Initialize map centered on Metro Detroit
-    const map = L.map('map', {
-        zoomControl: true
-    }).setView([43.5, -84.5], 7);
+// State
+let filteredEvents = [...events];
+let markers = [];
+let activeCategory = 'all';
+let activeDate = null;
+let searchTimeout = null;
+let map, tileLayer;
 
-    baseTile.addTo(map);
+// Theme
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  if (tileLayer) {
+    tileLayer.setUrl(t === 'light'
+      ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png');
+  }
+}
+const savedTheme = localStorage.getItem('theme');
+setTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  setTheme(cur === 'light' ? 'dark' : 'light');
+}
 
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-    const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+// Init map
+map = L.map('map').setView([43.3, -85.5], 7);
+tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap © CARTO'
+}).addTo(map);
 
-    function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('map-theme', theme);
-        baseTile.setUrl(theme === 'light' ? lightTiles : darkTiles);
-    }
+// Legend
+const legend = L.control({ position: 'bottomleft' });
+legend.onAdd = function() {
+  const div = L.DomUtil.create('div', 'legend');
+  let h = '<h4>Categories</h4>';
+  for (const [k, v] of Object.entries(CAT_COLORS)) {
+    if (k !== 'other') h += `<div class="legend-item"><span class="legend-dot" style="background:${v}"></span>${CAT_LABELS[k]||k}</div>`;
+  }
+  div.innerHTML = h;
+  return div;
+};
+legend.addTo(map);
 
-    const savedTheme = localStorage.getItem('map-theme');
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        setTheme('light');
+// Category filters
+const cats = ['all', ...new Set(events.map(e => e.category || 'other'))];
+const filterDiv = document.getElementById('filters');
+cats.forEach(c => {
+  const pill = document.createElement('div');
+  pill.className = 'pill' + (c === 'all' ? ' active' : '');
+  pill.textContent = c === 'all' ? 'All' : (CAT_LABELS[c] || c);
+  pill.onclick = () => {
+    activeCategory = c;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    applyFilters();
+  };
+  filterDiv.appendChild(pill);
+});
+
+// Calendar
+const eventDates = [...new Set(events.map(e => e.parsed_date))].sort();
+const fp = flatpickr('#calendar', {
+  inline: true,
+  dateFormat: 'Y-m-d',
+  onChange: function(selectedDates, dateStr) {
+    if (selectedDates.length > 0) {
+      activeDate = dateStr;
+      document.getElementById('calendar-filter').textContent = '📅 ' + dateStr;
+      document.getElementById('calendar-filter').classList.add('show');
     } else {
-        setTheme('dark');
+      activeDate = null;
+      document.getElementById('calendar-filter').classList.remove('show');
     }
+    applyFilters();
+  }
+});
 
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-        if (!localStorage.getItem('map-theme')) {
-            setTheme(e.matches ? 'light' : 'dark');
-        }
+// Add orange dots to event dates
+if (fp && fp.l._days) {
+  setTimeout(() => {
+    const cells = document.querySelectorAll('.flatpickr-day');
+    cells.forEach(cell => {
+      const d = cell.getAttribute('data-date');
+      if (d && eventDates.includes(d)) {
+        cell.style.position = 'relative';
+        const dot = document.createElement('span');
+        dot.style.cssText = 'position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#f97316;';
+        cell.appendChild(dot);
+      }
     });
+  }, 100);
+}
 
-    themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        setTheme(current === 'dark' ? 'light' : 'dark');
-    });
+// Search
+function onSearch() {
+  clearTimeout(searchTimeout);
+  const v = document.getElementById('search').value.trim();
+  document.getElementById('search-clear').classList.toggle('show', v.length > 0);
+  searchTimeout = setTimeout(applyFilters, 200);
+}
+function clearSearch() {
+  document.getElementById('search').value = '';
+  document.getElementById('search-clear').classList.remove('show');
+  applyFilters();
+}
 
-    // Create custom icon
-    function createIcon(category) {
-        const color = categoryColors[category] || '#60a5fa';
-        return L.divIcon({
-            className: 'custom-marker',
-            html: `<div style="
-                width: 14px; height: 14px;
-                background: ${color};
-                border: 2px solid #fff;
-                border-radius: 50%;
-                box-shadow: 0 1px 6px rgba(0,0,0,0.35);
-            "></div>`,
-            iconSize: [14, 14],
-            iconAnchor: [7, 7],
-            popupAnchor: [0, -10]
-        });
+// Apply filters
+function applyFilters() {
+  const q = (document.getElementById('search').value || '').toLowerCase().trim();
+  filteredEvents = events.filter(e => {
+    if (activeCategory !== 'all' && (e.category || 'other') !== activeCategory) return false;
+    if (activeDate && e.parsed_date !== activeDate) return false;
+    if (q) {
+      const haystack = [e.title, e.location, e.category, e.site].join(' ').toLowerCase();
+      if (!haystack.includes(q)) return false;
     }
+    return true;
+  });
+  renderMarkers();
+  renderSidebar();
+  updateCount();
+}
 
-    // Store markers
-    const markers = [];
-    const sidebar = document.getElementById('sidebar');
-
-    // Add events to map
-    events.forEach((event, idx) => {
-        if (!event.lat || !event.lon) return;
-
-        const marker = L.marker([event.lat, event.lon], {
-            icon: createIcon(event.category)
-        }).addTo(map);
-
-        const popupContent = `
-            <div class="popup-title">${event.title}</div>
-            <div class="popup-detail">📍 ${event.location}</div>
-            <div class="popup-detail">⏰ ${event.time}</div>
-            <div class="popup-detail">📅 ${event.date}</div>
-            <a class="popup-link" href="${event.url}" target="_blank">Learn More →</a>
-        `;
-
-        marker.bindPopup(popupContent, { maxWidth: 280 });
-        markers.push({ marker, event, idx });
-
-        // Add to sidebar
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        card.dataset.category = event.category;
-        card.dataset.site = event.site || '';
-        card.innerHTML = `
-            <div class="event-title">${categoryEmojis[event.category] || '📌'} ${event.title}</div>
-            <div class="event-location">📍 ${event.location}</div>
-            <div class="event-time">⏰ ${event.time} &bull; 📅 ${event.date}</div>
-            <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
-                <span class="event-tag tag-${event.category}">${event.category}</span>
-                <span class="event-tag tag-site" style="background:rgba(16,185,129,0.15);color:#34d399;font-size:0.6rem">${event.site || ''}</span>
-            </div>
-        `;
-        card.addEventListener('click', () => {
-            map.flyTo([event.lat, event.lon], 14, { duration: 0.8 });
-            marker.openPopup();
-        });
-        sidebar.appendChild(card);
+// Render markers
+function renderMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+  const bounds = [];
+  filteredEvents.forEach(e => {
+    if (!e.lat || !e.lon) return;
+    const color = CAT_COLORS[e.category] || CAT_COLORS.other;
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="background:${color};width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
     });
+    const marker = L.marker([e.lat, e.lon], { icon })
+      .bindPopup(`<b>${e.title}</b><br>${e.date}${e.time ? ' • ' + e.time : ''}<br><i>${e.location}</i><br><a href="${e.url}" target="_blank">Details ↗</a>`)
+      .addTo(map);
+    markers.push(marker);
+    bounds.push([e.lat, e.lon]);
+  });
+  if (bounds.length > 1) {
+    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+  } else if (bounds.length === 1) {
+    map.setView(bounds[0], 10);
+  }
+}
 
-    // Fit map to show all markers
-    const group = L.featureGroup(markers.map(m => m.marker));
-    map.fitBounds(group.getBounds().pad(0.08));
+// Render sidebar
+function renderSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  if (filteredEvents.length === 0) {
+    sidebar.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text2)">No events match your filters</div>';
+    return;
+  }
+  let html = '';
+  filteredEvents.forEach((e, i) => {
+    html += `<div class="event-card" onclick="flyTo(${i})">
+      <div class="date">${e.date}</div>
+      ${e.time ? `<div class="time">⏰ ${e.time}</div>` : ''}
+      <div class="title">${e.title}</div>
+      <div class="location">📍 ${e.location || 'Location TBD'}</div>
+      <div class="site">${e.site}</div>
+    </div>`;
+  });
+  sidebar.innerHTML = html;
+}
 
-    // Category filter functionality
-    let activeFilter = 'all';
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.dataset.filter;
-            activeFilter = filter;
+function flyTo(i) {
+  const e = filteredEvents[i];
+  if (e && e.lat && e.lon) {
+    map.flyTo([e.lat, e.lon], 12);
+    markers[i]?.openPopup();
+  }
+}
 
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+function updateCount() {
+  document.getElementById('event-count').textContent = `Showing ${filteredEvents.length} of ${events.length}`;
+}
 
-            let count = 0;
-            markers.forEach(({ marker, event }) => {
-                const show = filter === 'all' || event.category === filter;
-                if (show) {
-                    marker.addTo(map);
-                    count++;
-                } else {
-                    map.removeLayer(marker);
-                }
-            });
-
-            document.querySelectorAll('.event-card').forEach(card => {
-                const show = filter === 'all' || card.dataset.category === filter;
-                const showSite = activeSite === 'all' || card.dataset.site === activeSite;
-                card.style.display = (show && showSite) ? 'block' : 'none';
-            });
-
-            document.getElementById('count').textContent = `${count} event${count !== 1 ? 's' : ''}`;
-
-            if (count > 0) {
-                const visible = markers.filter(({ marker, event }) =>
-                    filter === 'all' || event.category === filter
-                );
-                if (visible.length > 1) {
-                    const bounds = L.featureGroup(visible.map(m => m.marker)).getBounds();
-                    map.fitBounds(bounds.pad(0.1));
-                }
-            }
-        });
-    });
-
-
-    // Site filter functionality
-    let activeSite = 'all';
-    const siteBtns = document.querySelectorAll('.site-btn');
-    siteBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const site = btn.dataset.site;
-            activeSite = site;
-
-            siteBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            let count = 0;
-            markers.forEach(({ marker, event }) => {
-                const show = site === 'all' || (event.site && event.site === site);
-                if (show) {
-                    marker.addTo(map);
-                    count++;
-                } else {
-                    map.removeLayer(marker);
-                }
-            });
-
-            document.querySelectorAll('.event-card').forEach(card => {
-                const showCat = activeFilter === 'all' || card.dataset.category === activeFilter;
-                const showSite = site === 'all' || card.dataset.site === site;
-                card.style.display = (showCat && showSite) ? 'block' : 'none';
-            });
-
-            document.getElementById('count').textContent = `${count} event${count !== 1 ? 's' : ''}`;
-
-            if (count > 0) {
-                const visible = markers.filter(({ marker, event }) => {
-                    const matchCat = activeFilter === 'all' || event.category === activeFilter;
-                    const matchSite = site === 'all' || event.site === site;
-                    return matchCat && matchSite;
-                });
-                if (visible.length > 1) {
-                    const bounds = L.featureGroup(visible.map(m => m.marker)).getBounds();
-                    map.fitBounds(bounds.pad(0.1));
-                }
-            }
-        });
-    });
-
-
-    // Legend - positioned bottom-left with enough padding
-    const legend = L.control({ position: 'bottomleft', className: 'legend-control' });
-    legend.onAdd = function() {
-        const div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = `
-            <div class="legend-title">Categories</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Outdoor</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Festival</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Library</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Nature</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div>Educational</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#eab308"></div>Free</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>Sports</div>
-        `;
-        return div;
-    };
-    legend.addTo(map);
-    </script>
+// Initial render
+applyFilters();
+</script>
 </body>
 </html>
