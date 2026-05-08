@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API &bull; 2026-05-08</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://www.theverge.com/tech/926458/canvas-shinyhunters-breach" target="_blank">Canvas is down as ShinyHunters threatens to leak schools’ data</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 671</span>
+                <span class="comments">💬 412</span>
+                <span class="by">👤 stefanpie</span>
+            </div>
+            <div class="summary"><p>The Instructure-owned learning management platform Canvas went offline after the ShinyHunters hacking group claimed responsibility for a massive data breach impacting student names, email addresses, ID numbers, and messages. The hackers posted a ransom message giving affected schools until May 12 to negotiate before data would be leaked. Instructure took Canvas offline to contain the breach and has since restored service for most users, confirming the attackers exploited an issue related to Free-For-Teacher accounts.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.theverge.com/tech/926458/canvas-shinyhunters-breach" target="_blank">https://www.theverge.com/tech/926458/canvas-shinyhunters-breach</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="https://www.reuters.com/business/world-at-work/cloudflare-cut-over-1100-jobs-2026-05-07/" target="_blank">Cloudflare to cut about 20% workforce</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 793</span>
+                <span class="comments">💬 525</span>
+                <span class="by">👤 PriorityLeft</span>
+            </div>
+            <div class="summary"><p>Cloudflare is cutting approximately 20% of its workforce, eliminating over 1,100 jobs, as part of a broader restructuring following the company's recent leadership changes and financial restructuring efforts under new ownership.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.reuters.com/business/world-at-work/cloudflare-cut-over-1100-jobs-2026-05-07/" target="_blank">https://www.reuters.com/business/world-at-work/cloudflare-cut-over-1100-jobs-...</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://xeiaso.net/blog/2026/abstain-from-install/" target="_blank">Maybe you shouldn't install new software for a bit</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 557</span>
+                <span class="comments">💬 299</span>
+                <span class="by">👤 psxuaw</span>
+            </div>
+            <div class="summary"><p>Outside of Linux kernel patches from your distro, I think it's probably a good idea to put a moratorium on installing new software for a week or so. Facts and circumstances may have changed since publication. Please contact me before jumping to conclusions if something seems wrong or unclear.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://xeiaso.net/blog/2026/abstain-from-install/" target="_blank">https://xeiaso.net/blog/2026/abstain-from-install/</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://www.nintendo.co.jp/corporate/release/en/2026/260508.html" target="_blank">Nintendo announces price increases for Nintendo Switch 2</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 37</span>
+                <span class="comments">💬 23</span>
+                <span class="by">👤 razorbeamz</span>
+            </div>
+            <div class="summary"><p>(HQ: Kyoto, Minami-ku, Japan; President and Representative Director: Shuntaro Furukawa, “Nintendo” hereafter) hereby announces that it has decided to revise the prices of the following products and services. Dedicated Video Game Systems In light of changes in market conditions, and after considering the global business outlook, Nintendo will revise the manufacturer’s suggested retail prices (MSRP) of the Nintendo Switch 2 system and Nintendo...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.nintendo.co.jp/corporate/release/en/2026/260508.html" target="_blank">https://www.nintendo.co.jp/corporate/release/en/2026/260508.html</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://clojurescript.org/news/2026-05-07-release" target="_blank">ClojureScript Gets Async/Await</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 76</span>
+                <span class="comments">💬 21</span>
+                <span class="by">👤 Borkdude</span>
+            </div>
+            <div class="summary"><p>_07 May 2026_ _ClojureScript Team_ We’re happy to announce a new release of ClojureScript. If you’re an existing user of ClojureScript please read over the following release notes carefully. [](https://clojurescript.org/news/2026-05-07-release#_async_functions)Async Functions Now that ClojureScript targets ECMAScript 2016 we can carefully choose new areas of enhanced interop.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://clojurescript.org/news/2026-05-07-release" target="_blank">https://clojurescript.org/news/2026-05-07-release</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://www.openwall.com/lists/oss-security/2026/05/07/8" target="_blank">Dirtyfrag: Universal Linux LPE</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 656</span>
+                <span class="comments">💬 269</span>
+                <span class="by">👤 flipped</span>
+            </div>
+            <div class="summary"><p>This vulnerability has a similar impact to the previous Copy Fail. Because the embargo has now been broken, no patches or CVEs exist for these vulnerabilities. After consultation with the linux-distros@...openwall.org maintainers, and at the maintainers' request, I am publicly releasing this Dirty Frag document.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.openwall.com/lists/oss-security/2026/05/07/8" target="_blank">https://www.openwall.com/lists/oss-security/2026/05/07/8</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://www.not-ship.com/burning-man-moop/" target="_blank">The map that keeps Burning Man honest</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 660</span>
+                <span class="comments">💬 320</span>
+                <span class="by">👤 speckx</span>
+            </div>
+            <div class="summary"><p>_At the end of April, I ran a short campaign to find 15 more paying members of Not-Ship. Thank you to the wonderful souls who chose to back this work. It means the world to me._ Each year, 70,000 people gather on a dry lakebed in Nevada to build a city from scratch.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.not-ship.com/burning-man-moop/" target="_blank">https://www.not-ship.com/burning-man-moop/</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://sdocs.dev/blogs/journey-to-pdf-generation" target="_blank">The surprisingly complex journey to text-selectable client-side generated PDFs</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 26</span>
+                <span class="comments">💬 10</span>
+                <span class="by">👤 FailMore</span>
+            </div>
+            <div class="summary"><p>Filename journey-to-pdf-generation.md !Image 1: A SmallDocs PDF open in a viewer with body text highlighted, showing the text is selectable. If you're like me, you probably have never thought twice about PDFs. They are so prevalent that you'd think including the ability to generate them in your application would be trivial: include some widely used module and "Bob's your uncle" (as we...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://sdocs.dev/blogs/journey-to-pdf-generation" target="_blank">https://sdocs.dev/blogs/journey-to-pdf-generation</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://storica.club/blog/pinocchio-in-italian/" target="_blank">Pinocchio is weirder than you remembered</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 165</span>
+                <span class="comments">💬 73</span>
+                <span class="by">👤 cemsakarya</span>
+            </div>
+            <div class="summary"><p>Pinocchio is weirder than you remember — Storica Cultural Learning May 3, 2026·7 min read Pinocchio is weirder than you remember The original 1881 serial ended in chapter fifteen with the puppet hanging dead from an oak tree. Italian children wrote in begging the author to continue. What followed — donkey-skin drums, dead-girl fairies, a satire of every other moralising children's book in Italy — became one of the most translated books in...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://storica.club/blog/pinocchio-in-italian/" target="_blank">https://storica.club/blog/pinocchio-in-italian/</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://ikesau.co/blog/dithering-with-css/" target="_blank">Dithering with CSS</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 23</span>
+                <span class="comments">💬 7</span>
+                <span class="by">👤 speckx</span>
+            </div>
+            <div class="summary"><p>handy if you're running a site with pictures but you want everything to maintain a consistent aesthetic and colour scheme. might be better to just process the images and save them already dithered, but this way can be customized. Noise dithering image source noise baseFrequency 0.90 numOctaves 1 seed 2 mix (feComposite arithmetic)k1 0.00 k2 0.75 k3 0.35 k4 -0.05 two-tone enabled.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://ikesau.co/blog/dithering-with-css/" target="_blank">https://ikesau.co/blog/dithering-with-css/</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API &bull; 2026-05-08</p>
+        </footer>
+    </div>
+</body>
+</html>
