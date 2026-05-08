@@ -1,65 +1,5 @@
 [
   {
-    "title": "Bird Walks",
-    "date": "May 7",
-    "time": "5:00 PM - 7:30 PM",
-    "location": "EDSEL & ELEANOR FORD HOUSE",
-    "url": "https://littleguidedetroit.com/event/bird-walks/2026-05-07/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-07",
-    "lat": 42.438,
-    "lon": -82.9546,
-    "category": "nature"
-  },
-  {
-    "title": "Fishing 101",
-    "date": "May 7",
-    "time": "6:00 PM - 7:30 PM",
-    "location": "Thelma Spencer Park",
-    "url": "https://littleguidedetroit.com/event/fishing-101/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-07",
-    "lat": 42.3314,
-    "lon": -83.0458,
-    "category": "outdoor"
-  },
-  {
-    "title": "Mother Son Dance",
-    "date": "May 7",
-    "time": "6:00 PM - 7:30 PM",
-    "location": "WIxom Community Center",
-    "url": "https://littleguidedetroit.com/event/mother-son-dance-3/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-07",
-    "lat": 42.5075,
-    "lon": -83.455,
-    "category": "outdoor"
-  },
-  {
-    "title": "MILK & MEET",
-    "date": "May 7",
-    "time": "6:00 PM - 6:30 PM",
-    "location": "MSU Tollgate Farm",
-    "url": "https://littleguidedetroit.com/event/milk-meet/2026-05-07/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-07",
-    "lat": 42.7165,
-    "lon": -84.4987,
-    "category": "outdoor"
-  },
-  {
-    "title": "GRAND RAPIDS LANTERN FESTIVAL",
-    "date": "May 7",
-    "time": "7:30 PM - 11:30 PM",
-    "location": "John Ball Zoo",
-    "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-07/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-07",
-    "lat": 42.9626,
-    "lon": -85.6669,
-    "category": "festival"
-  },
-  {
     "title": "Mystery of the Mayan Medallion",
     "date": "May 8",
     "time": "All Day",
@@ -252,6 +192,18 @@
     "category": "nature"
   },
   {
+    "title": "Birmingham Family Swim",
+    "date": "May 8",
+    "time": "6:30 PM - 8:00 PM",
+    "location": "Goldfish Swim School \u2013 Birmingham",
+    "url": "https://littleguidedetroit.com/event/birmingham-family-swim/2026-05-08/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-08",
+    "lat": 42.5475,
+    "lon": -83.2118,
+    "category": "sport"
+  },
+  {
     "title": "Canton Open Swim",
     "date": "May 8",
     "time": "6:30 PM - 8:00 PM",
@@ -300,18 +252,6 @@
     "category": "sport"
   },
   {
-    "title": "GRAND RAPIDS LANTERN FESTIVAL",
-    "date": "May 8",
-    "time": "7:30 PM - 11:30 PM",
-    "location": "John Ball Zoo",
-    "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-08/",
-    "site": "Detroit Metro",
-    "parsed_date": "2026-05-08",
-    "lat": 42.9626,
-    "lon": -85.6669,
-    "category": "festival"
-  },
-  {
     "title": "Bat Chat",
     "date": "May 8",
     "time": "8:00 PM - 9:30 PM",
@@ -351,12 +291,12 @@
     "title": "World Migratory Bird Day at Fenner",
     "date": "May 9",
     "time": "8:00 AM - 8:00 PM",
-    "location": "Fenner Nature Center",
+    "location": "Fenner Nature Center'",
     "url": "https://littleguidedetroit.com/event/world-migratory-bird-day-at-fenner/",
     "site": "Detroit Metro",
     "parsed_date": "2026-05-09",
-    "lat": 42.7369,
-    "lon": -84.4104,
+    "lat": 42.3314,
+    "lon": -83.0458,
     "category": "outdoor"
   },
   {
@@ -504,6 +444,66 @@
     "category": "outdoor"
   },
   {
+    "title": "Project Kidsight Vision Screening",
+    "date": "May 9",
+    "time": "10:00 AM - 12:00 PM",
+    "location": "BALDWIN PUBLIC LIBRARY",
+    "url": "https://littleguidedetroit.com/event/project-kidsight-vision-screening-2/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-09",
+    "lat": 42.3314,
+    "lon": -83.0458,
+    "category": "outdoor"
+  },
+  {
+    "title": "Mother's Day Mini-Golf Weekend",
+    "date": "May 9",
+    "time": "10:00 AM - 5:00 PM",
+    "location": "CRANBROOK ART MUSEUM",
+    "url": "https://littleguidedetroit.com/event/mothers-day-mini-golf-weekend/2026-05-09/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-09",
+    "lat": 42.3314,
+    "lon": -83.0458,
+    "category": "sport"
+  },
+  {
+    "title": "Mother's Day Weekend Brunch",
+    "date": "May 9",
+    "time": "10:00 AM - 2:00 PM",
+    "location": "Jojo's Shake Bar",
+    "url": "https://littleguidedetroit.com/event/mothers-day-weekend-brunch/2026-05-09/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-09",
+    "lat": 42.3314,
+    "lon": -83.0458,
+    "category": "sport"
+  },
+  {
+    "title": "May LEGO Club",
+    "date": "May 9",
+    "time": "10:00 AM - 11:30 AM",
+    "location": "Sloan Museum",
+    "url": "https://littleguidedetroit.com/event/may-lego-club/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-09",
+    "lat": 42.3314,
+    "lon": -83.0458,
+    "category": "outdoor"
+  },
+  {
+    "title": "Baby Week Celebration with a Free Class",
+    "date": "May 9",
+    "time": "10:45 AM - 11:30 AM",
+    "location": "GYMBOREE PLAY & MUSIC \u2013 ROCHESTER HILLS",
+    "url": "https://littleguidedetroit.com/event/baby-week-celebration-with-a-free-class/2026-05-09/",
+    "site": "Detroit Metro",
+    "parsed_date": "2026-05-09",
+    "lat": 42.6984,
+    "lon": -83.1348,
+    "category": "festival"
+  },
+  {
     "title": "1 Free Kid's Meal with Purchase of 1 Pizza at Venezia Restaurant",
     "date": "Thursday May 7, 2026",
     "time": "All day",
@@ -624,6 +624,18 @@
     "category": "outdoor"
   },
   {
+    "title": "Artist Presentation: Angelique De Castro",
+    "date": "May 7, 2026",
+    "time": "All day",
+    "location": "Glen Arbor Arts Center",
+    "url": "/event-detail/artist-presentation%3a-angelique-de-castro/25884/",
+    "site": "Traverse City",
+    "parsed_date": "2026-05-07",
+    "lat": 44.7631,
+    "lon": -85.6206,
+    "category": "outdoor"
+  },
+  {
     "title": "Brushstrokes for Healing at Peace Ranch",
     "date": "May 7, 2026",
     "time": "All day",
@@ -732,30 +744,6 @@
     "category": "outdoor"
   },
   {
-    "title": "Monthly Singles Night",
-    "date": "May 7, 2026",
-    "time": "All day",
-    "location": "Traverse City Whiskey Co.",
-    "url": "/event-detail/monthly-singles-night/25497/",
-    "site": "Traverse City",
-    "parsed_date": "2026-05-07",
-    "lat": 44.7631,
-    "lon": -85.6206,
-    "category": "outdoor"
-  },
-  {
-    "title": "Musical Fountain Testing Nights",
-    "date": "May 8, 2026",
-    "time": "9:30 pm - 11:00 pm",
-    "location": "",
-    "url": "https://visitgrandhaven.com/events/musical-fountain-testing-nights/",
-    "site": "Grand Haven",
-    "parsed_date": "2026-05-08",
-    "lat": 43.065,
-    "lon": -86.227,
-    "category": "outdoor"
-  },
-  {
     "title": "Grand Haven Farmers Market",
     "date": "May 9, 2026",
     "time": "8:00 am - 1:00 pm",
@@ -793,18 +781,6 @@
   },
   {
     "title": "Musical Fountain Testing Nights",
-    "date": "May 9, 2026",
-    "time": "9:30 pm - 11:00 pm",
-    "location": "",
-    "url": "https://visitgrandhaven.com/events/musical-fountain-testing-nights/musical-fountain-testing-nights-2026-05-09/",
-    "site": "Grand Haven",
-    "parsed_date": "2026-05-09",
-    "lat": 43.065,
-    "lon": -86.227,
-    "category": "outdoor"
-  },
-  {
-    "title": "Musical Fountain Testing Nights",
     "date": "May 15, 2026",
     "time": "9:30 pm - 11:00 pm",
     "location": "",
@@ -828,18 +804,6 @@
     "category": "festival"
   },
   {
-    "title": "Musical Fountain Testing Nights",
-    "date": "May 16, 2026",
-    "time": "9:30 pm - 11:00 pm",
-    "location": "",
-    "url": "https://visitgrandhaven.com/events/musical-fountain-testing-nights/musical-fountain-testing-nights-2/",
-    "site": "Grand Haven",
-    "parsed_date": "2026-05-16",
-    "lat": 43.065,
-    "lon": -86.227,
-    "category": "outdoor"
-  },
-  {
     "title": "1st Annual Club Crawl Poker Run",
     "date": "May 16, 2026",
     "time": "2:00 pm - 7:00 pm",
@@ -850,18 +814,6 @@
     "lat": 43.065,
     "lon": -86.227,
     "category": "sport"
-  },
-  {
-    "title": "Grand Haven Farmers Market",
-    "date": "May 16, 2026",
-    "time": "8:00 am - 1:00 pm",
-    "location": "",
-    "url": "https://visitgrandhaven.com/events/grand-haven-farmers-market-2/grand-haven-farmers-market-2026-05-16/",
-    "site": "Grand Haven",
-    "parsed_date": "2026-05-16",
-    "lat": 43.065,
-    "lon": -86.227,
-    "category": "outdoor"
   },
   {
     "title": "Armed Services Marathon",
@@ -876,16 +828,16 @@
     "category": "outdoor"
   },
   {
-    "title": "The Kite Festival at Grand Haven",
-    "date": "May 17, 2026",
-    "time": "11:00 am - 5:00 pm",
+    "title": "Annual Grand Haven VFW Ribfest",
+    "date": "May 22, 2026",
+    "time": "4:00 pm - 11:59 pm",
     "location": "",
-    "url": "https://visitgrandhaven.com/events/the-kite-festival-at-grand-haven/the-kite-festival-at-grand-haven-2026-05-17/",
+    "url": "https://visitgrandhaven.com/events/annual-grand-haven-vfw-ribfest/",
     "site": "Grand Haven",
-    "parsed_date": "2026-05-17",
+    "parsed_date": "2026-05-22",
     "lat": 43.065,
     "lon": -86.227,
-    "category": "festival"
+    "category": "outdoor"
   },
   {
     "title": "SDB Author Event",
