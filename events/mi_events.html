@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake Michigan Weekend Events Map - May 2026</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --bg-card-hover: #172033;
+            --bg-header: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --bg-legend: rgba(15, 23, 42, 0.92);
+            --bg-popup: #1e293b;
+            --bg-filter: transparent;
+            --bg-filter-hover: rgba(59, 130, 246, 0.12);
+            --bg-filter-active: #3b82f6;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-heading: #f1f5f9;
+            --text-time: #60a5fa;
+            --text-gradient-1: #60a5fa;
+            --text-gradient-2: #a78bfa;
+            --border-color: #334155;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --marker-shadow: rgba(0, 0, 0, 0.4);
+            --marker-border: #fff;
+            --tag-outdoor-bg: #065f46; --tag-outdoor-fg: #6ee7b7;
+            --tag-festival-bg: #7c2d12; --tag-festival-fg: #fdba74;
+            --tag-library-bg: #1e3a5f; --tag-library-fg: #93c5fd;
+            --tag-nature-bg: #064e3b; --tag-nature-fg: #86efac;
+            --tag-educational-bg: #4c1d95; --tag-educational-fg: #c4b5fd;
+            --tag-free-bg: #713f12; --tag-free-fg: #fde68a;
+            --tag-starwars-bg: #7c2d12; --tag-starwars-fg: #fdba74;
+            --tag-sport-bg: #1e3a5f; --tag-sport-fg: #67e8f9;
+            --toggle-bg: #475569;
+            --toggle-knob: #f1f5f9;
+            --toggle-icon: "🌙";
+            --scrollbar-track: #1e293b;
+            --scrollbar-thumb: #475569;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-pill: 999px;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --bg-header: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            --bg-legend: rgba(255, 255, 255, 0.96);
+            --bg-popup: #ffffff;
+            --bg-filter: transparent;
+            --bg-filter-hover: rgba(59, 130, 246, 0.08);
+            --bg-filter-active: #3b82f6;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --text-heading: #0f172a;
+            --text-time: #2563eb;
+            --text-gradient-1: #2563eb;
+            --text-gradient-2: #7c3aed;
+            --border-color: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --marker-shadow: rgba(0, 0, 0, 0.12);
+            --marker-border: #e2e8f0;
+            --tag-outdoor-bg: #d1fae5; --tag-outdoor-fg: #065f46;
+            --tag-festival-bg: #ffedd5; --tag-festival-fg: #9a3412;
+            --tag-library-bg: #dbeafe; --tag-library-fg: #1e40af;
+            --tag-nature-bg: #dcfce7; --tag-nature-fg: #166534;
+            --tag-educational-bg: #ede9fe; --tag-educational-fg: #5b21b6;
+            --tag-free-bg: #fef3c7; --tag-free-fg: #92400e;
+            --tag-starwars-bg: #ffedd5; --tag-starwars-fg: #9a3412;
+            --tag-sport-bg: #dbeafe; --tag-sport-fg: #0e7490;
+            --toggle-bg: #cbd5e1;
+            --toggle-knob: #ffffff;
+            --scrollbar-track: #f1f5f9;
+            --scrollbar-thumb: #cbd5e1;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.35s ease, color 0.35s ease;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* ====== HEADER ====== */
+        #header {
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 24px;
+            transition: background 0.35s ease, border-color 0.35s ease;
+            z-index: 2000;
+            position: relative;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0 10px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            line-height: 1.2;
+        }
+
+        .brand-text .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .count-badge {
+            background: linear-gradient(135deg, var(--text-gradient-1), var(--text-gradient-2));
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        /* ====== THEME TOGGLE ====== */
+        #theme-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.15rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        #theme-toggle:hover {
+            border-color: var(--accent);
+            background: var(--bg-filter-hover);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        #theme-toggle:active {
+            transform: scale(0.94);
+        }
+
+        #theme-toggle .icon-sun,
+        #theme-toggle .icon-moon {
+            position: absolute;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        [data-theme="dark"] #theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(0); }
+        [data-theme="dark"] #theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
+        [data-theme="light"] #theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
+        [data-theme="light"] #theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0); }
+
+        /* ====== FILTER BAR ====== */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 0 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .filter-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-color);
+            background: var(--bg-filter);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .filter-btn .emoji {
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-filter-hover);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--bg-filter-active);
+            border-color: var(--bg-filter-active);
+            color: #ffffff;
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .filter-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ====== MAP CONTAINER ====== */
+        #map-container {
+            display: flex;
+            height: calc(100vh - 140px);
+            margin-bottom: 12px;
+        }
+
+        #map {
+            flex: 1;
+            min-height: 400px;
+        }
+
+        #sidebar {
+            width: 360px;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 16px 16px 60px 16px;
+            transition: background 0.35s ease, border-color 0.35s ease;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        }
+
+        #sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        #sidebar::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+        }
+
+        /* ====== EVENT CARDS ====== */
+        .event-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .event-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateX(3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .event-card .event-title {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .event-card .event-location {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .event-card .event-time {
+            font-size: 0.75rem;
+            color: var(--text-time);
+            margin-top: 3px;
+        }
+
+        .event-card .event-tag {
+            display: inline-block;
+            font-size: 0.62rem;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            margin-top: 6px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .tag-outdoor { background: var(--tag-outdoor-bg); color: var(--tag-outdoor-fg); }
+        .tag-festival { background: var(--tag-festival-bg); color: var(--tag-festival-fg); }
+        .tag-library { background: var(--tag-library-bg); color: var(--tag-library-fg); }
+        .tag-nature { background: var(--tag-nature-bg); color: var(--tag-nature-fg); }
+        .tag-educational { background: var(--tag-educational-bg); color: var(--tag-educational-fg); }
+        .tag-free { background: var(--tag-free-bg); color: var(--tag-free-fg); }
+        .tag-starwars { background: var(--tag-starwars-bg); color: var(--tag-starwars-fg); }
+        .tag-sport { background: var(--tag-sport-bg); color: var(--tag-sport-fg); }
+
+
+        /* ====== SITE FILTER ====== */
+        .site-btn {
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-color);
+            background: var(--bg-filter);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .site-btn .emoji {
+            font-size: 0.85rem;
+            line-height: 1;
+        }
+
+        .site-btn:hover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--text-primary);
+        }
+
+        .site-btn.active {
+            background: #10b981;
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+        }
+
+        .site-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ====== LEGEND ====== */
+
+        .legend-control {
+            padding-bottom: 4px;
+        }
+
+        .legend {
+            background: var(--bg-legend);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 14px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            color: var(--text-primary);
+            transition: all 0.35s ease;
+            box-shadow: var(--shadow-md);
+            margin: 10px;
+            z-index: 1000;
+        }
+
+        @media (min-width: 641px) {
+            .legend {
+                margin: 16px;
+            }
+        }
+
+        .legend-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-heading);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 3px 0;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,0.15);
+        }
+
+        /* ====== POPUP ====== */
+        .leaflet-popup-content-wrapper {
+            background: var(--bg-popup) !important;
+            color: var(--text-primary) !important;
+            border-radius: var(--radius) !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: var(--shadow-md) !important;
+            transition: all 0.35s ease;
+        }
+
+        .leaflet-popup-tip {
+            background: var(--bg-popup) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        .leaflet-popup-content {
+            margin: 12px 16px !important;
+            font-family: 'Inter', 'Segoe UI', sans-serif !important;
+        }
+
+        .popup-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+            color: var(--text-heading);
+            line-height: 1.3;
+        }
+
+        .popup-detail {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin: 3px 0;
+        }
+
+        .popup-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .popup-link:hover {
+            border-bottom-color: var(--accent);
+        }
+
+
+        /* ====== SEARCH + CALENDAR ====== */
+        .sidebar-header {
+            margin-bottom: 12px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.82rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .calendar-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.82rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .calendar-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        /* Flatpickr theme overrides */
+        .flatpickr-calendar {
+            background: var(--bg-secondary) !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: var(--shadow-md) !important;
+            border-radius: var(--radius) !important;
+        }
+
+        .flatpickr-day {
+            color: var(--text-primary) !important;
+        }
+
+        .flatpickr-day:hover {
+            background: var(--bg-filter-hover) !important;
+        }
+
+        .flatpickr-day.selected {
+            background: var(--accent) !important;
+            border-color: var(--accent) !important;
+        }
+
+        .flatpickr-months .flatpickr-month {
+            background: var(--bg-secondary) !important;
+        }
+
+        .flatpickr-current-month .flatpickr-monthDropdown-months,
+        .flatpickr-current-month input.cur-year {
+            color: var(--text-primary) !important;
+        }
+
+        .flatpickr-months .flatpickr-prev-month,
+        .flatpickr-months .flatpickr-next-month {
+            color: var(--text-primary) !important;
+            fill: var(--text-primary) !important;
+        }
+
+        .flatpickr-day.today {
+            border-color: var(--accent) !important;
+        }
+
+        .flatpickr-day.today:hover {
+            background: var(--accent) !important;
+        }
+
+        span.flatpickr-weekday {
+            color: var(--text-secondary) !important;
+        }
+
+        .flatpickr-day.inRange,
+        .flatpickr-day.prevMonthDay.inRange,
+        .flatpickr-day.nextMonthDay.inRange {
+            background: var(--accent-glow) !important;
+            border-color: transparent !important;
+        }
+
+        .flatpickr-day.startRange,
+        .flatpickr-day.endRange {
+            background: var(--accent) !important;
+        }
+
+        /* Event dot indicator on calendar days */
+        .flatpickr-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .flatpickr-day.has-event:hover::after {
+            background: #fff !important;
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            #header { padding: 0 16px; }
+            .header-top { padding: 10px 0 8px; }
+            .brand-text h1 { font-size: 1rem; }
+            .brand-icon { width: 30px; height: 30px; font-size: 0.9rem; }
+            #theme-toggle { width: 36px; height: 36px; font-size: 1rem; }
+            .filter-btn { padding: 5px 10px; font-size: 0.72rem; }
+            #sidebar { width: 300px; padding: 12px; }
+        }
+
+        @media (max-width: 640px) {
+            #map-container { flex-direction: column; }
+            #map { min-height: 45vh; flex: none; }
+            #sidebar {
+                width: 100%;
+                flex: 1;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                padding: 12px;
+            }
+            .brand-icon { display: none; }
+            .brand-text .subtitle { display: none; }
+            .count-badge { font-size: 0.7rem; padding: 4px 10px; }
+        }
+    </style>
+    <!-- Flatpickr calendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="header-top">
+            <div class="brand">
+                <div class="brand-icon">🗺️</div>
+                <div class="brand-text">
+                    <h1>Mid Michigan & Lake Michigan Events</h1>
+                    <div class="subtitle">Kid-Friendly Events Across 7 Regions — May 2026</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="count-badge" id="count"></span>
+                <button id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">
+                    <span class="icon-moon">🌙</span>
+                    <span class="icon-sun">☀️</span>
+                </button>
+            </div>
+        </div>
+        <div class="filter-bar" id="category-filters"></div>
+        <div class="filter-bar">
+            <button class="site-btn active" data-site="all"><span class="emoji">🌍</span>All Regions</button>
+            <button class="site-btn" data-site="Detroit Metro"><span class="emoji">🏙️</span>Detroit Metro</button>
+            <button class="site-btn" data-site="South Haven"><span class="emoji">🌊</span>South Haven</button>
+            <button class="site-btn" data-site="Traverse City"><span class="emoji">🍒</span>Traverse City</button>
+            <button class="site-btn" data-site="Grand Haven"><span class="emoji">🏖️</span>Grand Haven</button>
+            <button class="site-btn" data-site="Mt. Pleasant"><span class="emoji">🏫</span>Mt. Pleasant</button>
+            <button class="site-btn" data-site="Battle Creek"><span class="emoji">🌽</span>Battle Creek</button>
+            <button class="site-btn" data-site="Grand Rapids"><span class="emoji">🌷</span>Grand Rapids</button>
+        </div>
+    </div>
+
+    <div id="map-container">
+        <div id="map"></div>
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <input type="text" class="search-input" id="search-input" placeholder="Search events, locations, dates...">
+                <input type="text" class="calendar-input" id="calendar-input" placeholder="Select date or date range">
+            </div>
+            <div id="event-list"></div>
+        </div>
+    </div>
+
+    <script>
+    const events = [{"title": "Mystery of the Mayan Medallion", "date": "May 9", "time": "All Day", "location": "CRANBROOK SCIENCE MUSEUM", "url": "https://littleguidedetroit.com/event/mystery-of-the-mayan-medallion/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5023, "lon": -83.2668, "category": "outdoor"}, {"title": "Michigan Humane's Tailgate", "date": "May 9", "time": "7:30 AM - 2:00 PM", "location": "Roosevelt Park", "url": "https://littleguidedetroit.com/event/michigan-humanes-tailgate/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3736, "lon": -83.0619, "category": "outdoor"}, {"title": "World Migratory Bird Day at Fenner", "date": "May 9", "time": "8:00 AM - 8:00 PM", "location": "Fenner Nature Center", "url": "https://littleguidedetroit.com/event/world-migratory-bird-day-at-fenner/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.7369, "lon": -84.4104, "category": "outdoor"}, {"title": "Blake's In Bloom", "date": "May 9", "time": "8:00 AM - 5:00 PM", "location": "Blake Farms and Apple Orchard", "url": "https://littleguidedetroit.com/event/blakes-in-bloom/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.448, "lon": -83.1265, "category": "outdoor"}, {"title": "Howell Touch a Truck", "date": "May 9", "time": "9:00 AM - 2:00 PM", "location": "Kensington Valley Outlets", "url": "https://littleguidedetroit.com/event/howell-touch-a-truck/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6176, "lon": -83.7942, "category": "outdoor"}, {"title": "Open Barn", "date": "May 9", "time": "9:00 AM - 4:00 PM", "location": "CHARLES L. BOWERS SCHOOL FARM", "url": "https://littleguidedetroit.com/event/open-barn-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5948, "lon": -83.6945, "category": "outdoor"}, {"title": "Family Fishing Frenzy", "date": "May 9", "time": "9:00 AM - 12:00 PM", "location": "HERITAGE PARK – CANTON", "url": "https://littleguidedetroit.com/event/family-fishing-frenzy/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3067, "lon": -83.4423, "category": "outdoor"}, {"title": "Open Climb then Play", "date": "May 9", "time": "9:00 AM - 10:30 AM", "location": "Troy Gym – TG4", "url": "https://littleguidedetroit.com/event/open-climb-then-play/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6064, "lon": -83.1498, "category": "outdoor"}, {"title": "Theut's Flower Barn Tulip Festival", "date": "May 9", "time": "9:00 AM - 6:00 PM", "location": "Theut's Flower Barn", "url": "https://littleguidedetroit.com/event/theuts-flower-barn-tulip-festival/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5157, "lon": -83.1529, "category": "festival"}, {"title": "FREE Admission Waterloo Farm Museum", "date": "May 9", "time": "10:00 AM - 4:00 PM", "location": "Waterloo Farm and Dewey School Museum", "url": "https://littleguidedetroit.com/event/free-admission-waterloo-farm-museum/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.7751, "lon": -83.5807, "category": "educational"}, {"title": "Annual Garden Party in the Alley", "date": "May 9", "time": "10:00 AM - 5:00 PM", "location": "Downtown Howell", "url": "https://littleguidedetroit.com/event/annual-garden-party-in-the-alley/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6176, "lon": -83.7942, "category": "outdoor"}, {"title": "ART BIRMINGHAM", "date": "May 9", "time": "10:00 AM - 6:00 PM", "location": "Shain Park", "url": "https://littleguidedetroit.com/event/art-birmingham/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day Wildflower Walk", "date": "May 9", "time": "10:00 AM - 2:00 PM", "location": "Kensington Nature Center", "url": "https://littleguidedetroit.com/event/mothers-day-wildflower-wal/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lakeshore Stroll", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "Lake Erie Marshlands Museum", "url": "https://littleguidedetroit.com/event/lakeshore-stroll/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Garden Club: Indian Springs", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "Indian Springs Environmental Discovery Center", "url": "https://littleguidedetroit.com/event/garden-club-indian-springs/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Project Kidsight Vision Screening", "date": "May 9", "time": "10:00 AM - 12:00 PM", "location": "BALDWIN PUBLIC LIBRARY", "url": "https://littleguidedetroit.com/event/project-kidsight-vision-screening-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day Mini-Golf Weekend", "date": "May 9", "time": "10:00 AM - 5:00 PM", "location": "CRANBROOK ART MUSEUM", "url": "https://littleguidedetroit.com/event/mothers-day-mini-golf-weekend/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day Weekend Brunch", "date": "May 9", "time": "10:00 AM - 2:00 PM", "location": "Jojo's Shake Bar", "url": "https://littleguidedetroit.com/event/mothers-day-weekend-brunch/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "May LEGO Club", "date": "May 9", "time": "10:00 AM - 11:30 AM", "location": "Sloan Museum of Discovery", "url": "https://littleguidedetroit.com/event/may-lego-club/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Baby Week Celebration with a Free Class", "date": "May 9", "time": "10:45 AM - 11:30 AM", "location": "GYMBOREE PLAY & MUSIC – ROCHESTER HILLS", "url": "https://littleguidedetroit.com/event/baby-week-celebration-with-a-free-class/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6984, "lon": -83.1348, "category": "festival"}, {"title": "Family Day", "date": "May 9", "time": "11:00 AM - 3:00 PM", "location": "Museum of Contemporary Art Detroit (MOCAD)", "url": "https://littleguidedetroit.com/event/family-day/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lost Lake Open House", "date": "May 9", "time": "12:00 PM - 3:00 PM", "location": "LOST LAKE NATURE PARK", "url": "https://littleguidedetroit.com/event/lost-lake-open-house-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "free"}, {"title": "Weekend Hayrides", "date": "May 9", "time": "12:00 PM - 4:00 PM", "location": "KENSINGTON METRO PARK FARM CENTER", "url": "https://littleguidedetroit.com/event/weekend-hayrides-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.4914, "lon": -83.0936, "category": "outdoor"}, {"title": "Talkin' About Series", "date": "May 9", "time": "1:00 PM - 2:00 PM", "location": "Oakwoods Metropark Nature Center", "url": "https://littleguidedetroit.com/event/talkin-about-series-2/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Kids Outdoor Craft Hour", "date": "May 9", "time": "1:00 PM - 2:00 PM", "location": "Stony Creek Nature Center", "url": "https://littleguidedetroit.com/event/kids-outdoor-craft-hour-2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "MILK & MEET", "date": "May 9", "time": "1:00 PM - 1:30 PM", "location": "MSU Tollgate Farm", "url": "https://littleguidedetroit.com/event/milk-meet/2026-05-09/1/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.7165, "lon": -84.4987, "category": "outdoor"}, {"title": "Magic: the Gathering Game Day", "date": "May 9", "time": "2:00 PM - 4:00 PM", "location": "Henry Ford Centennial Library", "url": "https://littleguidedetroit.com/event/magic-the-gathering-game-day/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Drop-in Mother's Day Cards", "date": "May 9", "time": "2:00 PM - 4:00 PM", "location": "Troy Public Library", "url": "https://littleguidedetroit.com/event/drop-in-mothers-day-cards/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6064, "lon": -83.1498, "category": "outdoor"}, {"title": "Kids Safety Day", "date": "May 9", "time": "2:00 PM - 5:00 PM", "location": "Tattan Park", "url": "https://littleguidedetroit.com/event/kids-safety-day/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Owl Encounters", "date": "May 9", "time": "3:00 PM - 4:00 PM", "location": "STAGE NATURE CENTER", "url": "https://littleguidedetroit.com/event/owl-encounters/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Highland Park Fire Open House", "date": "May 9", "time": "4:30 PM - 7:00 PM", "location": "Highland Park Fire Department", "url": "https://littleguidedetroit.com/event/highland-park-fire-open-house/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5875, "lon": -83.381, "category": "free"}, {"title": "Date Night: Mother's Day Gift Making", "date": "May 9", "time": "5:30 PM - 8:30 PM", "location": "Kidcreate Studio – Wixom", "url": "https://littleguidedetroit.com/event/date-night-mothers-day-gift-making/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.5075, "lon": -83.455, "category": "outdoor"}, {"title": "Nerf Night", "date": "May 9", "time": "5:30 PM - 8:30 PM", "location": "Michigan Academy of Gymnastics (Westland)", "url": "https://littleguidedetroit.com/event/nerf-night/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3242, "lon": -83.4001, "category": "outdoor"}, {"title": "Spring Fling", "date": "May 9", "time": "6:00 PM - 8:00 PM", "location": "SUMMIT CANTON", "url": "https://littleguidedetroit.com/event/spring-fling/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3067, "lon": -83.4423, "category": "outdoor"}, {"title": "Mother and Son Dino Dig Adventure", "date": "May 9", "time": "6:00 PM - 8:00 PM", "location": "Dodge Park", "url": "https://littleguidedetroit.com/event/mother-and-son-dino-dig-adventure/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "MILK & MEET", "date": "May 9", "time": "6:00 PM - 6:30 PM", "location": "MSU Tollgate Farm", "url": "https://littleguidedetroit.com/event/milk-meet/2026-05-09/2/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.7165, "lon": -84.4987, "category": "outdoor"}, {"title": "Kids Night Out", "date": "May 9", "time": "6:30 PM - 9:30 PM", "location": "Troy Gym – TG1", "url": "https://littleguidedetroit.com/event/kids-night-out/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.6064, "lon": -83.1498, "category": "outdoor"}, {"title": "GRAND RAPIDS LANTERN FESTIVAL", "date": "May 9", "time": "7:30 PM - 11:30 PM", "location": "John Ball Zoo", "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-09/", "site": "Detroit Metro", "parsed_date": "2026-05-09", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Mystery of the Mayan Medallion", "date": "May 10", "time": "All Day", "location": "CRANBROOK SCIENCE MUSEUM", "url": "https://littleguidedetroit.com/event/mystery-of-the-mayan-medallion/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.5023, "lon": -83.2668, "category": "outdoor"}, {"title": "Royal Oak in Bloom", "date": "May 10", "time": "7:00 AM - 2:00 PM", "location": "Downtown Royal Oak", "url": "https://littleguidedetroit.com/event/royal-oak-in-bloom/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.4894, "lon": -83.1446, "category": "outdoor"}, {"title": "Mother's Day Brunch", "date": "May 10", "time": "9:00 AM - 1:30 PM", "location": "EDSEL AND ELEANOR FORD HOUSE", "url": "https://littleguidedetroit.com/event/mothers-day-brunch/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Birmingham Farmers Market", "date": "May 10", "time": "9:00 AM - 2:00 PM", "location": "Public Parking Lot 6", "url": "https://littleguidedetroit.com/event/birmingham-farmers-market/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day at Just Play", "date": "May 10", "time": "9:00 AM - 8:00 PM", "location": "Just Play", "url": "https://littleguidedetroit.com/event/mothers-day-at-just-play/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Theut's Flower Barn Tulip Festival", "date": "May 10", "time": "9:00 AM - 6:00 PM", "location": "Theut's Flower Barn", "url": "https://littleguidedetroit.com/event/theuts-flower-barn-tulip-festival/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.5157, "lon": -83.1529, "category": "festival"}, {"title": "ART BIRMINGHAM", "date": "May 10", "time": "10:00 AM - 5:00 PM", "location": "Shain Park", "url": "https://littleguidedetroit.com/event/art-birmingham/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Walk-A-Mom", "date": "May 10", "time": "10:00 AM - 4:00 PM", "location": "Stony Creek Nature Center", "url": "https://littleguidedetroit.com/event/walk-a-mom/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Brunch with the Babies", "date": "May 10", "time": "10:00 AM - 11:30 AM", "location": "Wolcott Mill Farm Center", "url": "https://littleguidedetroit.com/event/brunch-with-the-babies/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day Mini-Golf Weekend", "date": "May 10", "time": "10:00 AM - 5:00 PM", "location": "CRANBROOK ART MUSEUM", "url": "https://littleguidedetroit.com/event/mothers-day-mini-golf-weekend/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mothers Day Brunch", "date": "May 10", "time": "10:00 AM - 1:00 PM", "location": "Blake's Backyard", "url": "https://littleguidedetroit.com/event/mothers-day-brunch-2/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day Weekend Brunch", "date": "May 10", "time": "10:00 AM - 2:00 PM", "location": "Jojo's Shake Bar", "url": "https://littleguidedetroit.com/event/mothers-day-weekend-brunch/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mother's Day at Kona Grill", "date": "May 10", "time": "10:00 AM - 2:00 PM", "location": "Kona Grill", "url": "https://littleguidedetroit.com/event/mothers-day-at-kona-grill/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day in Nature", "date": "May 10", "time": "10:00 AM - 5:00 PM", "location": "Howell Nature Center", "url": "https://littleguidedetroit.com/event/mothers-day-in-nature/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.6176, "lon": -83.7942, "category": "nature"}, {"title": "Mother's Day Brunch", "date": "May 10", "time": "10:00 AM - 3:00 PM", "location": "The Department at Hudson's", "url": "https://littleguidedetroit.com/event/mothers-day-brunch-3/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "sport"}, {"title": "Mothers FREE Admission at Cranbrook", "date": "May 10", "time": "12:00 PM - 4:00 PM", "location": "Cranbrook Institute of Science", "url": "https://littleguidedetroit.com/event/mothers-free-admission-at-cranbrook/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "free"}, {"title": "Weekend Hayrides", "date": "May 10", "time": "12:00 PM - 4:00 PM", "location": "KENSINGTON METRO PARK FARM CENTER", "url": "https://littleguidedetroit.com/event/weekend-hayrides-2/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.4914, "lon": -83.0936, "category": "outdoor"}, {"title": "Festa Della Mamma", "date": "May 10", "time": "12:00 PM - 7:30 PM", "location": "Cafe Cortina", "url": "https://littleguidedetroit.com/event/festa-della-mamma/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Lansing Spring Carnival", "date": "May 10", "time": "1:00 PM - 9:00 PM", "location": "Abundant Grace Faith Church", "url": "https://littleguidedetroit.com/event/lansing-spring-carnival/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.7284, "lon": -84.5454, "category": "festival"}, {"title": "Feeding Time in the Nature Center", "date": "May 10", "time": "1:00 PM - 2:00 PM", "location": "Stony Creek Nature Center", "url": "https://littleguidedetroit.com/event/feeding-time-in-the-nature-center/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "nature"}, {"title": "Let's Dance! Detroit Ballroom Dance Class for Kids and Parents", "date": "May 10", "time": "1:30 PM - 3:00 PM", "location": "DETROIT PUBLIC LIBRARY – Main", "url": "https://littleguidedetroit.com/event/lets-dance-detroit-ballroom-dance-class-for-kids-and-parents/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "educational"}, {"title": "Mother's Day Meander", "date": "May 10", "time": "2:00 PM - 4:00 PM", "location": "Lake Erie Marshlands Museum", "url": "https://littleguidedetroit.com/event/mothers-day-meander/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "Mother's Day Tea", "date": "May 10", "time": "2:00 PM - 4:00 PM", "location": "St. John's Resort", "url": "https://littleguidedetroit.com/event/mothers-day-tea-2/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.3314, "lon": -83.0458, "category": "outdoor"}, {"title": "GRAND RAPIDS LANTERN FESTIVAL", "date": "May 10", "time": "7:30 PM - 11:30 PM", "location": "John Ball Zoo", "url": "https://littleguidedetroit.com/event/grand-rapids-lantern-festival/2026-05-10/", "site": "Detroit Metro", "parsed_date": "2026-05-10", "lat": 42.9626, "lon": -85.6669, "category": "festival"}, {"title": "Sensory-Friendly Hours at the Zoo", "date": "May 11", "time": "9:00 AM - 12:00 PM", "location": "Detroit Zoo", "url": "https://littleguidedetroit.com/event/sensory-friendly-hours-at-the-zoo/2026-05-11/", "site": "Detroit Metro", "parsed_date": "2026-05-11", "lat": 42.4753, "lon": -83.3901, "category": "nature"}, {"title": "\"The Who's Tommy\"", "date": "Dates vary between May 8, 2026 - May 10, 2026", "time": "All day", "location": "Interlochen Center for the Arts", "url": "https://www.traversecity.com/event-detail/the-who%e2%80%99s-tommy/23867/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.606, "lon": -85.628, "category": "outdoor"}, {"title": "Leelanau Vintner's Celebration", "date": "May 9, 2026", "time": "All day", "location": "Showroom", "url": "https://www.traversecity.com/event-detail/leelanau-vintners-celebration/25544/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "festival"}, {"title": "Live Music with Andy McQuillen at TC Whiskey -- The Stillhouse", "date": "May 9, 2026", "time": "All day", "location": "Traverse City Whiskey Co.", "url": "https://www.traversecity.com/event-detail/live-music-with-andy-mcquillen-at-tc-whiskey-the-stillhouse/25665/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Old Town Playhouse presents - Dueling Pianos", "date": "May 9, 2026", "time": "All day", "location": "Hotel Indigo", "url": "https://www.traversecity.com/event-detail/old-town-playhouse-presents-dueling-pianos/25144/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Tuscan Bistro Nights", "date": "Dates vary between May 6, 2026 - May 9, 2026", "time": "All day", "location": "The Grille at Grand Traverse Resort and Spa", "url": "https://www.traversecity.com/event-detail/tuscan-bistro-nights/25603/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Traverse City Uncorked 2026", "date": "Recurring daily until May 10, 2026", "time": "All day", "location": "Traverse Wine Coast Wineries", "url": "https://www.traversecity.com/event-detail/traverse-city-uncorked-2026/23740/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.78, "lon": -85.59, "category": "outdoor"}, {"title": "2026 Organic Plant Sale", "date": "Recurring daily until May 31, 2026", "time": "All day", "location": "Lakeview Hill Farm", "url": "https://www.traversecity.com/event-detail/2026-organic-plant-sale/25861/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Cosmo St. Charles is Dead and Someone in this Room Killed Him", "date": "Dates vary between May 8, 2026 - May 10, 2026", "time": "All day", "location": "Old Town Playhouse", "url": "https://www.traversecity.com/event-detail/cosmo-st-charles-is-dead-and-someone-in-this-room-killed-him/25529/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Crystal Rush Mountain Bike Race", "date": "May 9, 2026", "time": "All day", "location": "Crystal Mountain", "url": "https://www.traversecity.com/event-detail/crystal-rush-mountain-bike-race/25699/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Free Family Fun: Make & Take Citronella Plants", "date": "May 9, 2026", "time": "All day", "location": "The Botanic Garden at Historic Barns Park", "url": "https://www.traversecity.com/event-detail/free-family-fun%3a-make-%26-take-citronella-plants/25827/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "free"}, {"title": "Live At The Bay: Joshua Davis", "date": "May 9, 2026", "time": "All day", "location": "The Bay Community Theater", "url": "https://www.traversecity.com/event-detail/live-at-the-bay%3a-joshua-davis/25828/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Live Music Ft. Tower of Bauer", "date": "May 9, 2026", "time": "All day", "location": "Waterfall", "url": "https://www.traversecity.com/event-detail/live-music-ft-tower-of-bauer/25745/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Live Music at Iron Fish Distillery", "date": "Recurring weekly on Friday, Saturday", "time": "All day", "location": "Iron Fish Distillery", "url": "https://www.traversecity.com/event-detail/live-music-at-iron-fish-distillery/24957/", "site": "Traverse City", "parsed_date": "unknown", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Mother's Day on the Farm", "date": "May 9, 2026", "time": "All day", "location": "Moondance Flower Farm", "url": "https://www.traversecity.com/event-detail/mothers-day-on-the-farm/25698/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Ramp Fest", "date": "May 9, 2026", "time": "All day", "location": "The Foxglove Farm", "url": "https://www.traversecity.com/event-detail/ramp-fest/25772/", "site": "Traverse City", "parsed_date": "2026-05-09", "lat": 44.7631, "lon": -85.6206, "category": "outdoor"}, {"title": "Grand Haven Farmers Market", "date": "May 9, 2026", "time": "8:00 am - 1:00 pm", "location": "Chinook Pier, 301 N. Harbor Dr., Grand Haven", "url": "https://visitgrandhaven.com/events/grand-haven-farmers-market-2/grand-haven-farmers-market-2026-05-09/", "site": "Grand Haven", "parsed_date": "2026-05-09", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Tote Club Days", "date": "May 9, 2026", "time": "10:00 am - 8:00 pm", "location": "Downtown Grand Haven, 101 Washington Avenue", "url": "https://visitgrandhaven.com/events/tote-club-days-2/", "site": "Grand Haven", "parsed_date": "2026-05-09", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Mother's Day Luncheon", "date": "May 9, 2026", "time": "12:00 pm - 2:00 pm", "location": "Coopersville Farm Museum, 375 Main Street, Coopersville", "url": "https://visitgrandhaven.com/events/mothers-day-luncheon/", "site": "Grand Haven", "parsed_date": "2026-05-09", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Musical Fountain Testing Nights", "date": "May 15, 2026", "time": "9:30 pm - 11:00 pm", "location": "Lynne Sherwood Waterfront Stadium, 1 N. Harbor Drive, Grand Haven", "url": "https://visitgrandhaven.com/events/musical-fountain-testing-nights/", "site": "Grand Haven", "parsed_date": "2026-05-15", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "The Kite Festival at Grand Haven", "date": "May 16, 2026", "time": "10:00 am - 5:00 pm", "location": "Grand Haven State Park", "url": "https://visitgrandhaven.com/events/the-kite-festival-at-grand-haven/", "site": "Grand Haven", "parsed_date": "2026-05-16", "lat": 43.065, "lon": -86.227, "category": "festival"}, {"title": "1st Annual Club Crawl Poker Run", "date": "May 16, 2026", "time": "2:00 pm - 7:00 pm", "location": "American Legion Post #28, 700 S Harbor Dr, Grand Haven", "url": "https://visitgrandhaven.com/events/1st-annual-club-crawl/", "site": "Grand Haven", "parsed_date": "2026-05-16", "lat": 43.065, "lon": -86.227, "category": "sport"}, {"title": "Armed Services Marathon", "date": "May 17, 2026", "time": "7:00 am - 2:00 pm", "location": "Grand Haven High School Football Grounds, 17001 Ferris St, Grand Haven", "url": "https://visitgrandhaven.com/events/armed-services-marathon/", "site": "Grand Haven", "parsed_date": "2026-05-17", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Blood Drive - Spring Lake", "date": "May 21, 2026", "time": "1:00 pm - 5:30 pm", "location": "Spring Lake Presbyterian Church, 760 E. Savidge Street, Spring Lake", "url": "https://visitgrandhaven.com/events/blood-drive-spring-lake/", "site": "Grand Haven", "parsed_date": "2026-05-21", "lat": 43.065, "lon": -86.227, "category": "outdoor"}, {"title": "Battle of the Creek Bands", "date": "May 15", "time": "All day", "location": "New Holland Brewing", "url": "https://www.battlecreekvisitors.org/event/battle-of-the-creek-bands/1166/", "site": "Battle Creek", "parsed_date": "2026-05-15", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Spring into the Arts", "date": "May 15", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/spring-into-the-arts/1204/", "site": "Battle Creek", "parsed_date": "2026-05-15", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Memorial Day Parade", "date": "May 25", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/memorial-day-parade/1250/", "site": "Battle Creek", "parsed_date": "2026-05-25", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Battle Creek Community Spelling Bee", "date": "Jun 06", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/battle-creek-community-spelling-bee/1201/", "site": "Battle Creek", "parsed_date": "2026-06-06", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "TrailBlaze Family Adventure Day", "date": "Jun 06", "time": "All day", "location": "Calhoun County Trailway", "url": "https://www.battlecreekvisitors.org/event/trailblaze-family-adventure-day/1180/", "site": "Battle Creek", "parsed_date": "2026-06-06", "lat": 42.3211, "lon": -85.1797, "category": "nature"}, {"title": "Corks & Crafts Tasting Event", "date": "May 09", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/corks-%26-crafts-tasting-event/1130/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Corks & Crafts Tasting Event", "date": "May 09", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/corks-%26-crafts-tasting-event/1169/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Marshall Museums Dollar Day", "date": "May 09", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/marshall-museums-dollar-day/1245/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "educational"}, {"title": "Mother's Day at Binder Park Zoo", "date": "May 10", "time": "All day", "location": "Binder Park Zoo", "url": "https://www.battlecreekvisitors.org/event/mother%e2%80%99s-day-at-binder-park-zoo/1188/", "site": "Battle Creek", "parsed_date": "2026-05-10", "lat": 42.3211, "lon": -85.1797, "category": "nature"}, {"title": "Wednesday Night Cruise-ins", "date": "May 13", "time": "All day", "location": "", "url": "https://www.battlecreekvisitors.org/event/wednesday-night-cruise-ins/1129/", "site": "Battle Creek", "parsed_date": "2026-05-13", "lat": 42.3211, "lon": -85.1797, "category": "outdoor"}, {"title": "Brooks Nature Area: World Migratory Bird Hike Day", "date": "May 09", "time": "All day", "location": "Brooks Nature Area", "url": "https://www.battlecreekvisitors.org/event/brooks-nature-area%3a-world-migratory-bird-hike-day/1246/", "site": "Battle Creek", "parsed_date": "2026-05-09", "lat": 42.3211, "lon": -85.1797, "category": "nature"}, {"title": "Chamber 101", "date": "2026-05-13", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/chamber-101-5-13/", "site": "Grand Rapids", "parsed_date": "2026-05-13", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Create Great Leaders Annual Party", "date": "2026-05-15", "time": "All day", "location": "Midtown GR, 123 Ionia Ave. SW", "url": "https://grandrapids.org/event/create-great-leaders-annual-party-5-15/", "site": "Grand Rapids", "parsed_date": "2026-05-15", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Grand Rapids Candidate Forum", "date": "2026-05-18", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/grand-rapids-candidate-forum/", "site": "Grand Rapids", "parsed_date": "2026-05-18", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Talent & Human Resources Workshop: Inclusive Collaboration", "date": "2026-05-19", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/talent-human-resources-workshop-5-19/", "site": "Grand Rapids", "parsed_date": "2026-05-19", "lat": 42.9634, "lon": -85.6681, "category": "educational"}, {"title": "Business Exchange Luncheon", "date": "2026-05-21", "time": "All day", "location": "The Rutledge, 120 Ionia Ave SW Suite 101", "url": "https://grandrapids.org/event/business-exchange-luncheon-5-21/", "site": "Grand Rapids", "parsed_date": "2026-05-21", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Chamber Happy Hour", "date": "2026-05-27", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/chamber-happy-hour-5-27/", "site": "Grand Rapids", "parsed_date": "2026-05-27", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "West Michigan CEO Summit", "date": "2026-06-02", "time": "All day", "location": "JW Marriott Grand Rapids: International Ballroom, 235 Louis St NW", "url": "https://grandrapids.org/event/west-michigan-ceo-summit-2026/", "site": "Grand Rapids", "parsed_date": "2026-06-02", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "First Friday Update", "date": "2026-06-05", "time": "All day", "location": "Zoom Webinar", "url": "https://grandrapids.org/event/first-friday-update-6-5/", "site": "Grand Rapids", "parsed_date": "2026-06-05", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Business Exchange Luncheon", "date": "2026-06-18", "time": "All day", "location": "Sunnybrook Country Club, 624 Port Sheldon Rd", "url": "https://grandrapids.org/event/business-exchange-luncheon-6-18/", "site": "Grand Rapids", "parsed_date": "2026-06-18", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Ending Homelessness: A Celebration of Impact", "date": "2026-06-18", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/ending-homelessness-a-celebration-of-impact/", "site": "Grand Rapids", "parsed_date": "2026-06-18", "lat": 42.9634, "lon": -85.6681, "category": "festival"}, {"title": "Making It Work: The Essentials for Professional Women", "date": "2026-06-23", "time": "All day", "location": "Watermark Country Club, 1600 Galbraith Ave SE", "url": "https://grandrapids.org/event/athena-leadership-forum-6-23/", "site": "Grand Rapids", "parsed_date": "2026-06-23", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}, {"title": "Chamber Happy Hour", "date": "2026-06-24", "time": "All day", "location": "Grand Rapids Chamber, 250 Monroe Ave", "url": "https://grandrapids.org/event/chamber-happy-hour-6-24/", "site": "Grand Rapids", "parsed_date": "2026-06-24", "lat": 42.9634, "lon": -85.6681, "category": "outdoor"}];    // Category color palette — cycles through nice colors for unknown categories
+    const colorPalette = [
+        '#22c55e', '#f97316', '#3b82f6', '#10b981', '#a855f7',
+        '#eab308', '#06b6d4', '#ec4899', '#84cc16', '#f43f5e'
+    ];
+
+    // Known category defaults (emoji + display label) — new categories get auto-generated
+    const categoryDefaults = {
+        outdoor:     { emoji: '🌳', label: 'Outdoor' },
+        festival:    { emoji: '🎪', label: 'Festival' },
+        library:     { emoji: '📚', label: 'Library' },
+        nature:      { emoji: '🦎', label: 'Nature' },
+        educational: { emoji: '🎓', label: 'Educational' },
+        free:        { emoji: '🎉', label: 'Free Entry' },
+        starwars:    { emoji: '⚔️', label: 'Star Wars' },
+        sport:       { emoji: '🏊', label: 'Sports' }
+    };
+
+    // Derive categories from actual events
+    const categories = [...new Set(events.map(e => e.category || 'Other'))].sort();
+    const categoryColors = {};
+    const categoryEmojis = {};
+    const categoryLabels = {};
+    categories.forEach((cat, i) => {
+        categoryColors[cat] = colorPalette[i % colorPalette.length];
+        const def = categoryDefaults[cat];
+        if (def) {
+            categoryEmojis[cat] = def.emoji;
+            categoryLabels[cat] = def.label;
+        } else {
+            categoryEmojis[cat] = '📌';
+            categoryLabels[cat] = cat.charAt(0).toUpperCase() + cat.slice(1);
+        }
+    });
+
+    // Count events per category
+    const catCounts = {};
+    events.forEach(e => {
+        const cat = e.category || 'Other';
+        catCounts[cat] = (catCounts[cat] || 0) + 1;
+    });
+
+    // Build category filter buttons dynamically with counts
+    const catFilterBar = document.getElementById('category-filters');
+    catFilterBar.innerHTML = '<button class="filter-btn active" data-filter="all"><span class="emoji">📋</span>All <span class="filter-count">(' + events.length + ')</span></button>' +
+        categories.map(cat =>
+            `<button class="filter-btn" data-filter="${cat}"><span class="emoji">${categoryEmojis[cat]}</span>${categoryLabels[cat]} <span class="filter-count">(${catCounts[cat] || 0})</span></button>`
+        ).join('');
+
+    // Reusable tile layer reference
+    const baseTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19
+    });
+
+    // Initialize map centered on Metro Detroit
+    const map = L.map('map', {
+        zoomControl: true
+    }).setView([43.5, -84.5], 7);
+
+    baseTile.addTo(map);
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+    const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('map-theme', theme);
+        baseTile.setUrl(theme === 'light' ? lightTiles : darkTiles);
+    }
+
+    const savedTheme = localStorage.getItem('map-theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        setTheme('light');
+    }
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+        if (!localStorage.getItem('map-theme')) {
+            setTheme(e.matches ? 'light' : 'dark');
+        }
+    });
+
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Create custom icon
+    function createIcon(category) {
+        const color = categoryColors[category] || '#60a5fa';
+        return L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="
+                width: 14px; height: 14px;
+                background: ${color};
+                border: 2px solid #fff;
+                border-radius: 50%;
+                box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+            "></div>`,
+            iconSize: [14, 14],
+            iconAnchor: [7, 7],
+            popupAnchor: [0, -10]
+        });
+    }
+
+    // Store markers
+    const markers = [];
+    const sidebar = document.getElementById('sidebar');
+    const eventList = document.getElementById('event-list');
+
+    // Add events to map
+    events.forEach((event, idx) => {
+        if (!event.lat || !event.lon) return;
+
+        const marker = L.marker([event.lat, event.lon], {
+            icon: createIcon(event.category)
+        }).addTo(map);
+
+        const popupContent = `
+            <div class="popup-title">${event.title}</div>
+            <div class="popup-detail">📍 ${event.location}</div>
+            <div class="popup-detail">⏰ ${event.time}</div>
+            <div class="popup-detail">📅 ${event.date}</div>
+            <a class="popup-link" href="${event.url}" target="_blank">Learn More →</a>
+        `;
+
+        marker.bindPopup(popupContent, { maxWidth: 280 });
+        markers.push({ marker, event, idx });
+
+        // Add to sidebar
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.dataset.category = event.category;
+        card.dataset.site = event.site || '';
+        card.innerHTML = `
+            <div class="event-title">${categoryEmojis[event.category] || '📌'} ${event.title}</div>
+            <div class="event-location">📍 ${event.location}</div>
+            <div class="event-time">⏰ ${event.time} &bull; 📅 ${event.date}</div>
+            <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
+                <span class="event-tag tag-${event.category}">${event.category}</span>
+                <span class="event-tag tag-site" style="background:rgba(16,185,129,0.15);color:#34d399;font-size:0.6rem">${event.site || ''}</span>
+            </div>
+        `;
+        card.dataset.eventDate = event.date;
+        card.addEventListener('click', () => {
+            map.flyTo([event.lat, event.lon], 14, { duration: 0.8 });
+            marker.openPopup();
+        });
+        eventList.appendChild(card);
+    });
+
+    // Fit map to show all markers
+    const group = L.featureGroup(markers.map(m => m.marker));
+    map.fitBounds(group.getBounds().pad(0.08));
+
+    // Category filter functionality
+    let activeFilter = 'all';
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            activeFilter = filter;
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let count = 0;
+            markers.forEach(({ marker, event }) => {
+                const show = filter === 'all' || event.category === filter;
+                if (show) {
+                    marker.addTo(map);
+                    count++;
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+
+            document.querySelectorAll('.event-card').forEach(card => {
+                const show = filter === 'all' || card.dataset.category === filter;
+                const showSite = activeSite === 'all' || card.dataset.site === activeSite;
+                card.style.display = (show && showSite) ? 'block' : 'none';
+            });
+
+            document.getElementById('count').textContent = `${count} event${count !== 1 ? 's' : ''}`;
+
+            if (count > 0) {
+                const visible = markers.filter(({ marker, event }) =>
+                    filter === 'all' || event.category === filter
+                );
+                if (visible.length > 1) {
+                    const bounds = L.featureGroup(visible.map(m => m.marker)).getBounds();
+                    map.fitBounds(bounds.pad(0.1));
+                }
+            }
+        });
+    });
+
+
+    // Site filter functionality
+    let activeSite = 'all';
+    const siteBtns = document.querySelectorAll('.site-btn');
+    siteBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const site = btn.dataset.site;
+            activeSite = site;
+
+            siteBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let count = 0;
+            markers.forEach(({ marker, event }) => {
+                const show = site === 'all' || (event.site && event.site === site);
+                if (show) {
+                    marker.addTo(map);
+                    count++;
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+
+            document.querySelectorAll('.event-card').forEach(card => {
+                const showCat = activeFilter === 'all' || card.dataset.category === activeFilter;
+                const showSite = site === 'all' || card.dataset.site === site;
+                card.style.display = (showCat && showSite) ? 'block' : 'none';
+            });
+
+            document.getElementById('count').textContent = `${count} event${count !== 1 ? 's' : ''}`;
+
+            if (count > 0) {
+                const visible = markers.filter(({ marker, event }) => {
+                    const matchCat = activeFilter === 'all' || event.category === activeFilter;
+                    const matchSite = site === 'all' || event.site === site;
+                    return matchCat && matchSite;
+                });
+                if (visible.length > 1) {
+                    const bounds = L.featureGroup(visible.map(m => m.marker)).getBounds();
+                    map.fitBounds(bounds.pad(0.1));
+                }
+            }
+        });
+    });
+
+
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', applyFilters);
+
+    // Date parser — handles "May 7, 2026", "May 7", "07 MAY", "MAY 7"
+    function parseDate(dateStr) {
+        const months = {
+            'january': 0, 'jan': 0, 'february': 1, 'feb': 1, 'march': 2, 'mar': 2,
+            'april': 3, 'apr': 3, 'may': 4, 'june': 5, 'jun': 5,
+            'july': 6, 'jul': 6, 'august': 7, 'aug': 7,
+            'september': 8, 'sep': 8, 'october': 9, 'oct': 9,
+            'november': 10, 'nov': 10, 'december': 11, 'dec': 11
+        };
+        const year = calendarYear; // from page subtitle, fallback set below
+        const weekdays = {
+            'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday': 3,
+            'thursday': 4, 'friday': 5, 'saturday': 6
+        };
+        // "May 7, 2026"
+        let match = dateStr.match(/(\w+)\s+(\d+),?\s*(\d{4})/);
+        if (match) return new Date(parseInt(match[3]), months[match[1].toLowerCase()], parseInt(match[2]));
+        // "May 7"
+        match = dateStr.match(/(\w+)\s+(\d+)/);
+        if (match && match[1].toLowerCase() in months) return new Date(year, months[match[1].toLowerCase()], parseInt(match[2]));
+        // "07 MAY"
+        match = dateStr.match(/(\d+)\s+(\w+)/);
+        if (match && match[2].toLowerCase() in months) return new Date(year, months[match[2].toLowerCase()], parseInt(match[1]));
+        return null;
+    }
+
+    // Recurring date parser — returns { type, weekdays?, dates?, until? }
+    function parseRecurring(dateStr) {
+        const lower = dateStr.toLowerCase();
+        // "Recurring weekly on Sunday, Thursday" or "Recurring weekly on Thursday"
+        let match = lower.match(/weekly\s+on\s+([\w\s,]+)/);
+        if (match) {
+            const weekdays = match[1].split(',').map(w => w.trim());
+            return { type: 'weekly', weekdays };
+        }
+        // "Recurring daily until May 10, 2026"
+        match = lower.match(/daily\s+until\s+(.+)/);
+        if (match) {
+            const until = parseDate(match[1].trim());
+            if (until) return { type: 'daily', until };
+        }
+        // "Dates vary between May 6, 2026 - May 9, 2026"
+        match = lower.match(/(?:between|from)\s+(.+?)\s*[-–]\s*(.+)/);
+        if (match) {
+            const start = parseDate(match[1].trim());
+            const end = parseDate(match[2].trim());
+            if (start && end) return { type: 'range', start, end };
+        }
+        return null;
+    }
+
+    // Generate calendar dates for a recurring event within a given month/year
+    function datesForRecurringInMonth(recurring, year, month) {
+        const dates = new Set();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        if (recurring.type === 'weekly') {
+            const weekdayMap = {
+                'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday': 3,
+                'thursday': 4, 'friday': 5, 'saturday': 6
+            };
+            for (let day = 1; day <= daysInMonth; day++) {
+                const d = new Date(year, month, day);
+                if (recurring.weekdays.some(w => weekdayMap[w] === d.getDay())) {
+                    const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    dates.add(key);
+                }
+            }
+        } else if (recurring.type === 'daily') {
+            const until = recurring.until;
+            for (let day = 1; day <= daysInMonth; day++) {
+                const d = new Date(year, month, day);
+                if (d <= until) {
+                    const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    dates.add(key);
+                }
+            }
+        } else if (recurring.type === 'range') {
+            for (let day = 1; day <= daysInMonth; day++) {
+                const d = new Date(year, month, day);
+                if (d >= recurring.start && d <= recurring.end) {
+                    const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    dates.add(key);
+                }
+            }
+        }
+        return dates;
+    }
+
+    // Check if a recurring event is active on a given Date
+    function recurringActiveOn(recurring, date) {
+        const weekdayMap = {
+            'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday': 3,
+            'thursday': 4, 'friday': 5, 'saturday': 6
+        };
+        if (recurring.type === 'weekly') {
+            return recurring.weekdays.some(w => weekdayMap[w] === date.getDay());
+        } else if (recurring.type === 'daily') {
+            return date <= recurring.until;
+        } else if (recurring.type === 'range') {
+            return date >= recurring.start && date <= recurring.end;
+        }
+        return false;
+    }
+
+    // Flatpickr calendar — single date mode
+    const calendarInput = document.getElementById('calendar-input');
+    let selectedDate = null;
+
+    // Enrich events with parsed date info
+    const eventDates = new Set();
+    // Extract calendar month/year from page subtitle
+    const subtitleEl = document.querySelector('.subtitle');
+    const dateMatchStr = subtitleEl ? subtitleEl.textContent.match(/(\w+)\s+(\d{4})/) : null;
+    const monthNames = { 'january': 0, 'jan': 0, 'february': 1, 'feb': 1, 'march': 2, 'mar': 2, 'april': 3, 'apr': 3, 'may': 4, 'june': 5, 'jun': 5, 'july': 6, 'jul': 6, 'august': 7, 'aug': 7, 'september': 8, 'sep': 8, 'october': 9, 'oct': 9, 'november': 10, 'nov': 10, 'december': 11, 'dec': 11 };
+    const calendarYear = dateMatchStr ? parseInt(dateMatchStr[2]) : 2026;
+    const calendarMonth = dateMatchStr ? monthNames[dateMatchStr[1].toLowerCase()] : 4;
+
+    events.forEach(ev => {
+        // Parse fixed date
+        const d = parseDate(ev.date);
+        if (d) {
+            ev._date = d;
+            const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            eventDates.add(key);
+        }
+
+        // Parse recurring date
+        const recurring = parseRecurring(ev.date);
+        if (recurring) {
+            ev._recurring = recurring;
+            // Add all matching dates in the current calendar month
+            const recurringDates = datesForRecurringInMonth(recurring, calendarYear, calendarMonth);
+            recurringDates.forEach(key => eventDates.add(key));
+        }
+    });
+
+    flatpickr(calendarInput, {
+        mode: "single",
+        dateFormat: "Y-m-d",
+        onDayCreate: function(dObj, dStr, fp, dayElem) {
+            if (eventDates.has(dStr)) {
+                dayElem.classList.add('has-event');
+            }
+        },
+        onChange: function(chosenDates, dateStr, instance) {
+            selectedDate = chosenDates.length > 0 ? chosenDates[0] : null;
+            applyFilters();
+        },
+        onClear: function(instance) {
+            selectedDate = null;
+            applyFilters();
+        }
+    });
+
+    // Initialize count badge on page load
+    applyFilters();
+
+    // Combined filter function
+    function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        markers.forEach(({ marker, event, idx }) => {
+            let show = true;
+
+            // Category filter
+            if (activeFilter !== 'all' && event.category !== activeFilter) {
+                show = false;
+            }
+
+            // Site filter
+            if (activeSite !== 'all' && event.site !== activeSite) {
+                show = false;
+            }
+
+            // Search filter
+            if (query) {
+                const searchable = `${event.title} ${event.location} ${event.category} ${event.date} ${event.site || ''}`.toLowerCase();
+                if (!searchable.includes(query)) {
+                    show = false;
+                }
+            }
+
+            // Date filter — single date
+            if (selectedDate) {
+                const sd = selectedDate.getFullYear();
+                const sm = selectedDate.getMonth();
+                const sday = selectedDate.getDate();
+                let dateMatch = false;
+                // Check fixed date
+                if (event._date) {
+                    if (event._date.getFullYear() === sd && event._date.getMonth() === sm && event._date.getDate() === sday) {
+                        dateMatch = true;
+                    }
+                }
+                // Check recurring
+                if (!dateMatch && event._recurring) {
+                    const checkDate = new Date(sd, sm, sday);
+                    if (recurringActiveOn(event._recurring, checkDate)) {
+                        dateMatch = true;
+                    }
+                }
+                if (!dateMatch) {
+                    show = false;
+                }
+            }
+
+            if (show) {
+                marker.addTo(map);
+            } else {
+                map.removeLayer(marker);
+            }
+        });
+
+        // Update sidebar cards
+        document.querySelectorAll('.event-card').forEach(card => {
+            let show = true;
+            if (activeFilter !== 'all' && card.dataset.category !== activeFilter) show = false;
+            if (activeSite !== 'all' && card.dataset.site !== activeSite) show = false;
+            
+            if (query) {
+                const text = card.textContent.toLowerCase();
+                if (!text.includes(query)) show = false;
+            }
+            
+            if (selectedDate) {
+                const sd = selectedDate.getFullYear();
+                const sm = selectedDate.getMonth();
+                const sday = selectedDate.getDate();
+                const eventDate = parseDate(card.dataset.eventDate);
+                let dateMatch = false;
+                // Check fixed date
+                if (eventDate) {
+                    if (eventDate.getFullYear() === sd && eventDate.getMonth() === sm && eventDate.getDate() === sday) dateMatch = true;
+                }
+                // Check recurring
+                if (!dateMatch) {
+                    const recurring = parseRecurring(card.dataset.eventDate);
+                    if (recurring) {
+                        const checkDate = new Date(sd, sm, sday);
+                        if (recurringActiveOn(recurring, checkDate)) dateMatch = true;
+                    }
+                }
+                if (!dateMatch) show = false;
+            }
+
+            card.style.display = show ? 'block' : 'none';
+        });
+
+        // Update count
+        const visible = markers.filter(({ event }) => {
+            let show = true;
+            if (activeFilter !== 'all' && event.category !== activeFilter) show = false;
+            if (activeSite !== 'all' && event.site !== activeSite) show = false;
+            if (query) {
+                const searchable = `${event.title} ${event.location} ${event.category} ${event.date} ${event.site || ''}`.toLowerCase();
+                if (!searchable.includes(query)) show = false;
+            }
+            if (selectedDate) {
+                const eventDate = parseDate(event.date);
+                if (eventDate) {
+                    const sd = selectedDate.getFullYear();
+                    const sm = selectedDate.getMonth();
+                    const sday = selectedDate.getDate();
+                    if (!(eventDate.getFullYear() === sd && eventDate.getMonth() === sm && eventDate.getDate() === sday)) show = false;
+                }
+            }
+            return show;
+        });
+        
+        const count = visible.length;
+        document.getElementById('count').textContent = `${count} event${count !== 1 ? 's' : ''}`;
+
+        // Update category filter counts dynamically
+        document.querySelectorAll('#category-filters .filter-btn').forEach(btn => {
+            const filter = btn.dataset.filter;
+            const catCount = filter === 'all' ? count : visible.filter(({ event }) => event.category === filter).length;
+            const countEl = btn.querySelector('.filter-count');
+            if (countEl) countEl.textContent = `(${catCount})`;
+        });
+
+        if (count > 1) {
+            const bounds = L.featureGroup(visible.map(m => m.marker)).getBounds();
+            map.fitBounds(bounds.pad(0.1));
+        }
+    }
+
+    // Dynamic legend based on actual event categories
+    const legend = L.control({ position: 'bottomleft', className: 'legend-control' });
+    legend.onAdd = function() {
+        const div = L.DomUtil.create('div', 'legend');
+        const catCounts = {};
+        events.forEach(e => {
+            catCounts[e.category] = (catCounts[e.category] || 0) + 1;
+        });
+        let html = '<div class="legend-title">Categories</div>';
+        // Sort by count descending
+        Object.entries(catCounts)
+            .sort((a, b) => b[1] - a[1])
+            .forEach(([cat, count]) => {
+                const color = categoryColors[cat] || '#60a5fa';
+                const label = categoryLabels[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+                html += `<div class="legend-item"><div class="legend-dot" style="background:${color}"></div>${label} (${count})</div>`;
+            });
+        div.innerHTML = html;
+        return div;
+    };
+    legend.addTo(map);
+    </script>
+</body>
+</html>
