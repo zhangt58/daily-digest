@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API &bull; 2026-05-14</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://www.anthropic.com/news/claude-for-small-business" target="_blank">Claude for Small Business</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 280</span>
+                <span class="comments">💬 204</span>
+                <span class="by">👤 neilfrndes</span>
+            </div>
+            <div class="summary"><p>We're launching Claude for Small Business—a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on—to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.S. GDP and employ nearly half the private-sector workforce, but their adoption of AI has lagged behind larger...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.anthropic.com/news/claude-for-small-business" target="_blank">https://www.anthropic.com/news/claude-for-small-business</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="http://www.scorch2000.com/web/" target="_blank">Scorched Earth 2000 – Web</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 275</span>
+                <span class="comments">💬 100</span>
+                <span class="by">👤 meshko</span>
+            </div>
+            <div class="summary"><p>Scorched Earth 2000 is a browser-based multiplayer tank warfare game, a beloved classic from the late 1990s now ported to HTML. Players command tanks on a destructible 2D battlefield, taking turns launching projectiles at opponents while accounting for wind and terrain. The web version lets you create or join multiplayer lobbies directly from your browser — no download required.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="http://www.scorch2000.com/web/" target="_blank">http://www.scorch2000.com/web/</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://www.xda-developers.com/linux-gaming-is-getting-faster-because-windows-apis-are-becoming-linux-kernel-features/" target="_blank">Linux gaming is faster because Windows APIs are becoming Linux kernel features</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 759</span>
+                <span class="comments">💬 490</span>
+                <span class="by">👤 haunter</span>
+            </div>
+            <div class="summary"><p>This article explains how Linux gaming performance has been steadily closing the gap with Windows, largely because key Windows APIs are being upstreamed into the Linux kernel itself. Rather than relying solely on translation layers like Proton or DXVK, Linux is gaining native support for Windows graphics and compute APIs directly in the kernel. This structural shift means Windows games can run on Linux with fewer abstraction layers, reducing overhead and improving frame rates.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.xda-developers.com/linux-gaming-is-getting-faster-because-windows-apis-are-becoming-linux-kernel-features/" target="_blank">https://www.xda-developers.com/linux-gaming-is-getting-faster-because-windows...</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://numa.rs/blog/posts/odoh-anonymous-dns-without-an-account.html" target="_blank">Show HN: Running the second public ODoH relay</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 4</span>
+                <span class="comments">💬 0</span>
+                <span class="by">👤 rdme</span>
+            </div>
+            <div class="summary"><p>Anonymous DNS without an account: shipping ODoH client + relay in one Rust binary If you run Pi-hole, AdGuard Home, or any forwarding resolver, every one of your queries goes through one operator who sees both your IP address and the question. If you switch to a recursive resolver like Unbound, your IP gets exposed to every authoritative nameserver instead - `.com` learns you exist, `google.com` learns you exist, and so does every CDN edge in...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://numa.rs/blog/posts/odoh-anonymous-dns-without-an-account.html" target="_blank">https://numa.rs/blog/posts/odoh-anonymous-dns-without-an-account.html</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://fredchan.org/blog/locality-domains-guide/" target="_blank">Setting up a free *.city.state.us locality domain (2025)</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 567</span>
+                <span class="comments">💬 176</span>
+                <span class="by">👤 speckx</span>
+            </div>
+            <div class="summary"><p>In the US, can get a domain name like `somename.city.state.us` for free. If your town has its own domain, you can get nameservers from Amazon Lightsail, send the _Interim .US Domain Template_ to the delegated manager for your locality to register one, then point DNS entries at your webhost. A locality domain is a domain name that’s associated with a location in the United States, such as `frederick.seattle.wa.us` (which currently redirects to...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://fredchan.org/blog/locality-domains-guide/" target="_blank">https://fredchan.org/blog/locality-domains-guide/</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://classic7.lol/" target="_blank">Classic 7 is a Windows 10 LTSC mod to look 1:1 to Windows 7</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 68</span>
+                <span class="comments">💬 59</span>
+                <span class="by">👤 jandeboevrie</span>
+            </div>
+            <div class="summary"><p>Classic 7 is a Windows 10 (IoT Enterprise LTSC 2021) modification made to look 1:1 to Windows 7. It has all of the goodies that Windows 7 had along with some extras included! Classic 7 features a 1:1 OOBE recreation, meaning it'll feel just like your PC simplified once more.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://classic7.lol/" target="_blank">https://classic7.lol/</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://joshuahhh.com/dims-of-feedback/" target="_blank">Technical Dimensions of Live Feedback in Programming Systems</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 12</span>
+                <span class="comments">💬 1</span>
+                <span class="by">👤 tobr</span>
+            </div>
+            <div class="summary"><p>As a first step towards establishing this map, we present six dimensions that can be used to characterize and evaluate live feedback in programming systems: **granularity**, **reactivity**, **velocity**, **moldability**, **bidirectionality**, and **materiality**.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://joshuahhh.com/dims-of-feedback/" target="_blank">https://joshuahhh.com/dims-of-feedback/</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://www.jdhodges.com/blog/macbook-neo-benchmarks-analysis/" target="_blank">MacBook Neo Deep Dive: Benchmarks, Wafer Economics, and the 8GB Gamble</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 234</span>
+                <span class="comments">💬 259</span>
+                <span class="by">👤 tosh</span>
+            </div>
+            <div class="summary"><p>**Updated: May 8th, 2026 with pricing and availability update** Preface: I’m not really a Mac guy. But I have deep respect for what Apple has done with their silicon, and I’ve been following their CPU journey since the Motorola 68k days through PowerPC, the Intel transition, and now their in-house Apple Silicon. What they’ve accomplished in the last five years is genuinely remarkable.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://www.jdhodges.com/blog/macbook-neo-benchmarks-analysis/" target="_blank">https://www.jdhodges.com/blog/macbook-neo-benchmarks-analysis/</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://laurent.le-brun.eu/blog/a-history-of-ides-at-google" target="_blank">A History of IDEs at Google</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 378</span>
+                <span class="comments">💬 248</span>
+                <span class="by">👤 laurentlb</span>
+            </div>
+            <div class="summary"><p>Some of the information might be approximative, I’ll update it if there are reports. This blog post focuses on the main monorepo at Google (google3).` A fragmented ecosystem Like in many companies, engineers at Google have been able to pick their IDE of choice, and this resulted in a lot of fragmentation. In 2011, some of the most senior engineers were asked a question: “Is there a way to get a good uniform IDE for all Googlers?“ The answer...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://laurent.le-brun.eu/blog/a-history-of-ides-at-google" target="_blank">https://laurent.le-brun.eu/blog/a-history-of-ides-at-google</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://sockpuppet.org/blog/2026/05/12/emacsification/" target="_blank">The Emacsification of Software</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 312</span>
+                <span class="comments">💬 206</span>
+                <span class="by">👤 rdslw</span>
+            </div>
+            <div class="summary"><p>**You want a good Markdown viewer more than you think you do.** We’re all reading a ton of Markdown. It’s been the lingua franca of software development since long before LLMs. But now agents have led us into a cursed renaissance of TUI tooling, and the reading experience has become intolerable.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://sockpuppet.org/blog/2026/05/12/emacsification/" target="_blank">https://sockpuppet.org/blog/2026/05/12/emacsification/</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API &bull; 2026-05-14</p>
+        </footer>
+    </div>
+</body>
+</html>
