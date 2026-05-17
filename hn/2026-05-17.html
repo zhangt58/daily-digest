@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Hacker News Posts</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 40px; }
+        header h1 {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 10px;
+        }
+        header p { color: #888; font-size: 1rem; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: linear-gradient(180deg, var(--accent), transparent);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .card-header { display: flex; align-items: flex-start; gap: 15px; }
+        .rank {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); min-width: 40px;
+        }
+        .title-section { flex: 1; }
+        .title-section h2 {
+            font-size: 1.2rem; font-weight: 700;
+            color: #fff; margin-bottom: 8px; line-height: 1.4;
+        }
+        .title-section a {
+            color: #fff; text-decoration: none; transition: color 0.2s;
+        }
+        .title-section a:hover { color: var(--accent); }
+        .meta {
+            display: flex; flex-wrap: wrap; gap: 15px;
+            font-size: 0.9rem; color: #888;
+        }
+        .meta span { display: flex; align-items: center; gap: 5px; }
+        .meta .score { color: #f7c948; font-weight: 600; }
+        .meta .comments { color: #5dade2; font-weight: 600; }
+        .meta .by { color: #82e0aa; }
+        .summary {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .source { margin-top: 10px; font-size: 0.85rem; }
+        .source a { color: #5dade2; text-decoration: none; word-break: break-all; }
+        .source a:hover { text-decoration: underline; }
+        footer {
+            text-align: center; margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #555; font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 18px; }
+            .card-header { flex-direction: column; gap: 8px; }
+            .rank { font-size: 1.5rem; }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Top 10 Hacker News Posts</h1>
+            <p>Fetched via Hacker News API &bull; 2026-05-17</p>
+        </header>
+
+<div class="card" style="--accent: #ff6b35;">
+    <div class="card-header">
+        <div class="rank">#1</div>
+        <div class="title-section">
+            <h2><a href="https://crates.io/crates/zerostack/1.0.0" target="_blank">Zerostack – A Unix-inspired coding agent written in pure Rust</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 432</span>
+                <span class="comments">💬 200</span>
+                <span class="by">👤 gidellav</span>
+            </div>
+            <div class="summary"><p>Zerostack is a minimal coding agent written in Rust, inspired by pi and opencode. It features MCP server support for extended tooling, integrated Exa search for WebFetch and WebSearch tools, looping capabilities for long-horizon tasks, and Git worktrees integration.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://crates.io/crates/zerostack/1.0.0" target="_blank">https://crates.io/crates/zerostack/1.0.0</a></div>
+</div>
+
+<div class="card" style="--accent: #4ecdc4;">
+    <div class="card-header">
+        <div class="rank">#2</div>
+        <div class="title-section">
+            <h2><a href="https://blog.mozilla.org/netpolicy/2026/05/15/mozilla-to-uk-regulators-vpns-are-essential-privacy-and-security-tools-and-should-not-be-undermined/" target="_blank">Mozilla to UK regulators: VPNs are essential privacy and security tools</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 287</span>
+                <span class="comments">💬 96</span>
+                <span class="by">👤 WithinReason</span>
+            </div>
+            <div class="summary"><p>Before the backdrop of users circumventing age assurance systems mandated under the UK’s Online Safety Act, the consultation considers age-gating virtual private networks (VPNs). Mozilla’s mission is grounded in the belief that the internet must remain open and accessible to all, and that privacy and security online are fundamental human rights. We recognize that the protection of young people online is one of the most pressing and...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://blog.mozilla.org/netpolicy/2026/05/15/mozilla-to-uk-regulators-vpns-are-essential-privacy-and-security-tools-and-should-not-be-undermined/" target="_blank">https://blog.mozilla.org/netpolicy/2026/05/15/mozilla-to-uk-regulators-vpns-a...</a></div>
+</div>
+
+<div class="card" style="--accent: #45b7d1;">
+    <div class="card-header">
+        <div class="rank">#3</div>
+        <div class="title-section">
+            <h2><a href="https://klaxon.live/" target="_blank">Klaxon a livr earthquake map with no back end</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 3</span>
+                <span class="comments">💬 0</span>
+                <span class="by">👤 Accher</span>
+            </div>
+            <div class="summary"><p>A post titled "Klaxon a livr earthquake map with no back end" on Hacker News. Submitted by Accher. Links to content on klaxon.live.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://klaxon.live/" target="_blank">https://klaxon.live/</a></div>
+</div>
+
+<div class="card" style="--accent: #96ceb4;">
+    <div class="card-header">
+        <div class="rank">#4</div>
+        <div class="title-section">
+            <h2><a href="https://lcamtuf.substack.com/p/a-nicer-voltmeter-clock" target="_blank">A nicer voltmeter clock</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 212</span>
+                <span class="comments">💬 27</span>
+                <span class="by">👤 surprisetalk</span>
+            </div>
+            <div class="summary"><p>Back in 2019, I built a simple voltmeter clock: _The clock, version 1. Cherry enclosure._ As the name implies, these clocks use analog panel voltmeters instead of traditional clock faces to display time. I didn’t come up with the idea, so I never really blogged about the design; I just built one and kept it on my office desk.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://lcamtuf.substack.com/p/a-nicer-voltmeter-clock" target="_blank">https://lcamtuf.substack.com/p/a-nicer-voltmeter-clock</a></div>
+</div>
+
+<div class="card" style="--accent: #ffeaa7;">
+    <div class="card-header">
+        <div class="rank">#5</div>
+        <div class="title-section">
+            <h2><a href="https://maurycyz.com/projects/mcusite/" target="_blank">Hosting a website on an 8-bit microcontroller</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 152</span>
+                <span class="comments">💬 13</span>
+                <span class="by">👤 zdw</span>
+            </div>
+            <div class="summary"><p>In an episode of "dumb things to do with an AVR microcontroller", the author built a tiny HTTP server running on an 8-bit AVR microcontroller. The project demonstrates hosting a basic website on minimal hardware — a small SMD IC on a perfboard with a few pin headers and LEDs, proving you can serve web content even without a traditional server.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://maurycyz.com/projects/mcusite/" target="_blank">https://maurycyz.com/projects/mcusite/</a></div>
+</div>
+
+<div class="card" style="--accent: #dda15e;">
+    <div class="card-header">
+        <div class="rank">#6</div>
+        <div class="title-section">
+            <h2><a href="https://en.wikipedia.org/wiki/Colossus:_The_Forbin_Project" target="_blank">Colossus: The Forbin Project</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 119</span>
+                <span class="comments">💬 39</span>
+                <span class="by">👤 doener</span>
+            </div>
+            <div class="summary"><p>After being given full control, Colossus' draconian logic expands on its original nuclear defense directives to assume total control of the world and end all warfare for the good of humankind, despite its creators' orders to stop. Dr. Forbin is the chief designer of a secret supercomputer designed to manage the Cold War nuclear arsenal, but discovers that the machine has taken matters into its own hands.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://en.wikipedia.org/wiki/Colossus:_The_Forbin_Project" target="_blank">https://en.wikipedia.org/wiki/Colossus:_The_Forbin_Project</a></div>
+</div>
+
+<div class="card" style="--accent: #98d8c8;">
+    <div class="card-header">
+        <div class="rank">#7</div>
+        <div class="title-section">
+            <h2><a href="https://unplannedobsolescence.com/blog/prolog-basics-pokemon/" target="_blank">Prolog Basics Explained with Pokémon</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 26</span>
+                <span class="comments">💬 2</span>
+                <span class="by">👤 birdculture</span>
+            </div>
+            <div class="summary"><p>For certain kinds of relationships, logic programming is by far the most concise and expressive programming system I’ve ever used. To understand why, let’s talk about Pokémon. Pokémon basics Pokémon is a video game series/multimedia franchise/lifestyle brand set in a world where humans live alongside a menagerie of colorful animal characters.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://unplannedobsolescence.com/blog/prolog-basics-pokemon/" target="_blank">https://unplannedobsolescence.com/blog/prolog-basics-pokemon/</a></div>
+</div>
+
+<div class="card" style="--accent: #f7dc6f;">
+    <div class="card-header">
+        <div class="rank">#8</div>
+        <div class="title-section">
+            <h2><a href="https://openai.com/index/malta-chatgpt-plus-partnership/" target="_blank">OpenAI and Government of Malta partner to roll out ChatGPT Plus to all citizens</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 213</span>
+                <span class="comments">💬 255</span>
+                <span class="by">👤 bookofjoe</span>
+            </div>
+            <div class="summary"><p>OpenAI and the Government of Malta announced a world's first partnership to roll out ChatGPT Plus to all Maltese citizens. The initiative provides free access to intelligence and empowers citizens through an AI literacy course designed to build practical AI skills that people can benefit from in their everyday lives.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://openai.com/index/malta-chatgpt-plus-partnership/" target="_blank">https://openai.com/index/malta-chatgpt-plus-partnership/</a></div>
+</div>
+
+<div class="card" style="--accent: #bb8fce;">
+    <div class="card-header">
+        <div class="rank">#9</div>
+        <div class="title-section">
+            <h2><a href="https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-structure-my-css-/" target="_blank">Moving away from Tailwind, and learning to structure my CSS</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 571</span>
+                <span class="comments">💬 322</span>
+                <span class="by">👤 mpweiher</span>
+            </div>
+            <div class="summary"><p>8 years ago, I wrote excitedly about discovering Tailwind. At that time I really had no idea how to structure my CSS code and given the choice between a pile of complete chaos and Tailwind, I was really happy to choose Tailwind. It helped me make a lot of tiny sites!.</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-structure-my-css-/" target="_blank">https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-st...</a></div>
+</div>
+
+<div class="card" style="--accent: #85c1e9;">
+    <div class="card-header">
+        <div class="rank">#10</div>
+        <div class="title-section">
+            <h2><a href="https://arnaud-carre.github.io/2026-05-15-ym-fast-emu/" target="_blank">Playing Atari ST Music on the Amiga with Zero CPU</a></h2>
+            <div class="meta">
+                <span class="score">⭐ 48</span>
+                <span class="comments">💬 15</span>
+                <span class="by">👤 z303</span>
+            </div>
+            <div class="summary"><p>Audience This post is for anyone who loves the technical and historical aspects of chiptune music, as well as enthusiasts of the Amiga PAULA and Atari YM2149 audio chips. The Context In my Cycle-Op demo, I showcased a classic sin-dots effect that rendered **6405** dots at 50 FPS on the Amiga 500. Two years later, Amiga legend Hannibal released the long-awaited...</p></div>
+        </div>
+    </div>
+    <div class="source">🔗 <a href="https://arnaud-carre.github.io/2026-05-15-ym-fast-emu/" target="_blank">https://arnaud-carre.github.io/2026-05-15-ym-fast-emu/</a></div>
+</div>
+
+        <footer>
+            <p>Fetched via Hacker News API &bull; 2026-05-17</p>
+        </footer>
+    </div>
+</body>
+</html>
